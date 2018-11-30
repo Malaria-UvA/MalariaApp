@@ -6,6 +6,10 @@
     <string name="start">START</string>
     <string name="description">HIGH QUALITY MALARIA DIAGNOSIS IN LOW RESOURCE ENVIRONMENTS</string>
     <string name="title_activity_guide">Guide</string>
+    <string name="guide_introduction">This application will help you on the thick and thin blood smear test by microscope. These are the steps need to be follow:</string>
+    <string name="guide_step_1">1.- Introduce the nurse name, his/her email, your name (the microscopist) and the patient name.</string>
+    <string name="guide_step_2">2.- Start counting white blood cells and parasites on the thick film.</string>
+    <string name="guide_step_3">3.- The application will follow the <a href="http://www.wpro.who.int/mvp/lab_quality/2096_oms_gmp_sop_09_rev1.pdf">WHO guidelines</a> and will let you know the results.</string>
     <string name="thickAnalysis">Thick Analysis</string>
     <string name="thinAnalysis">Thin Analysis</string>
     <string name="clear">Clear</string>
