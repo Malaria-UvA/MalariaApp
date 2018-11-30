@@ -122,7 +122,9 @@ public class Analysis {
             throw new InvalidTypeException("Type is unknown");
         }
     }
-
+    public int getNumberOfFeatures(){
+        return this.featuresList.size();
+    }
     /**
      *
      */

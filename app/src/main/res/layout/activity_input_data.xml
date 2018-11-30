@@ -4,73 +4,108 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.input.InputDataActivity">
+    tools:context=".activities.input.InputDataActivity"
+    tools:layout_editor_absoluteY="81dp">
 
     <TextView
         android:id="@+id/titleTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="57dp"
         android:layout_marginTop="75dp"
         android:text="@string/thickAnalysis"
         android:textAppearance="@style/analysis"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/topTxt"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/editTextTop"
-        android:layout_width="269dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginEnd="57dp"
+        android:layout_marginStart="57dp"
+        android:layout_marginTop="18dp"
         android:ems="10"
         android:inputType="number"
-        app:layout_constraintStart_toStartOf="@+id/titleTxt"
-        app:layout_constraintTop_toBottomOf="@+id/titleTxt" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/topTxt" />
 
     <EditText
         android:id="@+id/editTextBottom"
-        android:layout_width="268dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="33dp"
+        android:layout_marginEnd="58dp"
+        android:layout_marginStart="58dp"
+        android:layout_marginTop="8dp"
         android:ems="10"
         android:inputType="number"
-        app:layout_constraintStart_toStartOf="@+id/editTextTop"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTop" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bottomTxt" />
 
     <Button
         android:id="@+id/nextBtn"
-        android:layout_width="109dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginBottom="35dp"
+        android:layout_marginEnd="58dp"
         android:background="@drawable/button_bg"
         android:text="@string/next"
         android:textAppearance="@style/btnText"
-        app:layout_constraintEnd_toEndOf="@+id/editTextBottom"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/clearBtn"
-        app:layout_constraintTop_toBottomOf="@+id/clearBtn" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/cancelBtn" />
 
     <Button
         android:id="@+id/cancelBtn"
-        android:layout_width="91dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="35dp"
+        android:layout_marginEnd="69dp"
         android:layout_marginStart="57dp"
         android:background="@drawable/button_bg"
-        android:textAppearance="@style/btnText"
         android:text="@string/cancel"
-        app:layout_constraintBaseline_toBaselineOf="@+id/nextBtn"
+        android:textAppearance="@style/btnText"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/nextBtn"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/clearBtn"
-        android:layout_width="105dp"
+        android:layout_width="79dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="1dp"
-        android:layout_marginTop="34dp"
+        android:layout_marginTop="33dp"
         android:background="@drawable/button_bg_2"
         android:text="@string/clear"
         android:textAppearance="@style/btnText"
         app:layout_constraintEnd_toEndOf="@+id/editTextBottom"
         app:layout_constraintTop_toBottomOf="@+id/editTextBottom" />
+
+    <TextView
+        android:id="@+id/topTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="@string/white_blood_cells"
+        app:layout_constraintStart_toStartOf="@+id/editTextTop"
+        app:layout_constraintTop_toBottomOf="@+id/titleTxt" />
+
+    <TextView
+        android:id="@+id/bottomTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:text="@string/parasites"
+        app:layout_constraintStart_toStartOf="@+id/editTextTop"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTop" />
+
+    <TextView
+        android:id="@+id/numberOfFieldsTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/number_of_fields"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>

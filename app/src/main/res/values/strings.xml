@@ -11,4 +11,9 @@
     <string name="clear">Clear</string>
     <string name="cancel">Cancel</string>
     <string name="next">Next</string>
+    <string name="white_blood_cells">White blood cells</string>
+    <string name="parasites">Parasites</string>
+    <string name="red_blood_cells">Red blood cells</string>
+    <string name="inf_red_blood_cells">Infected red blood cells</string>
+    <string name="number_of_fields">Number of fields:</string>
 </resources>

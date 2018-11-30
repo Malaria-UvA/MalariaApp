@@ -22,8 +22,17 @@ import malaria.com.malaria.models.ThinFeatures;
 
 public class InputDataActivity extends BaseActivity {
 
+    @BindView(R.id.numberOfFieldsTxt)
+    TextView numberOfFieldsTxt;
+
     @BindView(R.id.titleTxt)
     TextView titleTxt;
+
+    @BindView(R.id.topTxt)
+    TextView topTxt;
+
+    @BindView(R.id.bottomTxt)
+    TextView bottomTxt;
 
     @BindView(R.id.editTextTop)
     EditText editTextTop;
@@ -51,6 +60,7 @@ public class InputDataActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.binds();
+        setNumberOfFields(malariaKBSService.getAnalysis().getNumberOfFeatures());
     }
 
     @Override
@@ -77,22 +87,31 @@ public class InputDataActivity extends BaseActivity {
                 InputDataActivity that = InputDataActivity.this;
                 Analysis analysis = that.malariaKBSService.getAnalysis();
                 Features f;
+                int top, bottom;
+                try {
+                    String topText = that.editTextTop.getText().toString();
+                    String bottomText = that.editTextBottom.getText().toString();
 
-                int top = Integer.parseInt(that.editTextTop.getText().toString());
-                int bottom = Integer.parseInt(that.editTextBottom.getText().toString());
+                    top = Integer.parseInt(topText);
+                    bottom = Integer.parseInt(bottomText);
 
+                } catch (Exception e) {
+                    return;
+                }
                 if (analysis.getType() == Analysis.TypeEnum.THICK) {
                     f = new ThickFeatures(top, bottom);
                 } else {
                     f = new ThinFeatures(top, bottom);
                 }
                 analysis.addFeature(f);
-
+                that.setNumberOfFields(analysis.getNumberOfFeatures());
                 if (analysis.getType() == Analysis.TypeEnum.THICK) {
                     boolean analysisValid = analysis.thickAnalysisValid();
                     if (!analysisValid) {
                         analysis.setType(Analysis.TypeEnum.THIN);
                         that.titleTxt.setText(getString(R.string.thinAnalysis));
+                        that.topTxt.setText(getString(R.string.red_blood_cells));
+                        that.bottomTxt.setText(getString(R.string.inf_red_blood_cells));
                         that.clearFields();
                         return;
                     }
@@ -109,7 +128,9 @@ public class InputDataActivity extends BaseActivity {
             }
         });
     }
-
+    private void setNumberOfFields(int n){
+        this.numberOfFieldsTxt.setText(String.format("%s%s", getString(R.string.number_of_fields), n));
+    }
     private void clearFields() {
         this.editTextTop.setText("");
         this.editTextBottom.setText("");
