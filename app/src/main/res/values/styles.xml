@@ -20,6 +20,30 @@
 
     </style>
 
+    <style name="subheading">
+
+        <item name="android:textSize">
+            25sp
+        </item>
+
+        <item name="android:textColor">
+            #DE000000
+        </item>
+
+    </style>
+
+    <style name="subsubheading">
+
+        <item name="android:textSize">
+            20sp
+        </item>
+
+        <item name="android:textColor">
+            #DE000000
+        </item>
+
+    </style>
+
     <style name="description">
 
         <item name="android:textSize">

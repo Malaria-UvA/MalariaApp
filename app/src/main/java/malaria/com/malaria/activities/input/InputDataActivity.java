@@ -107,7 +107,7 @@ public class InputDataActivity extends BaseActivity {
                 that.setNumberOfFields(analysis.getNumberOfFeatures());
                 if (analysis.getType() == Analysis.TypeEnum.THICK) {
                     boolean analysisValid = analysis.thickAnalysisValid();
-                    if (!analysisValid) {
+                    if (!analysisValid) { // change to thin analysis
                         analysis.setType(Analysis.TypeEnum.THIN);
                         that.titleTxt.setText(getString(R.string.thinAnalysis));
                         that.topTxt.setText(getString(R.string.red_blood_cells));

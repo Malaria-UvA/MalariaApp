@@ -5,15 +5,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import javax.inject.Inject;
-
 import butterknife.BindView;
 import malaria.com.malaria.R;
 import malaria.com.malaria.activities.base.BaseActivity;
 import malaria.com.malaria.activities.guide.GuideActivity;
-import malaria.com.malaria.activities.input.InputDataActivity;
+import malaria.com.malaria.activities.test.TestSettingActivity;
 import malaria.com.malaria.dagger.MalariaComponent;
-import malaria.com.malaria.interfaces.IMalariaKBSService;
 
 public class MainActivity extends BaseActivity {
     @BindView(R.id.startBtn)
@@ -21,9 +18,6 @@ public class MainActivity extends BaseActivity {
 
     @BindView(R.id.guideBtn)
     Button guideBtn;
-
-    @Inject()
-    IMalariaKBSService malariaKBSService;
 
     public MainActivity() {
         super(R.layout.activity_main);
@@ -44,9 +38,7 @@ public class MainActivity extends BaseActivity {
         this.startBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO change these 2 lines
-                malariaKBSService.createTest(null, null, null);
-                startActivity(new Intent(MainActivity.this, InputDataActivity.class));
+                startActivity(new Intent(MainActivity.this, TestSettingActivity.class));
 
             }
         });

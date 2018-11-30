@@ -16,4 +16,10 @@
     <string name="red_blood_cells">Red blood cells</string>
     <string name="inf_red_blood_cells">Infected red blood cells</string>
     <string name="number_of_fields">Number of fields:</string>
+    <string name="name">Name</string>
+    <string name="email">E-mail</string>
+    <string name="test_information">Test Information</string>
+    <string name="microscopist">Microscopist</string>
+    <string name="patient">Patient</string>
+    <string name="nurse">Nurse</string>
 </resources>
