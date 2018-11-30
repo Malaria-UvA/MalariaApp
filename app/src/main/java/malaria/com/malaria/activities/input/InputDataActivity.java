@@ -112,6 +112,7 @@ public class InputDataActivity extends BaseActivity {
                         that.titleTxt.setText(getString(R.string.thinAnalysis));
                         that.topTxt.setText(getString(R.string.red_blood_cells));
                         that.bottomTxt.setText(getString(R.string.inf_red_blood_cells));
+                        that.setNumberOfFields(analysis.getNumberOfFeatures());
                         that.clearFields();
                         return;
                     }
@@ -129,7 +130,7 @@ public class InputDataActivity extends BaseActivity {
         });
     }
     private void setNumberOfFields(int n){
-        this.numberOfFieldsTxt.setText(String.format("%s%s", getString(R.string.number_of_fields), n));
+        this.numberOfFieldsTxt.setText(String.format("%s %s", getString(R.string.number_of_fields), n));
     }
     private void clearFields() {
         this.editTextTop.setText("");
