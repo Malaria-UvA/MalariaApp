@@ -1,4 +1,4 @@
-package malaria.com.malaria.activities.guide;
+package malaria.com.malaria.activities.results;
 
 import android.os.Bundle;
 
@@ -6,10 +6,9 @@ import malaria.com.malaria.R;
 import malaria.com.malaria.activities.base.BaseActivity;
 import malaria.com.malaria.dagger.MalariaComponent;
 
-public class GuideActivity extends BaseActivity {
-
-    public GuideActivity() {
-        super(R.layout.activity_guide);
+public class ResultsActivity extends BaseActivity {
+    public ResultsActivity() {
+        super(R.layout.activity_results);
     }
 
     @Override

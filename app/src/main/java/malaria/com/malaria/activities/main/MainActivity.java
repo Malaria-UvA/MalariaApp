@@ -1,7 +1,6 @@
 package malaria.com.malaria.activities.main;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -22,6 +21,7 @@ public class MainActivity extends BaseActivity {
     public MainActivity() {
         super(R.layout.activity_main);
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +33,7 @@ public class MainActivity extends BaseActivity {
         applicationComponent.inject(this);
     }
 
-    private void binds(){
+    private void binds() {
         this.startBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

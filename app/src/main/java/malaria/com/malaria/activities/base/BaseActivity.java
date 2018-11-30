@@ -10,15 +10,15 @@ import malaria.com.malaria.dagger.MalariaComponent;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
-    private Integer layoutId;
     protected Context context;
+    private Integer layoutId;
 
-    public BaseActivity(){}
-
-    public BaseActivity(int layoutId){
-        this.layoutId = layoutId;
+    public BaseActivity() {
     }
 
+    public BaseActivity(int layoutId) {
+        this.layoutId = layoutId;
+    }
 
 
     @Override
@@ -28,7 +28,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
 
-        if(layoutId != null){
+        if (layoutId != null) {
             setContentView(layoutId);
         }
 
@@ -43,6 +43,7 @@ public abstract class BaseActivity extends AppCompatActivity {
      * If an Activity only needs injection into this base class, it does not need to override this method.
      * However, if an Activity requires extra injections (has one ore more @Inject annotations in it's source code),
      * then it must override this method, and invoke <code>applicationComponent.inject(this);</code>
+     *
      * @param applicationComponent the component being injected
      */
     protected abstract void onInject(MalariaComponent applicationComponent);
