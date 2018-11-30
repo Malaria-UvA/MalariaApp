@@ -6,4 +6,9 @@
     <string name="start">START</string>
     <string name="description">HIGH QUALITY MALARIA DIAGNOSIS IN LOW RESOURCE ENVIRONMENTS</string>
     <string name="title_activity_guide">Guide</string>
+    <string name="thickAnalysis">Thick Analysis</string>
+    <string name="thinAnalysis">Thin Analysis</string>
+    <string name="clear">Clear</string>
+    <string name="cancel">Cancel</string>
+    <string name="next">Next</string>
 </resources>

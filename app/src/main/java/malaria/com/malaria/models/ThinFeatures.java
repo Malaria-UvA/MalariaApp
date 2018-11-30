@@ -1,5 +1,7 @@
 package malaria.com.malaria.models;
 
+import java.util.List;
+
 /**
  *
  */
@@ -17,7 +19,9 @@ public class ThinFeatures extends Features {
     /**
      * Default constructor
      */
-    public ThinFeatures() {
+    public ThinFeatures(int rbc, int irbc) {
+        this.n_redBloodCells = rbc;
+        this.n_infected_rbc = irbc;
     }
 
     public int getN_redBloodCells() {
@@ -34,5 +38,9 @@ public class ThinFeatures extends Features {
 
     public void setN_infected_rbc(int n_infected_rbc) {
         this.n_infected_rbc = n_infected_rbc;
+    }
+
+    public static boolean stopConditionMet(List<Features> fs) {
+        return fs.size() == 20;
     }
 }
