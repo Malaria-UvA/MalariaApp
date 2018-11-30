@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Malaria</string>
+    <string name="heading">MOMALA-APP</string>
+    <string name="guide">GUIDE</string>
+    <string name="start">START</string>
+    <string name="description">HIGH QUALITY MALARIA DIAGNOSIS IN LOW RESOURCE ENVIRONMENTS</string>
 </resources>
