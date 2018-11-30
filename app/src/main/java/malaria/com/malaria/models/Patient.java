@@ -3,12 +3,12 @@ package malaria.com.malaria.models;
 /**
  *
  */
-public class Pacient extends Person {
+public class Patient extends Person {
 
     /**
      * Default constructor
      */
-    public Pacient() {
+    public Patient() {
     }
 
 }

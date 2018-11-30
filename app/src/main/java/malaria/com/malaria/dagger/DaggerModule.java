@@ -7,6 +7,8 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import malaria.com.malaria.interfaces.IMalariaKBSService;
+import malaria.com.malaria.services.MalariaKBSService;
 
 @Module()
 class DaggerModule {
@@ -26,6 +28,12 @@ class DaggerModule {
     @Singleton
     Context providesContext(Application application) {
         return application.getApplicationContext();
+    }
+
+    @Provides
+    @Singleton
+    IMalariaKBSService providesMalariaKBSService(){
+        return new MalariaKBSService();
     }
 
 }

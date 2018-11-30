@@ -12,7 +12,7 @@ public class Analysis {
     /**
      *
      */
-    private Test.TypeEnum type;
+    private TypeEnum type;
 
     /**
      * Default constructor
@@ -28,11 +28,19 @@ public class Analysis {
         this.performed = performed;
     }
 
-    public Test.TypeEnum getType() {
+    public TypeEnum getType() {
         return type;
     }
 
-    public void setType(Test.TypeEnum type) {
+    public void setType(TypeEnum type) {
         this.type = type;
+    }
+
+    /**
+     *
+     */
+    public enum TypeEnum {
+        THICK,
+        THIN
     }
 }

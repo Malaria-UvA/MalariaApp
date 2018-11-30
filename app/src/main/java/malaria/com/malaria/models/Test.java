@@ -25,12 +25,4 @@ public class Test {
     public void setDate(Date date) {
         this.date = date;
     }
-
-    /**
-     *
-     */
-    public enum TypeEnum {
-        THICK,
-        THIN
-    }
 }
