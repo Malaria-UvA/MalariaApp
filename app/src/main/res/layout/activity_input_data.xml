@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="58dp"
         android:layout_marginStart="58dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="7dp"
         android:ems="10"
         android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
@@ -74,11 +74,13 @@
         android:id="@+id/clearBtn"
         android:layout_width="79dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="57dp"
         android:layout_marginTop="33dp"
         android:background="@color/colorPrimaryDark"
         android:text="@string/clear"
         android:textAppearance="@style/btnText"
-        app:layout_constraintEnd_toEndOf="@+id/editTextBottom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/errorTxt"
         app:layout_constraintTop_toBottomOf="@+id/editTextBottom" />
 
     <TextView
@@ -108,4 +110,17 @@
         android:text="@string/number_of_fields"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/errorTxt"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="57dp"
+        android:text="@string/sample_text"
+        android:textColor="#ba1e1e"
+        app:layout_constraintBottom_toBottomOf="@+id/clearBtn"
+        app:layout_constraintEnd_toStartOf="@+id/clearBtn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/clearBtn" />
 </android.support.constraint.ConstraintLayout>

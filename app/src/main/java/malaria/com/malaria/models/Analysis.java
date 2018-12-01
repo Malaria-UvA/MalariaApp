@@ -125,6 +125,11 @@ public class Analysis {
     public int getNumberOfFeatures(){
         return this.featuresList.size();
     }
+
+    public List<Features> getFeaturesList() {
+        return featuresList;
+    }
+
     /**
      *
      */

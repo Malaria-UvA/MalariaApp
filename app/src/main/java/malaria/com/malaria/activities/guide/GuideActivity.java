@@ -14,6 +14,7 @@ import malaria.com.malaria.R;
 import malaria.com.malaria.activities.base.BaseActivity;
 import malaria.com.malaria.activities.input.InputDataActivity;
 import malaria.com.malaria.activities.main.MainActivity;
+import malaria.com.malaria.activities.test.TestSettingActivity;
 import malaria.com.malaria.dagger.MalariaComponent;
 import malaria.com.malaria.interfaces.IMalariaKBSService;
 
@@ -40,9 +41,7 @@ public class GuideActivity extends BaseActivity {
         this.startBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO change these 2 lines
-                malariaKBSService.createTest(null, null, null);
-                startActivity(new Intent(GuideActivity.this, InputDataActivity.class));
+                startActivity(new Intent(GuideActivity.this, TestSettingActivity.class));
 
             }
         });

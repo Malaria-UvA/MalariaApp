@@ -2,6 +2,8 @@ package malaria.com.malaria.models;
 
 import java.util.List;
 
+import malaria.com.malaria.errors.InvalidFeatureValuesException;
+
 /**
  *
  */
@@ -20,6 +22,10 @@ public class ThinFeatures extends Features {
      * Default constructor
      */
     public ThinFeatures(int rbc, int irbc) {
+        if(rbc < irbc){
+            throw new InvalidFeatureValuesException("The number of rbc should be equal or higher than the infected rbc");
+        }
+
         this.n_redBloodCells = rbc;
         this.n_infected_rbc = irbc;
     }

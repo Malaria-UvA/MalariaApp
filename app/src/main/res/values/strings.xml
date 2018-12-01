@@ -26,4 +26,8 @@
     <string name="microscopist">Microscopist</string>
     <string name="patient">Patient</string>
     <string name="nurse">Nurse</string>
+    <string name="results">Results</string>
+    <string name="close">Close</string>
+    <string name="send_e_mail_to_nurse">E-mail results to nurse</string>
+    <string name="sample_text">sample text</string>
 </resources>
