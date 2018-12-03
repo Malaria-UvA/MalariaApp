@@ -69,19 +69,15 @@ public class Analysis {
 
     public boolean thickAnalysisValid() {
         if (this.type == TypeEnum.THICK) {
-            int nParasitesTotal = 0;
-            int nWBC = 0;
             for (Features f : this.featuresList) {
                 ThickFeatures tf = (ThickFeatures) f;
 
-                nParasitesTotal += tf.getN_parasites();
-                if (nParasitesTotal >= 100) {
-                    return false;
+                if(tf.getN_parasites() < 100) {
+                    return true;
                 }
             }
-            return true;
+            return false;
         }
-
         return false;
     }
 
@@ -100,7 +96,7 @@ public class Analysis {
             }
 
             Result r = new Result();
-            r.setParasites_per_microlitre(8000 * nParasitesTotal / nWBC);
+            r.setParasites_per_microlitre(ThickFeatures.calculate(nParasitesTotal, nWBC));
             this.result = r;
         } else if (type == TypeEnum.THIN) {
             if (this.featuresList.size() < 20) {
@@ -116,7 +112,7 @@ public class Analysis {
             }
 
             Result r = new Result();
-            r.setParasites_per_microlitre(5_000_000 * nInfRBC / nRBC);
+            r.setParasites_per_microlitre(ThinFeatures.calculate(nInfRBC, nRBC));
             this.result = r;
         } else {
             throw new InvalidTypeException("Type is unknown");

@@ -7,16 +7,6 @@
     tools:context=".activities.input.InputDataActivity"
     tools:layout_editor_absoluteY="81dp">
 
-    <TextView
-        android:id="@+id/titleTxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="75dp"
-        android:text="@string/thickAnalysis"
-        android:textAppearance="@style/analysis"
-        app:layout_constraintStart_toStartOf="@+id/topTxt"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <EditText
         android:id="@+id/editTextTop"
         android:layout_width="0dp"
@@ -45,16 +35,15 @@
 
     <Button
         android:id="@+id/nextBtn"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="35dp"
-        android:layout_marginEnd="58dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
         android:background="@color/colorPrimary"
         android:text="@string/next"
         android:textAppearance="@style/btnText"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/cancelBtn" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/cancelBtn"
@@ -87,10 +76,10 @@
         android:id="@+id/topTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="128dp"
         android:text="@string/white_blood_cells"
         app:layout_constraintStart_toStartOf="@+id/editTextTop"
-        app:layout_constraintTop_toBottomOf="@+id/titleTxt" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/bottomTxt"
@@ -105,10 +94,10 @@
         android:id="@+id/numberOfFieldsTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:text="@string/number_of_fields"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView

@@ -49,4 +49,8 @@ public class ThinFeatures extends Features {
     public static boolean stopConditionMet(List<Features> fs) {
         return fs.size() == 20;
     }
+
+    public static int calculate(int nInfRBC, int nRBC) {
+        return (int) Math.ceil(5_000_000f * nInfRBC / nRBC);
+    }
 }

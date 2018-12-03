@@ -50,6 +50,10 @@ public class ThickFeatures extends Features {
             nWBC += tf.getN_whiteBloodCells();
 
         }
-        return nParasitesTotal >= 100 && nWBC <= 200 || nParasitesTotal <= 99 && nWBC <= 500;
+        return nParasitesTotal >= 100 && nWBC >= 200 || nParasitesTotal <= 99 && nWBC >= 500;
+    }
+
+    public static int calculate(int nParasitesTotal, int nWBC) {
+        return (int) Math.ceil(8000f * nParasitesTotal / nWBC);
     }
 }

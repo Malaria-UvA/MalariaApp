@@ -29,9 +29,6 @@ public class InputDataActivity extends BaseActivity {
     @BindView(R.id.numberOfFieldsTxt)
     TextView numberOfFieldsTxt;
 
-    @BindView(R.id.titleTxt)
-    TextView titleTxt;
-
     @BindView(R.id.topTxt)
     TextView topTxt;
 
@@ -141,7 +138,7 @@ public class InputDataActivity extends BaseActivity {
         });
     }
     private void setNumberOfFields(int n){
-        this.numberOfFieldsTxt.setText(String.format("%s %s", getString(R.string.number_of_fields), n));
+        this.numberOfFieldsTxt.setText(String.format("%s %s ", getString(R.string.number_of_fields), n));
     }
     private void clearFields() {
         this.editTextTop.setText("");
@@ -153,7 +150,9 @@ public class InputDataActivity extends BaseActivity {
     }
     private void changeToThinAnalysis(Analysis analysis){
         analysis.setType(Analysis.TypeEnum.THIN);
-        this.titleTxt.setText(getString(R.string.thinAnalysis));
+        if (this.getSupportActionBar() != null) {
+            this.getSupportActionBar().setTitle(R.string.thinAnalysis);
+        }
         this.topTxt.setText(getString(R.string.red_blood_cells));
         this.bottomTxt.setText(getString(R.string.inf_red_blood_cells));
         this.setNumberOfFields(analysis.getNumberOfFeatures());

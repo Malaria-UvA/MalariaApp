@@ -1,5 +1,6 @@
 package malaria.com.malaria.activities.results;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
@@ -22,9 +23,11 @@ import malaria.com.malaria.R;
 import malaria.com.malaria.activities.base.BaseActivity;
 import malaria.com.malaria.dagger.MalariaComponent;
 import malaria.com.malaria.interfaces.IMalariaKBSService;
+import malaria.com.malaria.mail.GMailSender;
 import malaria.com.malaria.models.Analysis;
 import malaria.com.malaria.models.Features;
 import malaria.com.malaria.models.Result;
+import malaria.com.malaria.models.Test;
 import malaria.com.malaria.models.ThickFeatures;
 import malaria.com.malaria.models.ThinFeatures;
 
@@ -69,7 +72,7 @@ public class ResultsActivity extends BaseActivity {
         this.emailResultsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                 new SendEmailTask().execute(malariaKBSService.getTest());
             }
         });
     }
@@ -149,5 +152,37 @@ public class ResultsActivity extends BaseActivity {
     @Override
     protected void onInject(MalariaComponent applicationComponent) {
         applicationComponent.inject(this);
+    }
+
+    private class SendEmailTask extends AsyncTask<Test, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Test... tests) {
+
+            Test test = tests[0];
+            Result r = test.getAnalysis().getResult();
+
+            try {
+                String content = getString(R.string.email_content);
+                content = String.format(content,
+                        test.getNurse().getName(),
+                        test.getPatient().getName(),
+                        r.getParasites_per_microlitre(),
+                        test.getMicroscopist().getName());
+
+                GMailSender sender = new GMailSender("microscopistmalaria@gmail.com", "xxxxxxxxx"); //TODO: put a local config file
+                sender.sendMail("Malaria Diagnosis Results",
+                        content,
+                        "microscopistmalaria@gmail.com",
+                        test.getNurse().getEmail());
+                //System.err.print("EMAIL SENT");
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                //Toast.makeText(ResultsActivity.this, "The email couldn't be sent", Toast.LENGTH_SHORT).show();
+            }
+            return null;
+        }
     }
 }

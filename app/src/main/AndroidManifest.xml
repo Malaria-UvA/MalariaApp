@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="malaria.com.malaria">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".dagger.MalariaApplication"
         android:allowBackup="true"
@@ -22,9 +24,13 @@
         <activity
             android:name=".activities.guide.GuideActivity"
             android:label="@string/title_activity_guide" />
-        <activity android:name=".activities.input.InputDataActivity" />
+        <activity
+            android:name=".activities.input.InputDataActivity"
+            android:label="@string/thickAnalysis"/>
         <activity android:name=".activities.results.ResultsActivity" />
-        <activity android:name=".activities.test.TestSettingActivity"></activity>
+        <activity
+            android:name=".activities.test.TestSettingActivity"
+            android:label="@string/test_information" />
     </application>
 
 </manifest>
