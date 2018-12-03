@@ -118,15 +118,17 @@ public class InputDataActivity extends BaseActivity {
                 }
                 analysis.addFeature(f);
                 that.setNumberOfFields(analysis.getNumberOfFeatures());
-                if (analysis.getType() == Analysis.TypeEnum.THICK) {
-                    boolean analysisValid = analysis.thickAnalysisValid();
-                    if (!analysisValid) { // change to thin analysis
-                        changeToThinAnalysis(analysis);
-                        return;
-                    }
-                }
 
                 if (analysis.stopConditionMet()) {
+
+                    if (analysis.getType() == Analysis.TypeEnum.THICK) {
+                        boolean analysisValid = analysis.thickAnalysisValid();
+                        if (!analysisValid) { // change to thin analysis
+                            changeToThinAnalysis(analysis);
+                            return;
+                        }
+                    }
+
                     startActivity(new Intent(that, ResultsActivity.class));
                     finish();
                     return;
