@@ -6,12 +6,9 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
-import android.text.Html;
-import android.text.Spanned;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
@@ -19,6 +16,8 @@ import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.IValueFormatter;
+import com.github.mikephil.charting.utils.ViewPortHandler;
 
 import java.util.ArrayList;
 import java.util.Properties;
@@ -38,8 +37,6 @@ import malaria.com.malaria.models.Test;
 import malaria.com.malaria.models.ThickFeatures;
 import malaria.com.malaria.models.ThinFeatures;
 import malaria.com.malaria.properties.PropertiesReader;
-
-import static android.text.Html.fromHtml;
 
 public class ResultsActivity extends BaseActivity {
     @BindView(R.id.chart)
@@ -73,7 +70,7 @@ public class ResultsActivity extends BaseActivity {
 
         malariaKBSService.getAnalysis().calculateResult();
         Result r = malariaKBSService.getResult();
-        calculationTxt.setText(String.format("%s parasites/\u00B5L", r.getParasites_per_microlitre()));
+        calculationTxt.setText(String.format("%s parasites/\u00B5L of blood", r.getParasites_per_microlitre()));
     }
 
     private void readProperties() {
@@ -164,9 +161,16 @@ public class ResultsActivity extends BaseActivity {
         // Setting Data
         LineData data = new LineData(dataSet);
         data.addDataSet(dataSet2);
+        data.setValueTextSize(14f);
+        data.setValueFormatter(new IValueFormatter() {
+            @Override
+            public String getFormattedValue(float value, Entry entry, int dataSetIndex, ViewPortHandler viewPortHandler) {
+                return "" + ((int) value);
+            }
+        });
 
         chart.setData(data);
-        chart.animateX(2500);
+        chart.animateX(1500);
         //refresh
         chart.invalidate();
     }
@@ -211,7 +215,7 @@ public class ResultsActivity extends BaseActivity {
             if(correct){
                 new AlertDialog.Builder(ResultsActivity.this)
                         .setTitle("The email has been sent")
-                        .setMessage("Please check your inbox")
+                        .setMessage("The email has been sent to nurse.")
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -222,7 +226,7 @@ public class ResultsActivity extends BaseActivity {
             }else{
                 new AlertDialog.Builder(ResultsActivity.this)
                         .setTitle("The email couldn't be sent")
-                        .setMessage("Please check your internet connection and try again")
+                        .setMessage("Please check your internet connection and try again.")
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {

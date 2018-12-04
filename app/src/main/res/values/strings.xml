@@ -30,5 +30,5 @@
     <string name="close">Close</string>
     <string name="send_e_mail_to_nurse">E-mail results to nurse</string>
     <string name="sample_text">sample text</string>
-    <string name="email_content">Dear %s,<br/><br/>I would like to inform you that the result of the thick and thin test by microscope for the patient %s has been released.<br/><br/>This is the total number of parasites per microlitre of blood: %d.<br/><br/>Kind Regards,<br/>%s</string>
+    <string name="email_content"><![CDATA[Dear %s,<br/><br/>I would like to inform you that the result of the thick and thin test by microscope for the patient %s has been released.<br/><br/>This is the total number of parasites per microlitre of blood: <strong>%d parasites/μL</strong>.<br/><br/>Kind Regards,<br/>%s]]></string>
 </resources>

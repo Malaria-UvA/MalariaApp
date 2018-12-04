@@ -27,7 +27,9 @@
         <activity
             android:name=".activities.input.InputDataActivity"
             android:label="@string/thickAnalysis"/>
-        <activity android:name=".activities.results.ResultsActivity" />
+        <activity
+            android:name=".activities.results.ResultsActivity"
+            android:label="@string/results"/>
         <activity
             android:name=".activities.test.TestSettingActivity"
             android:label="@string/test_information" />
