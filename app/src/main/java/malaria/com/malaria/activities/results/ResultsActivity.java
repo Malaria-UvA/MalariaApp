@@ -1,11 +1,17 @@
 package malaria.com.malaria.activities.results;
 
+import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
+import android.text.Html;
+import android.text.Spanned;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
@@ -15,6 +21,7 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 
 import java.util.ArrayList;
+import java.util.Properties;
 
 import javax.inject.Inject;
 
@@ -30,6 +37,9 @@ import malaria.com.malaria.models.Result;
 import malaria.com.malaria.models.Test;
 import malaria.com.malaria.models.ThickFeatures;
 import malaria.com.malaria.models.ThinFeatures;
+import malaria.com.malaria.properties.PropertiesReader;
+
+import static android.text.Html.fromHtml;
 
 public class ResultsActivity extends BaseActivity {
     @BindView(R.id.chart)
@@ -47,6 +57,9 @@ public class ResultsActivity extends BaseActivity {
     @Inject()
     IMalariaKBSService malariaKBSService;
 
+    String email;
+    String password;
+
     public ResultsActivity() {
         super(R.layout.activity_results);
     }
@@ -56,10 +69,19 @@ public class ResultsActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         this.drawLineChart();
         this.binds();
+        this.readProperties();
 
         malariaKBSService.getAnalysis().calculateResult();
         Result r = malariaKBSService.getResult();
         calculationTxt.setText(String.format("%s parasites/\u00B5L", r.getParasites_per_microlitre()));
+    }
+
+    private void readProperties() {
+        //reads the configuration file
+        PropertiesReader propertiesReader = new PropertiesReader(context);
+        Properties properties = propertiesReader.getProperties("app.properties");
+        this.email = properties.getProperty("email");
+        this.password = properties.getProperty("password");
     }
 
     private void binds() {
@@ -72,7 +94,7 @@ public class ResultsActivity extends BaseActivity {
         this.emailResultsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                 new SendEmailTask().execute(malariaKBSService.getTest());
+                new SendEmailTask().execute(malariaKBSService.getTest());
             }
         });
     }
@@ -86,11 +108,11 @@ public class ResultsActivity extends BaseActivity {
         int i = 0;
         for (Features f : analysis.getFeaturesList()) {
             float y, y2;
-            if(analysis.getType() == Analysis.TypeEnum.THICK){
+            if (analysis.getType() == Analysis.TypeEnum.THICK) {
                 ThickFeatures tf = (ThickFeatures) f;
                 y = tf.getN_parasites();
                 y2 = tf.getN_whiteBloodCells();
-            }else{
+            } else {
                 ThinFeatures tf = (ThinFeatures) f;
                 y = tf.getN_redBloodCells();
                 y2 = tf.getN_infected_rbc();
@@ -101,10 +123,10 @@ public class ResultsActivity extends BaseActivity {
             i++;
         }
         String ds1Title, ds2Title;
-        if(analysis.getType() == Analysis.TypeEnum.THICK){
+        if (analysis.getType() == Analysis.TypeEnum.THICK) {
             ds1Title = "Number of parasites";
             ds2Title = "Number of white blood cells";
-        }else{
+        } else {
             ds1Title = "Number of red blood cells";
             ds2Title = "Number of infected red blood cells";
         }
@@ -154,10 +176,13 @@ public class ResultsActivity extends BaseActivity {
         applicationComponent.inject(this);
     }
 
-    private class SendEmailTask extends AsyncTask<Test, Void, Void> {
+    @SuppressLint("StaticFieldLeak")
+    private class SendEmailTask extends AsyncTask<Test, Void, Boolean> {
 
         @Override
-        protected Void doInBackground(Test... tests) {
+        protected Boolean doInBackground(Test... tests) {
+            Boolean correct = false;
+            ResultsActivity that = ResultsActivity.this;
 
             Test test = tests[0];
             Result r = test.getAnalysis().getResult();
@@ -169,20 +194,44 @@ public class ResultsActivity extends BaseActivity {
                         test.getPatient().getName(),
                         r.getParasites_per_microlitre(),
                         test.getMicroscopist().getName());
-
-                GMailSender sender = new GMailSender("microscopistmalaria@gmail.com", "xxxxxxxxx"); //TODO: put a local config file
+                GMailSender sender = new GMailSender(that.email, that.password);
                 sender.sendMail("Malaria Diagnosis Results",
                         content,
-                        "microscopistmalaria@gmail.com",
+                        that.email,
                         test.getNurse().getEmail());
-                //System.err.print("EMAIL SENT");
-
-
+                correct = true;
             } catch (Exception e) {
                 e.printStackTrace();
-                //Toast.makeText(ResultsActivity.this, "The email couldn't be sent", Toast.LENGTH_SHORT).show();
             }
-            return null;
+            return correct;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean correct) {
+            if(correct){
+                new AlertDialog.Builder(ResultsActivity.this)
+                        .setTitle("The email has been sent")
+                        .setMessage("Please check your inbox")
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .show();
+            }else{
+                new AlertDialog.Builder(ResultsActivity.this)
+                        .setTitle("The email couldn't be sent")
+                        .setMessage("Please check your internet connection and try again")
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .show();
+            }
+
         }
     }
 }
