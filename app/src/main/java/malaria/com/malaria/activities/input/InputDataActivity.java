@@ -117,10 +117,11 @@ public class InputDataActivity extends BaseActivity {
                 }
                 analysis.addFeature(f);
                 that.setNumberOfFields(analysis.getNumberOfFeatures());
-
+                // stop condition
                 if (analysis.stopConditionMet()) {
 
                     if (analysis.getType() == Analysis.TypeEnum.THICK) {
+                        // check if thick analysis is still valid
                         boolean analysisValid = analysis.thickAnalysisValid();
                         if (!analysisValid) { // change to thin analysis
                             changeToThinAnalysis(analysis);
