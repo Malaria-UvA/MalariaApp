@@ -105,7 +105,7 @@ public class ResultsActivity extends BaseActivity {
         ArrayList<Entry> entries = new ArrayList<>();
         ArrayList<Entry> entries2 = new ArrayList<>();
 
-        int i = 0;
+        int i = 1;
         for (Features f : analysis.getFeaturesList()) {
             float y, y2;
             if (analysis.getType() == Analysis.TypeEnum.THICK) {
