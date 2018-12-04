@@ -4,7 +4,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -29,20 +28,20 @@ public class InputDataActivity extends BaseActivity {
     @BindView(R.id.numberOfFieldsTxt)
     TextView numberOfFieldsTxt;
 
-    @BindView(R.id.topTxt)
-    TextView topTxt;
-
     @BindView(R.id.bottomTxt)
     TextView bottomTxt;
+
+    @BindView(R.id.topTxt)
+    TextView topTxt;
 
     @BindView(R.id.errorTxt)
     TextView errorTxt;
 
-    @BindView(R.id.editTextTop)
-    EditText editTextTop;
-
     @BindView(R.id.editTextBottom)
     EditText editTextBottom;
+
+    @BindView(R.id.editTextTop)
+    EditText editTextTop;
 
     @BindView(R.id.clearBtn)
     Button clearBtn;
@@ -93,7 +92,7 @@ public class InputDataActivity extends BaseActivity {
                 Analysis analysis = that.malariaKBSService.getAnalysis();
                 setError("");
                 Features f;
-                int top, bottom;
+                int bottom, top;
                 try {
                     String topText = that.editTextTop.getText().toString();
                     String bottomText = that.editTextBottom.getText().toString();
@@ -106,10 +105,10 @@ public class InputDataActivity extends BaseActivity {
                     return;
                 }
                 if (analysis.getType() == Analysis.TypeEnum.THICK) {
-                    f = new ThickFeatures(top, bottom);
+                    f = new ThickFeatures(bottom, top);
                 } else {
                     try{
-                        f = new ThinFeatures(top, bottom);
+                        f = new ThinFeatures(bottom, top);
                     }catch (InvalidFeatureValuesException ex){
                         setError(ex.getMessage());
                         return;
@@ -143,8 +142,8 @@ public class InputDataActivity extends BaseActivity {
         this.numberOfFieldsTxt.setText(String.format("%s %s ", getString(R.string.number_of_fields), n));
     }
     private void clearFields() {
-        this.editTextTop.setText("");
         this.editTextBottom.setText("");
+        this.editTextTop.setText("");
     }
 
     private void setError(String txt){
@@ -155,8 +154,8 @@ public class InputDataActivity extends BaseActivity {
         if (this.getSupportActionBar() != null) {
             this.getSupportActionBar().setTitle(R.string.thinAnalysis);
         }
-        this.topTxt.setText(getString(R.string.red_blood_cells));
-        this.bottomTxt.setText(getString(R.string.inf_red_blood_cells));
+        this.bottomTxt.setText(getString(R.string.red_blood_cells));
+        this.topTxt.setText(getString(R.string.inf_red_blood_cells));
         this.setNumberOfFields(analysis.getNumberOfFeatures());
         this.clearFields();
 
