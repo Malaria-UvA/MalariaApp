@@ -11,7 +11,7 @@
     <style name="heading">
 
         <item name="android:textSize">
-            35sp
+            25sp
         </item>
 
         <item name="android:textColor">
@@ -47,7 +47,7 @@
     <style name="description">
 
         <item name="android:textSize">
-            18sp
+            15sp
         </item>
 
         <item name="android:textColor">

@@ -215,7 +215,7 @@ public class ResultsActivity extends BaseActivity {
             if(correct){
                 new AlertDialog.Builder(ResultsActivity.this)
                         .setTitle("The email has been sent")
-                        .setMessage("The email has been sent to nurse.")
+                        .setMessage("The email has been sent to the nurse.")
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {

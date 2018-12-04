@@ -1,15 +1,16 @@
 <resources>
     <string name="app_name">Malaria</string>
     <string name="mosquito">Mosquito</string>
-    <string name="heading">MALARIA-APP</string>
+    <string name="heading">MALARIA PARASITE COUNTING</string>
     <string name="guide">GUIDE</string>
     <string name="start">START</string>
-    <string name="description">HIGH QUALITY MALARIA DIAGNOSIS IN LOW RESOURCE ENVIRONMENTS</string>
+    <string name="description">KNOWLEDGE BASED SYSTEM</string>
     <string name="title_activity_guide">Guide</string>
-    <string name="guide_introduction">This application will help you on the thick and thin blood smear test by microscope. These are the steps need to be follow:</string>
+    <string name="guide_introduction">This application will help you on the Malaria parasite counting procedure. These are the steps that need to be follow:</string>
     <string name="guide_step_1">1.- Introduce the nurse name, his/her email, your name (the microscopist) and the patient name.</string>
-    <string name="guide_step_2">2.- Start counting white blood cells and parasites on the thick film.</string>
-    <string name="guide_step_3">3.- The application will follow the <a href="http://www.wpro.who.int/mvp/lab_quality/2096_oms_gmp_sop_09_rev1.pdf">WHO guidelines</a> and will let you know the results.</string>
+    <string name="guide_step_2">2.- The application will follow the Malaria parasite counting from the <a href="http://www.wpro.who.int/mvp/lab_quality/2096_oms_gmp_sop_09_rev1.pdf">WHO guidelines</a> and it will check when you need to stop counting.</string>
+    <string name="guide_step_3">3.- Keep introducing data until the results come out. Following the procedure, it will know when to show the results.</string>
+    <string name="guide_step_4">4.- You will have the option to send the results to the nurse.</string>
     <string name="thickAnalysis">Thick Analysis</string>
     <string name="thinAnalysis">Thin Analysis</string>
     <string name="clear">Clear</string>
@@ -28,7 +29,7 @@
     <string name="nurse">Nurse</string>
     <string name="results">Results</string>
     <string name="close">Close</string>
-    <string name="send_e_mail_to_nurse">E-mail results to nurse</string>
+    <string name="send_e_mail_to_nurse">E-mail results to the nurse</string>
     <string name="sample_text">sample text</string>
     <string name="email_content"><![CDATA[Dear %s,<br/><br/>I would like to inform you that the result of the thick and thin test by microscope for the patient %s has been released.<br/><br/>This is the total number of parasites per microlitre of blood: <strong>%d parasites/μL</strong>.<br/><br/>Kind Regards,<br/>%s]]></string>
 </resources>
