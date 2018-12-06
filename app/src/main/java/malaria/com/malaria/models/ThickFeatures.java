@@ -40,7 +40,14 @@ public class ThickFeatures extends Features {
         this.n_parasites = n_parasites;
     }
 
-    public static boolean stopConditionMet(List<Features> fs) {
+    /**
+     * This method is part of the extracted knowledge. It returns 'true'
+     * if it needs to stop counting, 'false' otherwise.
+     *
+     * @param fs features that have been added to the system
+     * @return boolean
+     */
+    static boolean stopConditionMet(List<Features> fs) {
         int nParasitesTotal = 0;
         int nWBC = 0;
         for (Features f : fs) {
@@ -48,12 +55,19 @@ public class ThickFeatures extends Features {
 
             nParasitesTotal += tf.getN_parasites();
             nWBC += tf.getN_whiteBloodCells();
-
         }
         return nParasitesTotal >= 100 && nWBC >= 200 || nParasitesTotal <= 99 && nWBC >= 500;
     }
 
-    public static int calculate(int nParasitesTotal, int nWBC) {
+    /**
+     * This method is part of the extracted knowledge. It calculates the parasites
+     * per microlitre of blood using the formula for the Thick film.
+     *
+     * @param nParasitesTotal number of total parasites
+     * @param nWBC number of total white blood cells
+     * @return int
+     */
+    static int calculate(int nParasitesTotal, int nWBC) {
         return (int) Math.ceil(8000f * nParasitesTotal / nWBC);
     }
 }

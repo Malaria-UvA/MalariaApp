@@ -46,11 +46,26 @@ public class ThinFeatures extends Features {
         this.n_infected_rbc = n_infected_rbc;
     }
 
-    public static boolean stopConditionMet(List<Features> fs) {
+    /**
+     * This method is part of the extracted knowledge. It returns 'true'
+     * if it needs to stop counting, 'false' otherwise.
+     *
+     * @param fs features that have been added to the system
+     * @return boolean
+     */
+    static boolean stopConditionMet(List<Features> fs) {
         return fs.size() == 20;
     }
 
-    public static int calculate(int nInfRBC, int nRBC) {
+    /**
+     * This method is part of the extracted knowledge. It calculates the parasites
+     * per microlitre of blood using the formula for the Thin film.
+     *
+     * @param nInfRBC number of infected red blood cells
+     * @param nRBC number of total red blood cells
+     * @return int
+     */
+    static int calculate(int nInfRBC, int nRBC) {
         return (int) Math.ceil(5_000_000f * nInfRBC / nRBC);
     }
 }
