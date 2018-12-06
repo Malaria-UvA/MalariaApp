@@ -40,6 +40,11 @@ public class ThickFeatures extends Features {
         this.n_parasites = n_parasites;
     }
 
+    /**
+     * Related with Rule instance 1 under Rule type: Analysis-influence
+     * @param fs
+     * @return
+     */
     public static boolean stopConditionMet(List<Features> fs) {
         int nParasitesTotal = 0;
         int nWBC = 0;
@@ -53,6 +58,12 @@ public class ThickFeatures extends Features {
         return nParasitesTotal >= 100 && nWBC >= 200 || nParasitesTotal <= 99 && nWBC >= 500;
     }
 
+    /**
+     * Related with Rule instance 2 under Rule type: Analysis-influence
+     * @param nParasitesTotal
+     * @param nWBC
+     * @return
+     */
     public static int calculate(int nParasitesTotal, int nWBC) {
         return (int) Math.ceil(8000f * nParasitesTotal / nWBC);
     }

@@ -46,10 +46,21 @@ public class ThinFeatures extends Features {
         this.n_infected_rbc = n_infected_rbc;
     }
 
+    /**
+     * Rule instance 3 under Rule type: Analysis-influence
+     * @param fs
+     * @return
+     */
     public static boolean stopConditionMet(List<Features> fs) {
         return fs.size() == 20;
     }
 
+    /**
+     * Rule instance 3 under Rule type: Analysis-influence
+     * @param nInfRBC
+     * @param nRBC
+     * @return
+     */
     public static int calculate(int nInfRBC, int nRBC) {
         return (int) Math.ceil(5_000_000f * nInfRBC / nRBC);
     }
