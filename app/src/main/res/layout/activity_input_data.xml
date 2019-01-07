@@ -7,109 +7,65 @@
     tools:context=".activities.input.InputDataActivity"
     tools:layout_editor_absoluteY="81dp">
 
-    <EditText
-        android:id="@+id/editTextTop"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="57dp"
-        android:layout_marginStart="57dp"
-        android:layout_marginTop="18dp"
-        android:ems="10"
-        android:inputType="number"
+
+    <TextureView
+        android:id="@+id/textureView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="18dp"
+        app:layout_constraintBottom_toTopOf="@+id/titleTextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/topTxt" />
-
-    <EditText
-        android:id="@+id/editTextBottom"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="58dp"
-        android:layout_marginStart="58dp"
-        android:layout_marginTop="7dp"
-        android:ems="10"
-        android:inputType="number"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bottomTxt" />
-
-    <Button
-        android:id="@+id/nextBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="16dp"
-        android:background="@color/colorPrimary"
-        android:text="@string/next"
-        android:textAppearance="@style/btnText"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/cancelBtn"
-        android:layout_width="0dp"
+    <TextView
+        android:id="@+id/titleTextView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="35dp"
-        android:layout_marginEnd="69dp"
-        android:layout_marginStart="57dp"
-        android:background="@color/colorAccent"
-        android:text="@string/cancel"
-        android:textAppearance="@style/btnText"
+        android:layout_marginBottom="19dp"
+        android:text="@string/focusing"
+        app:layout_constraintBottom_toTopOf="@+id/description1TextView"
+        app:layout_constraintStart_toStartOf="@+id/description1TextView"
+        app:layout_constraintTop_toBottomOf="@+id/textureView" />
+
+    <TextView
+        android:id="@+id/description1TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="23dp"
+        android:layout_marginStart="1dp"
+        android:visibility="invisible"
+        android:text="@string/keep_moving"
+        app:layout_constraintBottom_toTopOf="@+id/description2TextView"
+        app:layout_constraintStart_toStartOf="@+id/description2TextView"
+        app:layout_constraintTop_toBottomOf="@+id/titleTextView" />
+
+    <TextView
+        android:id="@+id/description2TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="7dp"
+        android:text="@string/number_pictures"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/nextBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/description1TextView" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="37dp"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
-        android:id="@+id/clearBtn"
-        android:layout_width="79dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="57dp"
-        android:layout_marginTop="33dp"
-        android:background="@color/colorPrimaryDark"
-        android:text="@string/clear"
-        android:textAppearance="@style/btnText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/errorTxt"
-        app:layout_constraintTop_toBottomOf="@+id/editTextBottom" />
-
-    <TextView
-        android:id="@+id/topTxt"
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="128dp"
-        android:text="@string/parasites"
-        app:layout_constraintStart_toStartOf="@+id/editTextTop"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/bottomTxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
-        android:text="@string/white_blood_cells"
-        app:layout_constraintStart_toStartOf="@+id/editTextTop"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTop" />
-
-    <TextView
-        android:id="@+id/numberOfFieldsTxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/number_of_fields"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/errorTxt"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="57dp"
-        android:text="@string/sample_text"
-        android:textColor="#ba1e1e"
-        app:layout_constraintBottom_toBottomOf="@+id/clearBtn"
-        app:layout_constraintEnd_toStartOf="@+id/clearBtn"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/clearBtn" />
+        android:layout_marginStart="3dp"
+        app:layout_constraintStart_toStartOf="@+id/titleTextView"
+        app:layout_constraintTop_toBottomOf="@+id/titleTextView" />
 </android.support.constraint.ConstraintLayout>

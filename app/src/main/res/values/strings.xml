@@ -32,4 +32,11 @@
     <string name="send_e_mail_to_nurse">E-mail results to the nurse</string>
     <string name="sample_text">sample text</string>
     <string name="email_content"><![CDATA[Dear %s,<br/><br/>I would like to inform you that the result of the thick and thin test by microscope for the patient %s has been released.<br/><br/>This is the total number of parasites per microlitre of blood: <strong>%d parasites/μL</strong>.<br/><br/>Kind Regards,<br/>%s]]></string>
+    <string name="focusing">Focusing…</string>
+    <string name="picture_taken">Picture taken!</string>
+    <string name="keep_moving">Keep moving the blood smear</string>
+    <string name="number_pictures">Number of pictures</string>
+    <string name="no_more_pictures_needed">No more pictures are needed. Results will be shown in a second. </string>
+    <string name="composing_results">COMPOSING RESULTS…</string>
+    <string name="analysing">Analysing</string>
 </resources>
