@@ -1,1 +1,1 @@
-# malaria_KE
+# MalariaApp
