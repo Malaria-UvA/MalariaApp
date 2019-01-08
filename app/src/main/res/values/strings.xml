@@ -39,4 +39,5 @@
     <string name="no_more_pictures_needed">No more pictures are needed. Results will be shown in a second. </string>
     <string name="composing_results">COMPOSING RESULTS…</string>
     <string name="analysing">Analysing</string>
+    <string name="request_permission">This app needs camera permission.</string>
 </resources>

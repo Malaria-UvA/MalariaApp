@@ -9,7 +9,7 @@ import butterknife.BindView;
 import malaria.com.malaria.R;
 import malaria.com.malaria.activities.base.BaseActivity;
 import malaria.com.malaria.activities.guide.GuideActivity;
-import malaria.com.malaria.activities.input.InputDataActivity;
+import malaria.com.malaria.activities.camera.CameraActivity;
 import malaria.com.malaria.dagger.MalariaComponent;
 
 public class MainActivity extends BaseActivity {
@@ -38,7 +38,7 @@ public class MainActivity extends BaseActivity {
         this.startBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, InputDataActivity.class));
+                startActivity(new Intent(MainActivity.this, CameraActivity.class));
 
             }
         });
