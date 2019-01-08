@@ -71,6 +71,13 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.opencv.android.OpenCVLoader;
+import org.opencv.core.Core;
+import org.opencv.core.CvType;
+import org.opencv.core.Mat;
+import org.opencv.imgcodecs.Imgcodecs;
+import org.opencv.imgproc.Imgproc;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -134,6 +141,7 @@ public class CameraFragment extends Fragment
     private Button calibrateBtn;
     private Button takePictureBtn;
     private int picturesTaken = 0;
+    private File tmpFile;
     /**
      * Conversion from screen rotation to JPEG orientation.
      */
@@ -144,6 +152,8 @@ public class CameraFragment extends Fragment
         ORIENTATIONS.append(Surface.ROTATION_90, 90);
         ORIENTATIONS.append(Surface.ROTATION_180, 180);
         ORIENTATIONS.append(Surface.ROTATION_270, 270);
+        System.loadLibrary("opencv_java3");
+        OpenCVLoader.initDebug(); // TODO delete
     }
 
     /**
@@ -529,6 +539,7 @@ public class CameraFragment extends Fragment
             File rawFile = new File(Environment.
                     getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM),
                     "RAW_" + currentDateTime + ".dng");
+            tmpFile = rawFile;
             File jpegFile = new File(Environment.
                     getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM),
                     "JPEG_" + currentDateTime + ".jpg");
@@ -636,6 +647,7 @@ public class CameraFragment extends Fragment
         this.hideUnnecessaryElements(this.behaviour);
 
         takePictureBtn.setOnClickListener(this);
+        calibrateBtn.setOnClickListener(this);
         // Setup a new OrientationEventListener.  This is used to handle rotation events like a
         // 180 degree rotation that do not normally trigger a call to onCreate to do view re-layout
         // or otherwise cause the preview TextureView's size to change.
@@ -656,7 +668,7 @@ public class CameraFragment extends Fragment
             description1TextView.setVisibility(View.INVISIBLE);
             description2TextView.setVisibility(View.INVISIBLE);
             progressBar.setVisibility(View.INVISIBLE);
-        }else{ // IntentKeys.START
+        } else { // IntentKeys.START
             calibrateBtn.setVisibility(View.INVISIBLE);
         }
     }
@@ -733,7 +745,34 @@ public class CameraFragment extends Fragment
                 takePicture();
                 break;
             }
+            case R.id.calibrateBtn: {
+                takePicture();
+                break;
+            }
         }
+    }
+
+    private void calculateThreshold() {
+        Mat src, src_gray = new Mat(), dst = new Mat();
+        int kernel_size = 3;
+        int scale = 1;
+        int delta = 0;
+        int ddepth = CvType.CV_16S;
+        boolean doesFileExist = tmpFile.exists();
+        String imageName = null;
+        imageName = tmpFile.getAbsolutePath();
+        //src = Imgcodecs.imread(imageName, Imgcodecs.IMREAD_COLOR); // Load an image
+        src = Imgcodecs.imread(imageName); // Load an image
+        // Check if image is loaded fine
+        boolean isImageLoaded = !src.empty();
+        if (!isImageLoaded) {
+            System.exit(-1);
+        }
+        // Reduce noise by blurring with a Gaussian filter ( kernel size = 3 )
+        Imgproc.GaussianBlur(src, src, new org.opencv.core.Size(3, 3), 0, 0, Core.BORDER_DEFAULT);
+        // Convert the image to grayscale
+        Imgproc.cvtColor(src, src_gray, Imgproc.COLOR_RGB2GRAY);
+        Imgproc.Laplacian(src_gray, dst, ddepth, kernel_size, scale, delta, Core.BORDER_DEFAULT);
     }
 
     /**
@@ -1243,10 +1282,12 @@ public class CameraFragment extends Fragment
             }
         }
         // update UI after having taken the picture
-        if(behaviour == IntentKeys.START){
+        if (behaviour == IntentKeys.START) {
             picturesTaken++;
             CameraFragment.this.description2TextView.setText(String.format(Locale.getDefault(), "%s: %d", getString(R.string.number_pictures), picturesTaken));
             CameraFragment.this.setIsFocusing(false);
+        } else {
+            calculateThreshold();
         }
     }
 
