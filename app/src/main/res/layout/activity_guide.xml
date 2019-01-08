@@ -4,87 +4,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="10sp"
-    tools:context=".activities.guide.GuideActivity">
+    tools:context=".activities.guide.GuideActivity"
+    tools:layout_editor_absoluteX="10dp"
+    tools:layout_editor_absoluteY="81dp">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:justificationMode="inter_word"
-        android:textSize="18sp"
-        android:text="@string/guide_introduction"
-        android:textColor="@android:color/black"
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="0dp"
+    <com.rd.PageIndicatorView
+        android:id="@+id/pageIndicatorView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/guide_step_1"
-        android:textColor="@android:color/black"
-        android:justificationMode="inter_word"
-        android:textSize="18sp"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="31dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.100000024" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/guide_step_2"
-        android:textColor="@android:color/black"
-        android:textSize="18sp"
-        android:justificationMode="inter_word"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView1" />
-
-    <TextView
-        android:id="@+id/step3_tv"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/guide_step_3"
-        android:textColor="@android:color/black"
-        android:textSize="18sp"
-        android:justificationMode="inter_word"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/guide_step_4"
-        android:textColor="@android:color/black"
-        android:textSize="18sp"
-        android:justificationMode="inter_word"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/step3_tv" />
-
-    <Button
-        android:id="@+id/startBtn"
-        android:layout_width="170dp"
-        android:layout_height="36dp"
-        android:layout_marginBottom="52dp"
-        android:background="@color/colorPrimary"
-        android:text="@string/start"
-        android:textAppearance="@style/btnText"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:piv_animationType="drop"
+        app:piv_dynamicCount="true"
+        app:piv_interactiveAnimation="true"
+        app:piv_selectedColor="@android:color/white"
+        app:piv_unselectedColor="@color/colorAccent"
+        app:piv_viewPager="@id/viewPager" />
 
 
 </android.support.constraint.ConstraintLayout>

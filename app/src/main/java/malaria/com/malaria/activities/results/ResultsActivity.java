@@ -29,7 +29,6 @@ import malaria.com.malaria.R;
 import malaria.com.malaria.activities.base.BaseActivity;
 import malaria.com.malaria.dagger.MalariaComponent;
 import malaria.com.malaria.interfaces.IMalariaKBSService;
-import malaria.com.malaria.mail.GMailSender;
 import malaria.com.malaria.models.Analysis;
 import malaria.com.malaria.models.Features;
 import malaria.com.malaria.models.Result;
@@ -48,14 +47,8 @@ public class ResultsActivity extends BaseActivity {
     @BindView(R.id.closeBtn)
     Button closeBtn;
 
-    @BindView(R.id.emailResultsBtn)
-    Button emailResultsBtn;
-
     @Inject()
     IMalariaKBSService malariaKBSService;
-
-    String email;
-    String password;
 
     public ResultsActivity() {
         super(R.layout.activity_results);
@@ -66,19 +59,10 @@ public class ResultsActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         this.drawLineChart();
         this.binds();
-        this.readProperties();
 
         malariaKBSService.getAnalysis().calculateResult();
         Result r = malariaKBSService.getResult();
         calculationTxt.setText(String.format("%s parasites/\u00B5L of blood", r.getParasites_per_microlitre()));
-    }
-
-    private void readProperties() {
-        //reads the configuration file
-        PropertiesReader propertiesReader = new PropertiesReader(context);
-        Properties properties = propertiesReader.getProperties("app.properties");
-        this.email = properties.getProperty("email");
-        this.password = properties.getProperty("password");
     }
 
     private void binds() {
@@ -86,12 +70,6 @@ public class ResultsActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 finish();
-            }
-        });
-        this.emailResultsBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new SendEmailTask().execute(malariaKBSService.getTest());
             }
         });
     }
@@ -178,64 +156,5 @@ public class ResultsActivity extends BaseActivity {
     @Override
     protected void onInject(MalariaComponent applicationComponent) {
         applicationComponent.inject(this);
-    }
-
-    @SuppressLint("StaticFieldLeak")
-    private class SendEmailTask extends AsyncTask<Test, Void, Boolean> {
-
-        @Override
-        protected Boolean doInBackground(Test... tests) {
-            Boolean correct = false;
-            ResultsActivity that = ResultsActivity.this;
-
-            Test test = tests[0];
-            Result r = test.getAnalysis().getResult();
-
-            try {
-                String content = getString(R.string.email_content);
-                content = String.format(content,
-                        test.getNurse().getName(),
-                        test.getPatient().getName(),
-                        r.getParasites_per_microlitre(),
-                        test.getMicroscopist().getName());
-                GMailSender sender = new GMailSender(that.email, that.password);
-                sender.sendMail("Malaria Diagnosis Results",
-                        content,
-                        that.email,
-                        test.getNurse().getEmail());
-                correct = true;
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return correct;
-        }
-
-        @Override
-        protected void onPostExecute(Boolean correct) {
-            if(correct){
-                new AlertDialog.Builder(ResultsActivity.this)
-                        .setTitle("The email has been sent")
-                        .setMessage("The email has been sent to the nurse.")
-                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        })
-                        .show();
-            }else{
-                new AlertDialog.Builder(ResultsActivity.this)
-                        .setTitle("The email couldn't be sent")
-                        .setMessage("Please check your internet connection and try again.")
-                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        })
-                        .show();
-            }
-
-        }
     }
 }
