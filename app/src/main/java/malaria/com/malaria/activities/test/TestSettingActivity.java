@@ -11,7 +11,6 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import malaria.com.malaria.R;
 import malaria.com.malaria.activities.base.BaseActivity;
-import malaria.com.malaria.activities.input.InputDataActivity;
 import malaria.com.malaria.activities.main.MainActivity;
 import malaria.com.malaria.dagger.MalariaComponent;
 import malaria.com.malaria.interfaces.IMalariaKBSService;
@@ -79,7 +78,7 @@ public class TestSettingActivity extends BaseActivity {
 
                 malariaKBSService.createTest(nurse, microscopist, patient);
 
-                startActivity(new Intent(that, InputDataActivity.class));
+                //startActivity(new Intent(that, InputDataActivity.class));
             }
         });
     }
