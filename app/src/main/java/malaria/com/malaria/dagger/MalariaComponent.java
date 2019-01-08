@@ -21,7 +21,5 @@ public interface MalariaComponent {
 
     void inject(ResultsActivity resultsActivity);
 
-    void inject(TestSettingActivity testSettingActivity);
-
     void inject(CameraActivity cameraActivity);
 }
