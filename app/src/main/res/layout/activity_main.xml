@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.main.MainActivity"
-    tools:layout_editor_absoluteY="81dp">
+    tools:layout_editor_absoluteY="25dp">
 
 
     <ImageView
@@ -14,21 +14,23 @@
         android:layout_height="0dp"
         android:layout_marginBottom="15dp"
         android:layout_marginTop="16dp"
+        android:contentDescription="@string/mosquito"
         android:src="@drawable/mosquito"
         app:layout_constraintBottom_toTopOf="@+id/headingTxt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="@string/mosquito" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <TextView
         android:id="@+id/headingTxt"
-        android:layout_width="285dp"
-        android:layout_height="72dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginBottom="8dp"
+        android:layout_marginEnd="49dp"
+        android:layout_marginStart="49dp"
         android:lineSpacingExtra="3sp"
         android:text="@string/heading"
         android:textAlignment="center"
@@ -45,27 +47,40 @@
         android:layout_height="36dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginBottom="23dp"
+        android:layout_marginTop="20dp"
         android:background="@color/colorPrimary"
-        android:textAppearance="@style/btnText"
         android:text="@string/guide"
-        app:layout_constraintBottom_toTopOf="@+id/startBtn"
+        android:textAppearance="@style/btnText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/descTxt" />
 
+    <Button
+        android:id="@+id/calibrateBtn"
+        android:layout_width="170dp"
+        android:layout_height="36dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="20dp"
+        android:background="@color/colorPrimary"
+        android:text="@string/calibrate"
+        android:textAppearance="@style/btnText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/guideBtn" />
+
     <TextView
         android:id="@+id/descTxt"
-        android:layout_width="330dp"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="61dp"
-        android:layout_marginEnd="61dp"
-        android:layout_marginBottom="18dp"
+        android:layout_marginBottom="206dp"
+        android:layout_marginEnd="27dp"
+        android:layout_marginStart="27dp"
         android:gravity="center_horizontal"
         android:lineSpacingExtra="27sp"
         android:text="@string/description"
         android:textAppearance="@style/description"
-        app:layout_constraintBottom_toTopOf="@+id/guideBtn"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/headingTxt" />
@@ -74,12 +89,11 @@
         android:id="@+id/startBtn"
         android:layout_width="170dp"
         android:layout_height="36dp"
-        android:layout_marginBottom="52dp"
+        android:layout_marginTop="20dp"
         android:background="@color/colorPrimary"
         android:text="@string/start"
         android:textAppearance="@style/btnText"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/guideBtn" />
+        app:layout_constraintTop_toBottomOf="@+id/calibrateBtn" />
 </android.support.constraint.ConstraintLayout>

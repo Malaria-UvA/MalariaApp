@@ -66,6 +66,7 @@ import android.view.Surface;
 import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -90,6 +91,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import malaria.com.malaria.R;
+import malaria.com.malaria.constants.IntentKeys;
 import malaria.com.malaria.views.AutoFitTextureView;
 
 /**
@@ -129,6 +131,8 @@ public class CameraFragment extends Fragment
     private TextView description1TextView;
     private TextView description2TextView;
     private ProgressBar progressBar;
+    private Button calibrateBtn;
+    private Button takePictureBtn;
     private int picturesTaken = 0;
     /**
      * Conversion from screen rotation to JPEG orientation.
@@ -604,6 +608,7 @@ public class CameraFragment extends Fragment
             }
         }
     };
+    private IntentKeys behaviour;
 
     public static CameraFragment newInstance() {
         return new CameraFragment();
@@ -612,18 +617,25 @@ public class CameraFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        Bundle bundle = this.getArguments();
+        String behaviourStr = bundle.getString(IntentKeys.ACTIVITY_BEHAVIOUR);
+        this.behaviour = IntentKeys.valueOf(behaviourStr);
         return inflater.inflate(R.layout.fragment_camera2_basic, container, false);
     }
 
     @Override
     public void onViewCreated(final View view, Bundle savedInstanceState) {
-        view.findViewById(R.id.picture).setOnClickListener(this);
+        takePictureBtn = (Button) view.findViewById(R.id.picture);
         titleTextView = (TextView) view.findViewById(R.id.titleTextView);
         description1TextView = (TextView) view.findViewById(R.id.description1TextView);
         description2TextView = (TextView) view.findViewById(R.id.description2TextView);
         progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
         mTextureView = (AutoFitTextureView) view.findViewById(R.id.texture);
+        calibrateBtn = (Button) view.findViewById(R.id.calibrateBtn);
 
+        this.hideUnnecessaryElements(this.behaviour);
+
+        takePictureBtn.setOnClickListener(this);
         // Setup a new OrientationEventListener.  This is used to handle rotation events like a
         // 180 degree rotation that do not normally trigger a call to onCreate to do view re-layout
         // or otherwise cause the preview TextureView's size to change.
@@ -636,6 +648,17 @@ public class CameraFragment extends Fragment
                 }
             }
         };
+    }
+
+    private void hideUnnecessaryElements(IntentKeys behaviour) {
+        if (behaviour == IntentKeys.CALIBRATION) {
+            takePictureBtn.setVisibility(View.INVISIBLE);
+            description1TextView.setVisibility(View.INVISIBLE);
+            description2TextView.setVisibility(View.INVISIBLE);
+            progressBar.setVisibility(View.INVISIBLE);
+        }else{ // IntentKeys.START
+            calibrateBtn.setVisibility(View.INVISIBLE);
+        }
     }
 
     private void setIsFocusing(boolean value) {
@@ -1219,9 +1242,12 @@ public class CameraFragment extends Fragment
                 e.printStackTrace();
             }
         }
-        picturesTaken++;
-        CameraFragment.this.description2TextView.setText(String.format(Locale.getDefault(), "%s: %d", getString(R.string.number_pictures), picturesTaken));
-        CameraFragment.this.setIsFocusing(false);
+        // update UI after having taken the picture
+        if(behaviour == IntentKeys.START){
+            picturesTaken++;
+            CameraFragment.this.description2TextView.setText(String.format(Locale.getDefault(), "%s: %d", getString(R.string.number_pictures), picturesTaken));
+            CameraFragment.this.setIsFocusing(false);
+        }
     }
 
     /**

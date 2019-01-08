@@ -20,6 +20,7 @@ import android.os.Bundle;
 
 import malaria.com.malaria.R;
 import malaria.com.malaria.activities.base.BaseActivity;
+import malaria.com.malaria.constants.IntentKeys;
 import malaria.com.malaria.dagger.MalariaComponent;
 import malaria.com.malaria.fragments.CameraFragment;
 
@@ -32,12 +33,22 @@ public class CameraActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
+        String behaviourStr = getIntent().getStringExtra(IntentKeys.ACTIVITY_BEHAVIOUR);
+        IntentKeys behaviour = IntentKeys.valueOf(behaviourStr);
+        if (behaviour == IntentKeys.CALIBRATION){
+            this.setTitle(getString(R.string.calibration));
+        }
+        Bundle bundle = new Bundle();
+        bundle.putString(IntentKeys.ACTIVITY_BEHAVIOUR, behaviourStr);
         if (null == savedInstanceState) {
+            CameraFragment fragment = CameraFragment.newInstance();
+            fragment.setArguments(bundle);
             getFragmentManager().beginTransaction()
-                    .replace(R.id.container, CameraFragment.newInstance())
+                    .replace(R.id.container, fragment)
                     .commit();
         }
     }
+
     @Override
     protected void onInject(MalariaComponent applicationComponent) {
         applicationComponent.inject(this);
