@@ -4,7 +4,7 @@ import javax.inject.Singleton;
 
 import dagger.Component;
 import malaria.com.malaria.activities.guide.GuideActivity;
-import malaria.com.malaria.activities.input.CameraActivity;
+import malaria.com.malaria.activities.camera.CameraActivity;
 import malaria.com.malaria.activities.main.MainActivity;
 import malaria.com.malaria.activities.results.ResultsActivity;
 import malaria.com.malaria.activities.test.TestSettingActivity;

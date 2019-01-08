@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package malaria.com.malaria.activities.input;
+package malaria.com.malaria.fragments;
 
 import android.Manifest;
 import android.app.Activity;
@@ -90,6 +90,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import malaria.com.malaria.R;
+import malaria.com.malaria.views.AutoFitTextureView;
 
 /**
  * A fragment that demonstrates use of the Camera2 API to capture RAW and JPEG photos.
@@ -122,12 +123,12 @@ import malaria.com.malaria.R;
  * </li>
  * </ul>
  */
-public class Camera2RawFragment extends Fragment
+public class CameraFragment extends Fragment
         implements View.OnClickListener, FragmentCompat.OnRequestPermissionsResultCallback {
-    TextView titleTextView;
-    TextView description1TextView;
-    TextView description2TextView;
-    ProgressBar progressBar;
+    private TextView titleTextView;
+    private TextView description1TextView;
+    private TextView description2TextView;
+    private ProgressBar progressBar;
     private int picturesTaken = 0;
     /**
      * Conversion from screen rotation to JPEG orientation.
@@ -604,8 +605,8 @@ public class Camera2RawFragment extends Fragment
         }
     };
 
-    public static Camera2RawFragment newInstance() {
-        return new Camera2RawFragment();
+    public static CameraFragment newInstance() {
+        return new CameraFragment();
     }
 
     @Override
@@ -1219,8 +1220,8 @@ public class Camera2RawFragment extends Fragment
             }
         }
         picturesTaken++;
-        Camera2RawFragment.this.description2TextView.setText(String.format(Locale.getDefault(), "%s: %d", getString(R.string.number_pictures), picturesTaken));
-        Camera2RawFragment.this.setIsFocusing(false);
+        CameraFragment.this.description2TextView.setText(String.format(Locale.getDefault(), "%s: %d", getString(R.string.number_pictures), picturesTaken));
+        CameraFragment.this.setIsFocusing(false);
     }
 
     /**

@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package malaria.com.malaria.activities.input;
+package malaria.com.malaria.activities.camera;
 
-import android.app.Activity;
 import android.os.Bundle;
 
 import malaria.com.malaria.R;
 import malaria.com.malaria.activities.base.BaseActivity;
 import malaria.com.malaria.dagger.MalariaComponent;
+import malaria.com.malaria.fragments.CameraFragment;
 
 /**
  * Activity displaying a fragment that implements RAW photo captures.
@@ -34,7 +34,7 @@ public class CameraActivity extends BaseActivity {
         setContentView(R.layout.activity_camera);
         if (null == savedInstanceState) {
             getFragmentManager().beginTransaction()
-                    .replace(R.id.container, Camera2RawFragment.newInstance())
+                    .replace(R.id.container, CameraFragment.newInstance())
                     .commit();
         }
     }

@@ -30,7 +30,7 @@
             android:name=".activities.guide.GuideActivity"
             android:label="@string/title_activity_guide" />
         <activity
-            android:name=".activities.input.CameraActivity"
+            android:name=".activities.camera.CameraActivity"
             android:label="@string/analysing"/>
         <activity
             android:name=".activities.results.ResultsActivity"

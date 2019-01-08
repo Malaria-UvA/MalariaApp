@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package malaria.com.malaria.activities.input;
+package malaria.com.malaria.views;
 
 import android.content.Context;
 import android.util.AttributeSet;
