@@ -1,18 +1,20 @@
 <resources>
     <string name="app_name">Malaria</string>
     <string name="mosquito">Mosquito</string>
-    <string name="heading">MALARIA PARASITE COUNTING</string>
+    <string name="heading">MOMALA APP</string>
     <string name="guide">GUIDE</string>
     <string name="start">START</string>
-    <string name="description">KNOWLEDGE BASED SYSTEM</string>
+    <string name="description">HIGH QUALITY MALARIA DIAGNOSIS IN LOW RESOURCE ENVIRONMENTS</string>
     <string name="title_activity_guide">Guide</string>
-    <string name="guide_introduction">This application will help you on the Malaria parasite counting procedure. These are the steps that need to be follow:</string>
-    <string name="guide_step_1">1.- Introduce the nurse name, his/her email, your name (the microscopist) and the patient name.</string>
-    <string name="guide_step_2">2.- The application will follow the Malaria parasite counting from the <a href="http://www.wpro.who.int/mvp/lab_quality/2096_oms_gmp_sop_09_rev1.pdf">WHO guidelines</a> and it will check when you need to stop counting.</string>
-    <string name="guide_step_3">3.- Keep introducing data until the results come out. Following the procedure, it will know when to show the results.</string>
-    <string name="guide_step_4">4.- You will have the option to send the results to the nurse.</string>
-    <string name="thickAnalysis">Thick Analysis</string>
-    <string name="thinAnalysis">Thin Analysis</string>
+    <string name="guide_step_1">Clean both camera lens and microscope lens to remove any dirt other objects that can interfere with the detection</string>
+    <string name="guide_step_2">Place the phone into the holding kit provided and secure holding kit to microscope</string>
+    <string name="guide_step_3">Check if phone is properly attached to the microscope and make sure the battery is charged</string>
+    <string name="guide_step_4">Prepare blood smear, ensure the blood smear is thick enough and check for contamination</string>
+    <string name="guide_step_5">After placing blood smear underneath the microscope lens wait until MOMOLA App gives confirmation that the image is focused</string>
+    <string name="guide_step_6">Move the blood smear when asked, STOP moving when prompted. While changing position of blood smear do not make any sudden movements</string>
+    <string name="guide_step_7">During focusing do not touch the microscope or mobile phone to yield high quality images</string>
+    <string name="guide_step_8">After focusing the application takes images automatically and shows progress to user</string>
+    <string name="guide_step_9">Wait until the results are shown and upload results to server for safekeeping</string>
     <string name="clear">Clear</string>
     <string name="cancel">Cancel</string>
     <string name="next">Next</string>
@@ -30,8 +32,6 @@
     <string name="results">Results</string>
     <string name="close">Close</string>
     <string name="send_e_mail_to_nurse">E-mail results to the nurse</string>
-    <string name="sample_text">sample text</string>
-    <string name="email_content"><![CDATA[Dear %s,<br/><br/>I would like to inform you that the result of the thick and thin test by microscope for the patient %s has been released.<br/><br/>This is the total number of parasites per microlitre of blood: <strong>%d parasites/μL</strong>.<br/><br/>Kind Regards,<br/>%s]]></string>
     <string name="focusing">Focusing…</string>
     <string name="picture_taken">Picture taken!</string>
     <string name="keep_moving">Keep moving the blood smear</string>

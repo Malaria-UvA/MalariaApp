@@ -7,7 +7,6 @@ import malaria.com.malaria.activities.guide.GuideActivity;
 import malaria.com.malaria.activities.camera.CameraActivity;
 import malaria.com.malaria.activities.main.MainActivity;
 import malaria.com.malaria.activities.results.ResultsActivity;
-import malaria.com.malaria.activities.test.TestSettingActivity;
 
 @Singleton
 @Component(modules = {
@@ -21,8 +20,6 @@ public interface MalariaComponent {
     void inject(GuideActivity guideActivity);
 
     void inject(ResultsActivity resultsActivity);
-
-    void inject(TestSettingActivity testSettingActivity);
 
     void inject(CameraActivity cameraActivity);
 }

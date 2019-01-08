@@ -35,9 +35,6 @@
         <activity
             android:name=".activities.results.ResultsActivity"
             android:label="@string/results"/>
-        <activity
-            android:name=".activities.test.TestSettingActivity"
-            android:label="@string/test_information" />
     </application>
 
 </manifest>
