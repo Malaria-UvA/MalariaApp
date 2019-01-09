@@ -8,6 +8,8 @@ import org.opencv.core.Mat;
 import org.opencv.core.MatOfDouble;
 import org.opencv.imgproc.Imgproc;
 
+import java.io.File;
+
 import javax.inject.Inject;
 
 import malaria.com.malaria.dagger.MalariaComponent;
@@ -15,13 +17,25 @@ import malaria.com.malaria.interfaces.ICalibrationService;
 import malaria.com.malaria.interfaces.IMainPreferences;
 import malaria.com.malaria.interfaces.Injector;
 
-public class CalibrationService implements ICalibrationService, Injector {
+public class CalibrationService implements ICalibrationService {
 
     @Inject
     IMainPreferences preferences;
 
     @Override
     public void calculateAndSaveThreshold(Bitmap bitmap) {
+        double threshold = calculateThreshold(bitmap);
+        this.saveThreshold(threshold);
+    }
+
+    @Override
+    public boolean isBlurry(Bitmap bitmap) {
+        double threshold = calculateThreshold(bitmap);
+        double savedThreshold = getThreshold();
+        return savedThreshold < threshold;
+    }
+
+    private double calculateThreshold(Bitmap bitmap){
 
         Mat src = new Mat();
         Bitmap bmp32 = bitmap.copy(Bitmap.Config.ARGB_8888, true);
@@ -37,8 +51,7 @@ public class CalibrationService implements ICalibrationService, Injector {
         MatOfDouble median = new MatOfDouble();
         MatOfDouble std = new MatOfDouble();
         Core.meanStdDev(destination, median, std);
-
-        this.saveThreshold(Math.pow(std.get(0, 0)[0], 2));
+        return Math.pow(std.get(0, 0)[0], 2);
     }
 
     @Override
