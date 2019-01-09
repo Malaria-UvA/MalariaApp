@@ -7,8 +7,10 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import malaria.com.malaria.interfaces.IMalariaKBSService;
-import malaria.com.malaria.services.MalariaKBSService;
+import malaria.com.malaria.interfaces.ICalibrationService;
+import malaria.com.malaria.interfaces.IMainPreferences;
+import malaria.com.malaria.services.CalibrationService;
+import malaria.com.malaria.utils.MainPreferences;
 
 @Module()
 class DaggerModule {
@@ -32,8 +34,14 @@ class DaggerModule {
 
     @Provides
     @Singleton
-    IMalariaKBSService providesMalariaKBSService(){
-        return new MalariaKBSService();
+    ICalibrationService providesCalibrationService(){
+        return new CalibrationService();
+    }
+
+    @Provides
+    @Singleton
+    IMainPreferences providesMainPreferences(Context context){
+        return new MainPreferences(context);
     }
 
 }

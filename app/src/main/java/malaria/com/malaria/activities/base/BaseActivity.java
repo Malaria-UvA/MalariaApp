@@ -8,8 +8,9 @@ import android.support.v7.app.AppCompatActivity;
 import butterknife.ButterKnife;
 import malaria.com.malaria.dagger.DependencyInjector;
 import malaria.com.malaria.dagger.MalariaComponent;
+import malaria.com.malaria.interfaces.Injector;
 
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity implements Injector {
 
     protected Context context;
     private Integer layoutId;
@@ -38,15 +39,4 @@ public abstract class BaseActivity extends AppCompatActivity {
 
         context = getApplicationContext();
     }
-
-
-    /**
-     * Performs dependency injection, using the applicationComponent as the injector.
-     * If an Activity only needs injection into this base class, it does not need to override this method.
-     * However, if an Activity requires extra injections (has one ore more @Inject annotations in it's source code),
-     * then it must override this method, and invoke <code>applicationComponent.inject(this);</code>
-     *
-     * @param applicationComponent the component being injected
-     */
-    protected abstract void onInject(MalariaComponent applicationComponent);
 }

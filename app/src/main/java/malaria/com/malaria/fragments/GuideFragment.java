@@ -3,7 +3,7 @@ package malaria.com.malaria.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,16 +11,19 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import malaria.com.malaria.R;
 import malaria.com.malaria.activities.main.MainActivity;
+import malaria.com.malaria.dagger.MalariaComponent;
+import malaria.com.malaria.interfaces.IMainPreferences;
 import malaria.com.malaria.utils.MainPreferences;
 
 /**
  * Created by zenbook on 11/02/14.
  */
-public class GuideFragment extends Fragment implements View.OnClickListener {
+public class GuideFragment extends BaseFragmentV4 implements View.OnClickListener {
 
     private String content;
     private int imageref;
@@ -35,7 +38,15 @@ public class GuideFragment extends Fragment implements View.OnClickListener {
     @BindView(R.id.exitbutton)
     Button exitButton;
 
-    public GuideFragment() {}
+    @Inject()
+    IMainPreferences preferences;
+
+    public GuideFragment() {super(R.layout.fragment_guide);}
+
+    @Override
+    public void onInject(MalariaComponent applicationComponent) {
+        applicationComponent.inject(this);
+    }
 
     public static GuideFragment newInstance(String content, int imageref, boolean lastFragment) {
         GuideFragment fragment = new GuideFragment();
@@ -48,10 +59,8 @@ public class GuideFragment extends Fragment implements View.OnClickListener {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_guide, container, false);
-        ButterKnife.bind(this, v);
-
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View v = super.onCreateView(inflater, container, savedInstanceState);
         exitButton.setOnClickListener(this);
 
         //image.getLayoutParams().height = (int) (0.6f* Utils.heightScreen);
@@ -71,7 +80,6 @@ public class GuideFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        MainPreferences preferences = new MainPreferences(getActivity());
         boolean firstTime = preferences.getBoolean(MainPreferences.FIRST_TIME_APP, true);
         if(firstTime) {
             startActivity(new Intent(getActivity(), MainActivity.class));

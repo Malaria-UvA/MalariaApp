@@ -40,7 +40,6 @@ import android.hardware.camera2.CameraMetadata;
 import android.hardware.camera2.CaptureFailure;
 import android.hardware.camera2.CaptureRequest;
 import android.hardware.camera2.CaptureResult;
-import android.hardware.camera2.DngCreator;
 import android.hardware.camera2.TotalCaptureResult;
 import android.hardware.camera2.params.StreamConfigurationMap;
 import android.media.Image;
@@ -72,11 +71,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import org.opencv.android.OpenCVLoader;
-import org.opencv.core.Core;
-import org.opencv.core.CvType;
-import org.opencv.core.Mat;
-import org.opencv.imgcodecs.Imgcodecs;
-import org.opencv.imgproc.Imgproc;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -97,8 +91,12 @@ import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import javax.inject.Inject;
+
 import malaria.com.malaria.R;
 import malaria.com.malaria.constants.IntentKeys;
+import malaria.com.malaria.dagger.MalariaComponent;
+import malaria.com.malaria.interfaces.ICalibrationService;
 import malaria.com.malaria.views.AutoFitTextureView;
 
 /**
@@ -132,7 +130,7 @@ import malaria.com.malaria.views.AutoFitTextureView;
  * </li>
  * </ul>
  */
-public class CameraFragment extends Fragment
+public class CameraFragment extends BaseFragment
         implements View.OnClickListener, FragmentCompat.OnRequestPermissionsResultCallback {
     private TextView titleTextView;
     private TextView description1TextView;
@@ -142,6 +140,14 @@ public class CameraFragment extends Fragment
     private Button takePictureBtn;
     private int picturesTaken = 0;
     private File tmpFile;
+    @Inject()
+    ICalibrationService calibrationService;
+
+    @Override
+    public void onInject(MalariaComponent applicationComponent) {
+        applicationComponent.inject(this);
+    }
+
     /**
      * Conversion from screen rotation to JPEG orientation.
      */
@@ -621,6 +627,10 @@ public class CameraFragment extends Fragment
     };
     private IntentKeys behaviour;
 
+    public CameraFragment(){
+        super(R.layout.fragment_camera);
+    }
+
     public static CameraFragment newInstance() {
         return new CameraFragment();
     }
@@ -628,10 +638,11 @@ public class CameraFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View v = super.onCreateView(inflater, container, savedInstanceState);
         Bundle bundle = this.getArguments();
         String behaviourStr = bundle.getString(IntentKeys.ACTIVITY_BEHAVIOUR);
         this.behaviour = IntentKeys.valueOf(behaviourStr);
-        return inflater.inflate(R.layout.fragment_camera2_basic, container, false);
+        return v;
     }
 
     @Override
@@ -750,29 +761,6 @@ public class CameraFragment extends Fragment
                 break;
             }
         }
-    }
-
-    private void calculateThreshold() {
-        Mat src, src_gray = new Mat(), dst = new Mat();
-        int kernel_size = 3;
-        int scale = 1;
-        int delta = 0;
-        int ddepth = CvType.CV_16S;
-        boolean doesFileExist = tmpFile.exists();
-        String imageName = null;
-        imageName = tmpFile.getAbsolutePath();
-        //src = Imgcodecs.imread(imageName, Imgcodecs.IMREAD_COLOR); // Load an image
-        src = Imgcodecs.imread(imageName); // Load an image
-        // Check if image is loaded fine
-        boolean isImageLoaded = !src.empty();
-        if (!isImageLoaded) {
-            System.exit(-1);
-        }
-        // Reduce noise by blurring with a Gaussian filter ( kernel size = 3 )
-        Imgproc.GaussianBlur(src, src, new org.opencv.core.Size(3, 3), 0, 0, Core.BORDER_DEFAULT);
-        // Convert the image to grayscale
-        Imgproc.cvtColor(src, src_gray, Imgproc.COLOR_RGB2GRAY);
-        Imgproc.Laplacian(src_gray, dst, ddepth, kernel_size, scale, delta, Core.BORDER_DEFAULT);
     }
 
     /**
@@ -1287,10 +1275,13 @@ public class CameraFragment extends Fragment
             CameraFragment.this.description2TextView.setText(String.format(Locale.getDefault(), "%s: %d", getString(R.string.number_pictures), picturesTaken));
             CameraFragment.this.setIsFocusing(false);
         } else {
-            calculateThreshold();
+            calculateThreshold(tmpFile);
         }
     }
-
+    private void calculateThreshold(File file){
+        calibrationService.calculateAndSaveThreshold(file);
+        double threshold = calibrationService.getThreshold();
+    }
     /**
      * Send a capture request to the camera device that initiates a capture targeting the JPEG and
      * RAW outputs.

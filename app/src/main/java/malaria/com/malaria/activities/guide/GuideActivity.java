@@ -1,28 +1,17 @@
 package malaria.com.malaria.activities.guide;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.view.ViewPager;
-import android.view.View;
 
 import com.rd.PageIndicatorView;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.inject.Inject;
 
 import butterknife.BindView;
 import malaria.com.malaria.R;
 import malaria.com.malaria.activities.base.BaseActivity;
 import malaria.com.malaria.adapters.GuideAdapter;
 import malaria.com.malaria.dagger.MalariaComponent;
-import malaria.com.malaria.interfaces.IMalariaKBSService;
 
 public class GuideActivity extends BaseActivity {
-
-    @Inject()
-    IMalariaKBSService malariaKBSService;
 
     @BindView(R.id.pageIndicatorView)
     PageIndicatorView pageIndicatorView;
@@ -49,7 +38,7 @@ public class GuideActivity extends BaseActivity {
     }
 
     @Override
-    protected void onInject(MalariaComponent applicationComponent) {
+    public void onInject(MalariaComponent applicationComponent) {
         applicationComponent.inject(this);
     }
 }

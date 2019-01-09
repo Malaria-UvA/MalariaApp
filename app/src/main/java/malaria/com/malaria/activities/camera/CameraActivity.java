@@ -50,7 +50,7 @@ public class CameraActivity extends BaseActivity {
     }
 
     @Override
-    protected void onInject(MalariaComponent applicationComponent) {
+    public void onInject(MalariaComponent applicationComponent) {
         applicationComponent.inject(this);
     }
 }
