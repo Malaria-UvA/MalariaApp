@@ -8,14 +8,11 @@ import org.opencv.core.Mat;
 import org.opencv.core.MatOfDouble;
 import org.opencv.imgproc.Imgproc;
 
-import java.io.File;
-
 import javax.inject.Inject;
 
 import malaria.com.malaria.dagger.MalariaComponent;
 import malaria.com.malaria.interfaces.ICalibrationService;
 import malaria.com.malaria.interfaces.IMainPreferences;
-import malaria.com.malaria.interfaces.Injector;
 
 public class CalibrationService implements ICalibrationService {
 
