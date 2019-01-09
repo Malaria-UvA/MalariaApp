@@ -40,6 +40,8 @@
     <string name="composing_results">COMPOSING RESULTS…</string>
     <string name="analysing">Analysing</string>
     <string name="request_permission">This app needs camera permission.</string>
+    <string name="camera_permission_confirmation">This app demonstrates the usage of CameraView. In order to do that, it needs permission to access camera.</string>
+    <string name="camera_permission_not_granted">Camera app cannot do anything without camera permission.</string>
     <string name="calibration">Calibration</string>
     <string name="calibrate">CALIBRATE</string>
 </resources>

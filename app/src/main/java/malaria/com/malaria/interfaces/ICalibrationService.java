@@ -1,8 +1,8 @@
 package malaria.com.malaria.interfaces;
 
-import java.io.File;
+import android.graphics.Bitmap;
 
 public interface ICalibrationService {
-    void calculateAndSaveThreshold(File file);
+    void calculateAndSaveThreshold(Bitmap bitmap);
     double getThreshold();
 }

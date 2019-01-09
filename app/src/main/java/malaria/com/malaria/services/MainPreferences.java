@@ -1,4 +1,4 @@
-package malaria.com.malaria.utils;
+package malaria.com.malaria.services;
 
 import android.content.Context;
 import android.content.SharedPreferences;

@@ -2,16 +2,16 @@ package malaria.com.malaria.activities.main;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 
 import butterknife.BindView;
 import malaria.com.malaria.R;
 import malaria.com.malaria.activities.base.BaseActivity;
-import malaria.com.malaria.activities.camera.CameraActivity;
+import malaria.com.malaria.activities.camera.AnalysisCameraActivity;
 import malaria.com.malaria.activities.guide.GuideActivity;
 import malaria.com.malaria.constants.IntentKeys;
 import malaria.com.malaria.dagger.MalariaComponent;
+import malaria.com.malaria.activities.camera.CalibrationCameraActivity;
 
 public class MainActivity extends BaseActivity {
     @BindView(R.id.startBtn)
@@ -39,27 +39,14 @@ public class MainActivity extends BaseActivity {
     }
 
     private void binds() {
-        this.startBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, CameraActivity.class);
-                intent.putExtra(IntentKeys.ACTIVITY_BEHAVIOUR, IntentKeys.START.toString());
-                startActivity(intent);
-            }
+        this.startBtn.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, AnalysisCameraActivity.class);
+            startActivity(intent);
         });
-        this.guideBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, GuideActivity.class));
-            }
-        });
-        this.calibrateBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, CameraActivity.class);
-                intent.putExtra(IntentKeys.ACTIVITY_BEHAVIOUR, IntentKeys.CALIBRATION.toString());
-                startActivity(intent);
-            }
+        this.guideBtn.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, GuideActivity.class)));
+        this.calibrateBtn.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, CalibrationCameraActivity.class);
+            startActivity(intent);
         });
     }
 }

@@ -18,7 +18,7 @@ import malaria.com.malaria.R;
 import malaria.com.malaria.activities.main.MainActivity;
 import malaria.com.malaria.dagger.MalariaComponent;
 import malaria.com.malaria.interfaces.IMainPreferences;
-import malaria.com.malaria.utils.MainPreferences;
+import malaria.com.malaria.services.MainPreferences;
 
 /**
  * Created by zenbook on 11/02/14.

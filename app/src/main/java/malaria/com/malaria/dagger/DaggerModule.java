@@ -10,7 +10,7 @@ import dagger.Provides;
 import malaria.com.malaria.interfaces.ICalibrationService;
 import malaria.com.malaria.interfaces.IMainPreferences;
 import malaria.com.malaria.services.CalibrationService;
-import malaria.com.malaria.utils.MainPreferences;
+import malaria.com.malaria.services.MainPreferences;
 
 @Module()
 class DaggerModule {

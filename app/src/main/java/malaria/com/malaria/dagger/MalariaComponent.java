@@ -3,14 +3,13 @@ package malaria.com.malaria.dagger;
 import javax.inject.Singleton;
 
 import dagger.Component;
+import malaria.com.malaria.activities.camera.CalibrationCameraActivity;
 import malaria.com.malaria.activities.guide.GuideActivity;
-import malaria.com.malaria.activities.camera.CameraActivity;
 import malaria.com.malaria.activities.main.MainActivity;
 import malaria.com.malaria.activities.results.ResultsActivity;
-import malaria.com.malaria.fragments.CameraFragment;
 import malaria.com.malaria.fragments.GuideFragment;
-import malaria.com.malaria.interfaces.Injector;
 import malaria.com.malaria.services.CalibrationService;
+import malaria.com.malaria.services.MainPreferences;
 
 @Singleton
 @Component(modules = {
@@ -25,11 +24,11 @@ public interface MalariaComponent {
 
     void inject(ResultsActivity resultsActivity);
 
-    void inject(CameraActivity cameraActivity);
-
     void inject(GuideFragment guideFragment);
 
-    void inject(CameraFragment cameraFragment);
+    void inject(CalibrationCameraActivity cameraFragment);
 
     void inject(CalibrationService calibrationService);
+
+    void inject(MainPreferences mainPreferences);
 }

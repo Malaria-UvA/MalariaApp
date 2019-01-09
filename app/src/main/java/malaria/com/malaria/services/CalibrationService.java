@@ -1,12 +1,12 @@
 package malaria.com.malaria.services;
 
+import android.graphics.Bitmap;
+
+import org.opencv.android.Utils;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfDouble;
-import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
-
-import java.io.File;
 
 import javax.inject.Inject;
 
@@ -14,20 +14,18 @@ import malaria.com.malaria.dagger.MalariaComponent;
 import malaria.com.malaria.interfaces.ICalibrationService;
 import malaria.com.malaria.interfaces.IMainPreferences;
 import malaria.com.malaria.interfaces.Injector;
-import malaria.com.malaria.utils.MainPreferences;
 
 public class CalibrationService implements ICalibrationService, Injector {
-    @Inject()
+
+    @Inject
     IMainPreferences preferences;
 
     @Override
-    public void calculateAndSaveThreshold(File file) {
-        if (file == null || !file.exists()) {
-            throw new IllegalArgumentException("File must be not null and exist");
-        }
-        String imageName = file.getAbsolutePath();
-        // Load an image
-        Mat src = Imgcodecs.imread(imageName);
+    public void calculateAndSaveThreshold(Bitmap bitmap) {
+
+        Mat src = new Mat();
+        Bitmap bmp32 = bitmap.copy(Bitmap.Config.ARGB_8888, true);
+        Utils.bitmapToMat(bmp32, src);
         if (src.empty()) {
             throw new IllegalArgumentException("Invalid image format");
         }
