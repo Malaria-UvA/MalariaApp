@@ -2,6 +2,8 @@ package malaria.com.malaria.activities.camera;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -39,7 +41,9 @@ public abstract class BaseCameraActivity extends BaseActivity {
         mCameraView.addCallback(new CameraView.Callback() {
             @Override
             public void onPictureTaken(CameraView cameraView, byte[] data) {
-                BaseCameraActivity.this.onPictureTaken(cameraView, data);
+                Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
+                Bitmap bmp32 = bitmap.copy(Bitmap.Config.ARGB_8888, true);
+                BaseCameraActivity.this.onPictureTaken(cameraView, bmp32);
             }
         });
     }
@@ -70,5 +74,5 @@ public abstract class BaseCameraActivity extends BaseActivity {
         super.onPause();
     }
 
-    public abstract void onPictureTaken(CameraView cameraView, byte[] data);
+    public abstract void onPictureTaken(CameraView cameraView, Bitmap data);
 }

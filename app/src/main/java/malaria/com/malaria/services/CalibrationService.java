@@ -40,8 +40,7 @@ public class CalibrationService implements ICalibrationService {
     private double calculateThreshold(Bitmap bitmap){
 
         Mat src = new Mat();
-        Bitmap bmp32 = bitmap.copy(Bitmap.Config.ARGB_8888, true);
-        Utils.bitmapToMat(bmp32, src);
+        Utils.bitmapToMat(bitmap, src);
         if (src.empty()) {
             throw new IllegalArgumentException("Invalid image format");
         }

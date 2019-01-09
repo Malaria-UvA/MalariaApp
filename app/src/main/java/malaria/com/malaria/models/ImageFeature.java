@@ -1,43 +1,45 @@
 package malaria.com.malaria.models;
 
+import android.media.Image;
+
 import java.util.List;
 
 /**
  *
  */
-public class ThickFeatures extends Features {
+public class ImageFeature {
 
     /**
      *
      */
-    private int n_whiteBloodCells;
+    private int nWhiteBloodCells;
     /**
      *
      */
-    private int n_parasites;
+    private int nParasites;
 
     /**
      * Default constructor
      */
-    public ThickFeatures(int wbc, int parasites) {
-        this.n_whiteBloodCells = wbc;
-        this.n_parasites = parasites;
+    public ImageFeature(int wbc, int parasites) {
+        this.nWhiteBloodCells = wbc;
+        this.nParasites = parasites;
     }
 
-    public int getN_whiteBloodCells() {
-        return n_whiteBloodCells;
+    public int getnWhiteBloodCells() {
+        return nWhiteBloodCells;
     }
 
-    public void setN_whiteBloodCells(int n_whiteBloodCells) {
-        this.n_whiteBloodCells = n_whiteBloodCells;
+    public void setnWhiteBloodCells(int nWhiteBloodCells) {
+        this.nWhiteBloodCells = nWhiteBloodCells;
     }
 
-    public int getN_parasites() {
-        return n_parasites;
+    public int getnParasites() {
+        return nParasites;
     }
 
-    public void setN_parasites(int n_parasites) {
-        this.n_parasites = n_parasites;
+    public void setnParasites(int nParasites) {
+        this.nParasites = nParasites;
     }
 
     /**
@@ -47,14 +49,12 @@ public class ThickFeatures extends Features {
      * @param fs features that have been added to the system
      * @return boolean
      */
-    static boolean stopConditionMet(List<Features> fs) {
+    static boolean stopConditionMet(List<ImageFeature> fs) {
         int nParasitesTotal = 0;
         int nWBC = 0;
-        for (Features f : fs) {
-            ThickFeatures tf = (ThickFeatures) f;
-
-            nParasitesTotal += tf.getN_parasites();
-            nWBC += tf.getN_whiteBloodCells();
+        for (ImageFeature tf : fs) {
+            nParasitesTotal += tf.getnParasites();
+            nWBC += tf.getnWhiteBloodCells();
         }
         return nParasitesTotal >= 100 && nWBC >= 200 || nParasitesTotal <= 99 && nWBC >= 500;
     }

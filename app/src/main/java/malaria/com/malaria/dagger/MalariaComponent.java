@@ -3,6 +3,7 @@ package malaria.com.malaria.dagger;
 import javax.inject.Singleton;
 
 import dagger.Component;
+import malaria.com.malaria.activities.camera.AnalysisCameraActivity;
 import malaria.com.malaria.activities.camera.CalibrationCameraActivity;
 import malaria.com.malaria.activities.guide.GuideActivity;
 import malaria.com.malaria.activities.main.MainActivity;
@@ -26,7 +27,9 @@ public interface MalariaComponent {
 
     void inject(GuideFragment guideFragment);
 
-    void inject(CalibrationCameraActivity cameraFragment);
+    void inject(CalibrationCameraActivity calibrationCameraActivity);
+
+    void inject(AnalysisCameraActivity analysisCameraActivity);
 
     void inject(CalibrationService calibrationService);
 
