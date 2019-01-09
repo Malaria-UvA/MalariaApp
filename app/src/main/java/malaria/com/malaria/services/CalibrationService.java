@@ -10,6 +10,7 @@ import org.opencv.imgproc.Imgproc;
 
 import javax.inject.Inject;
 
+import malaria.com.malaria.dagger.DependencyInjector;
 import malaria.com.malaria.dagger.MalariaComponent;
 import malaria.com.malaria.interfaces.ICalibrationService;
 import malaria.com.malaria.interfaces.IMainPreferences;
@@ -18,6 +19,10 @@ public class CalibrationService implements ICalibrationService {
 
     @Inject
     IMainPreferences preferences;
+
+    public CalibrationService() {
+        onInject(DependencyInjector.applicationComponent());
+    }
 
     @Override
     public void calculateAndSaveThreshold(Bitmap bitmap) {
