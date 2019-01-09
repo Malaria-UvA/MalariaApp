@@ -13,15 +13,26 @@ import javax.inject.Inject;
 import malaria.com.malaria.dagger.MalariaComponent;
 import malaria.com.malaria.interfaces.ICalibrationService;
 import malaria.com.malaria.interfaces.IMainPreferences;
-import malaria.com.malaria.interfaces.Injector;
 import malaria.com.malaria.utils.MainPreferences;
 
-public class CalibrationService implements ICalibrationService, Injector {
+public class CalibrationService implements ICalibrationService {
     @Inject()
     IMainPreferences preferences;
 
     @Override
     public void calculateAndSaveThreshold(File file) {
+        double threshold = calculateThreshold(file);
+        this.saveThreshold(threshold);
+    }
+
+    @Override
+    public boolean isBlurry(File file) {
+        double threshold = calculateThreshold(file);
+        double savedThreshold = getThreshold();
+        return savedThreshold < threshold;
+    }
+
+    private double calculateThreshold(File file){
         if (file == null || !file.exists()) {
             throw new IllegalArgumentException("File must be not null and exist");
         }
@@ -39,8 +50,7 @@ public class CalibrationService implements ICalibrationService, Injector {
         MatOfDouble median = new MatOfDouble();
         MatOfDouble std = new MatOfDouble();
         Core.meanStdDev(destination, median, std);
-
-        this.saveThreshold(Math.pow(std.get(0, 0)[0], 2));
+        return Math.pow(std.get(0, 0)[0], 2);
     }
 
     @Override
