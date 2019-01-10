@@ -35,7 +35,7 @@
     <string name="focusing">Focusing…</string>
     <string name="picture_taken">Picture taken!</string>
     <string name="keep_moving">Keep moving the blood smear</string>
-    <string name="number_pictures">Number of pictures</string>
+    <string name="number_pictures">Number of pictures:</string>
     <string name="no_more_pictures_needed">No more pictures are needed. Results will be shown in a second. </string>
     <string name="composing_results">COMPOSING RESULTS…</string>
     <string name="analysing">Analysing</string>
