@@ -32,6 +32,4 @@ public interface MalariaComponent {
     void inject(AnalysisCameraActivity analysisCameraActivity);
 
     void inject(CalibrationService calibrationService);
-
-    void inject(MainPreferences mainPreferences);
 }

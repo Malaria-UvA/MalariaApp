@@ -44,4 +44,7 @@
     <string name="camera_permission_not_granted">Camera app cannot do anything without camera permission.</string>
     <string name="calibration">Calibration</string>
     <string name="calibrate">CALIBRATE</string>
+    <string name="device_calibrated">Device calibrated</string>
+    <string name="analysed_fields">Analysed fields</string>
+    <string name="parasites_per_microlitre">PARASITES/µL BLOOD</string>
 </resources>

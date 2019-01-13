@@ -1,26 +1,33 @@
 package malaria.com.malaria.activities.results;
 
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
-import com.github.mikephil.charting.charts.LineChart;
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import malaria.com.malaria.R;
 import malaria.com.malaria.activities.base.BaseActivity;
 import malaria.com.malaria.dagger.MalariaComponent;
+import malaria.com.malaria.interfaces.IModelAnalysisService;
+import malaria.com.malaria.models.ImageFeature;
 
 public class ResultsActivity extends BaseActivity {
-    @BindView(R.id.chart)
-    LineChart chart;
 
-    @BindView(R.id.calculationTxt)
-    TextView calculationTxt;
+    @BindView(R.id.wbcTV)
+    TextView wbcTV;
 
-    @BindView(R.id.closeBtn)
-    Button closeBtn;
+    @BindView(R.id.parasitesTV)
+    TextView parasitesTV;
+
+    @BindView(R.id.fieldsTV)
+    TextView fieldsTV;
+
+    @BindView(R.id.resultTV)
+    TextView resultTV;
+
+    @Inject
+    IModelAnalysisService service;
 
 
     public ResultsActivity() {
@@ -30,17 +37,16 @@ public class ResultsActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.binds();
+        ImageFeature features = service.getTotalAggregation();
+        int nWBC = features.getnWhiteBloodCells();
+        int nParasites = features.getnParasites();
+        int fields = service.getTotalFields();
+        int result = service.getParasitePerMicrolitre();
 
-    }
-
-    private void binds() {
-        this.closeBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        wbcTV.setText(String.valueOf(nWBC));
+        parasitesTV.setText(String.valueOf(nParasites));
+        fieldsTV.setText(String.valueOf(fields));
+        resultTV.setText(String.valueOf(result));
     }
 
     @Override

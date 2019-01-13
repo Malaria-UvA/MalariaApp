@@ -4,6 +4,8 @@ import android.graphics.Bitmap;
 
 import java.util.ArrayList;
 
+import javax.inject.Inject;
+
 import malaria.com.malaria.interfaces.IModelAnalysisService;
 import malaria.com.malaria.models.ImageFeature;
 
@@ -11,6 +13,7 @@ public class ModelAnalysisService implements IModelAnalysisService {
 
     private ArrayList<ImageFeature> features;
 
+    @Inject
     public ModelAnalysisService() {
         this.features = new ArrayList<>();
     }
@@ -18,28 +21,37 @@ public class ModelAnalysisService implements IModelAnalysisService {
     @Override
     public ImageFeature processImage(Bitmap image) {
         // TODO Call model.predict() to obtain number of parasites and WBC
-        return new ImageFeature(25,50);
+        ImageFeature imageFeature = new ImageFeature(50,100);
+        features.add(imageFeature);
+        return imageFeature;
     }
 
     @Override
     public boolean checkStopCondition() {
+        ImageFeature aggregation = getTotalAggregation();
+        return aggregation.getnParasites() >= 100 && aggregation.getnWhiteBloodCells() >= 200 ||
+                aggregation.getnParasites() <= 99 && aggregation.getnWhiteBloodCells() >= 500;
+    }
+
+    @Override
+    public ImageFeature getTotalAggregation() {
         int nParasitesTotal = 0;
         int nWBC = 0;
         for (ImageFeature f : features) {
             nParasitesTotal += f.getnParasites();
             nWBC += f.getnWhiteBloodCells();
         }
-        return nParasitesTotal >= 100 && nWBC >= 200 || nParasitesTotal <= 99 && nWBC >= 500;
+        return new ImageFeature(nWBC, nParasitesTotal);
+    }
+
+    @Override
+    public int getTotalFields() {
+        return features.size();
     }
 
     @Override
     public int getParasitePerMicrolitre() {
-        int nParasitesTotal = 0;
-        int nWBC = 0;
-        for (ImageFeature f : features) {
-            nParasitesTotal += f.getnParasites();
-            nWBC += f.getnWhiteBloodCells();
-        }
-        return (int) Math.ceil(8000f * nParasitesTotal / nWBC);
+        ImageFeature aggregation = getTotalAggregation();
+        return (int) Math.ceil(8000f * aggregation.getnParasites() / aggregation.getnWhiteBloodCells());
     }
 }

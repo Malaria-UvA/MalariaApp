@@ -1,6 +1,7 @@
 package malaria.com.malaria.services;
 
 import android.graphics.Bitmap;
+import android.util.Log;
 
 import org.opencv.android.Utils;
 import org.opencv.core.Core;
@@ -20,6 +21,7 @@ public class CalibrationService implements ICalibrationService {
     @Inject
     IMainPreferences preferences;
 
+    @Inject
     public CalibrationService() {
         onInject(DependencyInjector.applicationComponent());
     }
@@ -34,6 +36,8 @@ public class CalibrationService implements ICalibrationService {
     public boolean isBlurry(Bitmap bitmap) {
         double threshold = calculateThreshold(bitmap);
         double savedThreshold = getThreshold();
+        Log.i("SAVED_THRESHOLD:", String.valueOf(savedThreshold));
+        Log.i("THRESHOLD:", String.valueOf(threshold));
         return savedThreshold < threshold;
     }
 

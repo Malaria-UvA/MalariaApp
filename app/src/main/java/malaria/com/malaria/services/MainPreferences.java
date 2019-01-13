@@ -2,6 +2,9 @@ package malaria.com.malaria.services;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+
+import javax.inject.Inject;
+
 import malaria.com.malaria.interfaces.IMainPreferences;
 
 public class MainPreferences implements IMainPreferences {
@@ -10,6 +13,7 @@ public class MainPreferences implements IMainPreferences {
     private SharedPreferences activityPreferences;
     private SharedPreferences.Editor editor;
 
+    @Inject
     public MainPreferences(Context context) {
         activityPreferences = context.getSharedPreferences(NAME, Context.MODE_PRIVATE);
         editor = activityPreferences.edit();

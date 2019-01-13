@@ -5,5 +5,4 @@ import android.graphics.Bitmap;
 public interface IAnalysisService {
 
     boolean addPicture(Bitmap image);
-    Bitmap getImageFromBuffer();
 }

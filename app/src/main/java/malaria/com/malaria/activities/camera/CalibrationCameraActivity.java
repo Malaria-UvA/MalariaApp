@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.android.cameraview.CameraView;
 
@@ -40,7 +41,7 @@ public class CalibrationCameraActivity extends BaseCameraActivity {
 
     @Override
     public void onPictureTaken(CameraView cameraView, Bitmap bitmap) {
-        //Toast.makeText(this, "Picture Taken!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, R.string.device_calibrated, Toast.LENGTH_SHORT).show();
         calibrationService.calculateAndSaveThreshold(bitmap);
     }
 }

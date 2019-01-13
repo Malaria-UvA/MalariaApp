@@ -2,6 +2,7 @@ package malaria.com.malaria.activities.camera;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -63,29 +64,19 @@ public class AnalysisCameraActivity extends BaseCameraActivity {
         changeStatus(Status.FOCUSING);
         numberOfPicturesTaken = 0;
         pictureTimer = new Timer();
-        pictureTimer.schedule(new PictureTask(), 500, 500);
+        pictureTimer.schedule(new PictureTask(), 2000, 2000);
     }
 
     @Override
     public void onPictureTaken(CameraView cameraView, Bitmap bitmap) {
-
-        boolean isBlurry = calibrationService.isBlurry(bitmap);
-        if (isBlurry) return;
-        boolean isAdded = analysisService.addPicture(bitmap);
-        if (!isAdded) return;
-
         // TODO take a look to the concurrency of this methods and the used structures
-        new Thread(new ModelTask()).run();
+        new ModelTask().execute(bitmap);
+    }
 
-        numberOfPicturesTaken++;
-        numberPicturesTV.setText(String.valueOf(numberOfPicturesTaken));
-        changeStatus(Status.PICTURE_TAKEN);
-        new Timer().schedule(new TimerTask() {
-            @Override
-            public void run() {
-                runOnUiThread(() -> changeStatus(Status.FOCUSING));
-            }
-        }, 1000);
+    @Override
+    protected void onStop() {
+        pictureTimer.cancel();
+        super.onStop();
     }
 
     @Override
@@ -112,22 +103,45 @@ public class AnalysisCameraActivity extends BaseCameraActivity {
 
         @Override
         public void run() {
-            runOnUiThread(() -> mCameraView.takePicture());
+            if (!AnalysisCameraActivity.this.isFinishing()) {
+                runOnUiThread(() -> {
+                    if (mCameraView != null) mCameraView.takePicture();
+                });
+            }
         }
     }
 
-    private class ModelTask extends TimerTask {
+    private class ModelTask extends AsyncTask<Bitmap, Void, Boolean> {
 
         @Override
-        public void run() {
-            Bitmap bitmap = analysisService.getImageFromBuffer();
-            if (bitmap == null) return;
+        protected Boolean doInBackground(Bitmap... bitmaps) {
+            Bitmap bitmap = bitmaps[0];
+            boolean isBlurry = calibrationService.isBlurry(bitmap);
+            if (isBlurry) return false;
+            boolean isAdded = analysisService.addPicture(bitmap);
+            if (!isAdded) return false;
+
+            numberOfPicturesTaken++;
+            runOnUiThread(() -> {
+                numberPicturesTV.setText(String.valueOf(numberOfPicturesTaken));
+                changeStatus(AnalysisCameraActivity.Status.PICTURE_TAKEN);
+                new Timer().schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        runOnUiThread(() -> changeStatus(AnalysisCameraActivity.Status.FOCUSING));
+                    }
+                }, 1000);
+            });
+
             modelAnalysisService.processImage(bitmap);
-            boolean stop = modelAnalysisService.checkStopCondition();
+            return modelAnalysisService.checkStopCondition();
+        }
+
+        @Override
+        protected void onPostExecute(Boolean stop) {
             if (stop) {
                 pictureTimer.cancel();
-                pictureTimer.purge();
-                runOnUiThread(() -> startActivity(new Intent(AnalysisCameraActivity.this, ResultsActivity.class)));
+                startActivity(new Intent(AnalysisCameraActivity.this, ResultsActivity.class));
             }
         }
     }

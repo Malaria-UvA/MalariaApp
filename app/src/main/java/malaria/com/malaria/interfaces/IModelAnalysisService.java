@@ -8,6 +8,8 @@ public interface IModelAnalysisService {
 
     ImageFeature processImage(Bitmap image);
     boolean checkStopCondition();
+    ImageFeature getTotalAggregation();
+    int getTotalFields();
     int getParasitePerMicrolitre();
 
 }

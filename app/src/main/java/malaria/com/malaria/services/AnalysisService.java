@@ -2,34 +2,27 @@ package malaria.com.malaria.services;
 
 import android.graphics.Bitmap;
 
-import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Queue;
+
+import javax.inject.Inject;
 
 import malaria.com.malaria.interfaces.IAnalysisService;
 
 public class AnalysisService implements IAnalysisService {
 
     private ArrayList<Bitmap> images;
-    private Queue<Bitmap> buffer;
 
+    @Inject
     public AnalysisService() {
         images = new ArrayList<>();
-        buffer = new ArrayDeque<>();
     }
 
     @Override
     public boolean addPicture(Bitmap image) {
         boolean check = checkPictureAlreadyTaken(image);
-        if (check) return true;
-        buffer.add(image);
+        if (check) return false;
         images.add(image);
-        return false;
-    }
-
-    @Override
-    public Bitmap getImageFromBuffer() {
-        return buffer.isEmpty() ? null : buffer.remove();
+        return true;
     }
 
     private boolean checkPictureAlreadyTaken(Bitmap image) {
