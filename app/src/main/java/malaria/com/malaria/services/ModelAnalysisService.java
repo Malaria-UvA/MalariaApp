@@ -15,6 +15,11 @@ public class ModelAnalysisService implements IModelAnalysisService {
 
     @Inject
     public ModelAnalysisService() {
+        initialize();
+    }
+
+    @Override
+    public void initialize() {
         this.features = new ArrayList<>();
     }
 

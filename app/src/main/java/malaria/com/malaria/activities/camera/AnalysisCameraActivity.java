@@ -63,6 +63,8 @@ public class AnalysisCameraActivity extends BaseCameraActivity {
         super.onCreate(savedInstanceState);
         changeStatus(Status.FOCUSING);
         numberOfPicturesTaken = 0;
+        refreshPictureTaken();
+        analysisService.initialize();
         pictureTimer = new Timer();
         pictureTimer.schedule(new PictureTask(), 2000, 2000);
     }
@@ -99,6 +101,20 @@ public class AnalysisCameraActivity extends BaseCameraActivity {
         }
     }
 
+    private void refreshPictureTaken() {
+
+        runOnUiThread(() -> {
+            numberPicturesTV.setText(String.valueOf(numberOfPicturesTaken));
+            changeStatus(AnalysisCameraActivity.Status.PICTURE_TAKEN);
+            new Timer().schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    runOnUiThread(() -> changeStatus(AnalysisCameraActivity.Status.FOCUSING));
+                }
+            }, 1000);
+        });
+    }
+
     private class PictureTask extends TimerTask {
 
         @Override
@@ -121,17 +137,8 @@ public class AnalysisCameraActivity extends BaseCameraActivity {
             boolean isAdded = analysisService.addPicture(bitmap);
             if (!isAdded) return false;
 
-            numberOfPicturesTaken++;
-            runOnUiThread(() -> {
-                numberPicturesTV.setText(String.valueOf(numberOfPicturesTaken));
-                changeStatus(AnalysisCameraActivity.Status.PICTURE_TAKEN);
-                new Timer().schedule(new TimerTask() {
-                    @Override
-                    public void run() {
-                        runOnUiThread(() -> changeStatus(AnalysisCameraActivity.Status.FOCUSING));
-                    }
-                }, 1000);
-            });
+            numberOfPicturesTaken += 1;
+            refreshPictureTaken();
 
             modelAnalysisService.processImage(bitmap);
             return modelAnalysisService.checkStopCondition();
@@ -142,6 +149,7 @@ public class AnalysisCameraActivity extends BaseCameraActivity {
             if (stop) {
                 pictureTimer.cancel();
                 startActivity(new Intent(AnalysisCameraActivity.this, ResultsActivity.class));
+                finish();
             }
         }
     }
