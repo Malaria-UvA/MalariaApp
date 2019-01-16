@@ -35,7 +35,7 @@ public class CalibrationService implements ICalibrationService {
     @Override
     public boolean isBlurry(Bitmap bitmap) {
         double threshold = calculateThreshold(bitmap);
-        double savedThreshold = getThreshold();
+        double savedThreshold = getThresholdAndThrow();
         Log.i("SAVED_THRESHOLD:", String.valueOf(savedThreshold));
         Log.i("THRESHOLD:", String.valueOf(threshold));
         return savedThreshold < threshold;
@@ -61,7 +61,12 @@ public class CalibrationService implements ICalibrationService {
 
     @Override
     public double getThreshold() {
-        double threshold = preferences.getDouble(MainPreferences.THRESHOLD, Double.NaN);
+        return preferences.getDouble(MainPreferences.THRESHOLD, Double.NaN);
+    }
+
+    @Override
+    public double getThresholdAndThrow() {
+        double threshold = this.getThreshold();
         if (Double.isNaN(threshold)) {
             throw new IllegalStateException("Threshold has not been saved yet");
         }
