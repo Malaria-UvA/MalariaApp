@@ -61,7 +61,6 @@ public class OrbFeatureDetectorService implements IOrbFeatureDetectorService {
                 Log.i(TAG, "Distances:" + Arrays.toString(distances));
                 Log.i(TAG, "Percentage:" + percentage);
                 if (percentage > PERCENTAGE_GOOD_MATCHES_THRESHOLD) {
-                    imagesDescriptors.add(descriptor); // save current descriptor for next call
                     return true;
                 }
             }
