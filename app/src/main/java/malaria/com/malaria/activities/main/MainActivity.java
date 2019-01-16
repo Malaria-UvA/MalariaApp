@@ -8,10 +8,9 @@ import butterknife.BindView;
 import malaria.com.malaria.R;
 import malaria.com.malaria.activities.base.BaseActivity;
 import malaria.com.malaria.activities.camera.AnalysisCameraActivity;
-import malaria.com.malaria.activities.guide.GuideActivity;
-import malaria.com.malaria.constants.IntentKeys;
-import malaria.com.malaria.dagger.MalariaComponent;
 import malaria.com.malaria.activities.camera.CalibrationCameraActivity;
+import malaria.com.malaria.activities.guide.GuideActivity;
+import malaria.com.malaria.dagger.MalariaComponent;
 
 public class MainActivity extends BaseActivity {
     @BindView(R.id.startBtn)
