@@ -47,6 +47,7 @@ public class CalibrationCameraActivity extends BaseCameraActivity {
         Toast.makeText(this, R.string.device_calibrated, Toast.LENGTH_SHORT).show();
         calibrationService.calculateAndSaveThreshold(bitmap);
         if(redirect){
+            mCameraView.stop(); // to prevent the following exception when redirecting java.lang.NullPointerException: Attempt to invoke virtual method 'int android.hardware.camera2.CameraCaptureSession.capture(android.hardware.camera2.CaptureRequest, android.hardware.camera2.CameraCaptureSession$CaptureCallback, android.os.Handler)' on a null object reference
             startActivity(new Intent(this, AnalysisCameraActivity.class));
             finish();
         }
