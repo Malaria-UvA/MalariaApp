@@ -33,6 +33,8 @@ public class GuideActivity extends BaseActivity implements OnSwipeRightListener 
     @Inject
     ICalibrationService calibrationService;
 
+    private GuideAdapter adapter;
+
     public GuideActivity() {
         super(R.layout.activity_guide);
     }
@@ -48,7 +50,7 @@ public class GuideActivity extends BaseActivity implements OnSwipeRightListener 
 
     @SuppressWarnings("ConstantConditions")
     private void initViews() {
-        GuideAdapter adapter = new GuideAdapter(this);
+        adapter = new GuideAdapter(this);
         viewPager.setAdapter(adapter);
         viewPager.setPagingEnabled(false);
 
@@ -60,6 +62,7 @@ public class GuideActivity extends BaseActivity implements OnSwipeRightListener 
 
     private void binds() {
         skipBtn.setOnClickListener(v -> startActivity(new Intent(GuideActivity.this, AnalysisCameraActivity.class)));
+        //skipBtn.setOnClickListener(v -> viewPager.setCurrentItem(adapter.getCount() - 1));
     }
 
     @Override

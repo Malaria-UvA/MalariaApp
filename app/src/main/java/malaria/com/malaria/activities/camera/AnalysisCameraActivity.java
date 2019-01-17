@@ -27,8 +27,8 @@ import malaria.com.malaria.interfaces.IModelAnalysisService;
 import malaria.com.malaria.interfaces.OnPictureTakenListener;
 
 public class AnalysisCameraActivity extends BaseCameraActivity implements OnPictureTakenListener {
-    private static final long DELAY_PICTURE_MS = 2000L;
-    private static final long PERIOD_PICTURE_MS = 2000L;
+    private static final long DELAY_PICTURE_MS = 3000L;
+    private static final long PERIOD_PICTURE_MS = 3000L;
 
     @Inject
     IAnalysisService analysisService;
@@ -63,7 +63,7 @@ public class AnalysisCameraActivity extends BaseCameraActivity implements OnPict
         super.onCreate(savedInstanceState);
         changeStatus(Status.FOCUSING);
         numberOfPicturesTaken = 0;
-        refreshPictureTaken();
+        numberPicturesTV.setText(String.valueOf(numberOfPicturesTaken));
         analysisService.initialize();
         pictureTimer = new Timer();
         pictureTimer.schedule(new PictureTask(), DELAY_PICTURE_MS, PERIOD_PICTURE_MS);
@@ -109,17 +109,14 @@ public class AnalysisCameraActivity extends BaseCameraActivity implements OnPict
     }
 
     private void refreshPictureTaken() {
-
-        runOnUiThread(() -> {
-            numberPicturesTV.setText(String.valueOf(numberOfPicturesTaken));
-            changeStatus(AnalysisCameraActivity.Status.PICTURE_TAKEN);
-            new Timer().schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    runOnUiThread(() -> changeStatus(AnalysisCameraActivity.Status.FOCUSING));
-                }
-            }, 1000);
-        });
+        numberPicturesTV.setText(String.valueOf(numberOfPicturesTaken));
+        changeStatus(AnalysisCameraActivity.Status.PICTURE_TAKEN);
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                runOnUiThread(() -> changeStatus(AnalysisCameraActivity.Status.FOCUSING));
+            }
+        }, 2000);
     }
 
     enum Status {
@@ -142,10 +139,10 @@ public class AnalysisCameraActivity extends BaseCameraActivity implements OnPict
                 boolean isBlurry = act.calibrationService.isBlurry(bitmap);
                 if (isBlurry) return false;
                 boolean isTaken = act.analysisService.isPictureAlreadyTaken(bitmap);
-                if (!isTaken) return false;
+                if (isTaken) return false;
 
                 act.numberOfPicturesTaken += 1;
-                act.refreshPictureTaken();
+                act.runOnUiThread(act::refreshPictureTaken);
 
                 act.modelAnalysisService.processImage(bitmap);
                 return act.modelAnalysisService.checkStopCondition();
@@ -169,9 +166,7 @@ public class AnalysisCameraActivity extends BaseCameraActivity implements OnPict
         @Override
         public void run() {
             if (!AnalysisCameraActivity.this.isFinishing()) {
-                runOnUiThread(() -> {
-                    cameraService.takePicture();
-                });
+                runOnUiThread(cameraService::takePicture);
             }
         }
     }

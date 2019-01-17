@@ -14,8 +14,7 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/skipBtn" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <com.rd.PageIndicatorView
         android:id="@+id/pageIndicatorView"
@@ -40,8 +39,10 @@
         android:layout_marginTop="6dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="7dp"
+        android:textSize="17sp"
+        android:background="@android:color/transparent"
         android:text="@string/skip"
-        app:layout_constraintBottom_toTopOf="@+id/viewPager"
+        android:drawableEnd="@drawable/back"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

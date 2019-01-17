@@ -8,11 +8,12 @@
     <string name="done">DONE</string>
     <string name="description">HIGH QUALITY MALARIA DIAGNOSIS IN LOW RESOURCE ENVIRONMENTS</string>
     <string name="title_activity_guide">Guide</string>
-    <string name="guide_step_0">Welcome</string>
+    <string name="guide_step_0">Welcome, we will guide through the setup in order to start with the analysis</string>
     <string name="guide_step_1">Clean both camera lens and microscope lens to remove any dirt other objects that can interfere with the detection</string>
     <string name="guide_step_2">Place the phone into the holding kit provided and secure holding kit to microscope</string>
     <string name="guide_step_3">Check if phone is properly attached to the microscope and make sure the battery is charged</string>
     <string name="guide_step_4">Prepare blood smear, ensure the blood smear is thick enough and check for contamination</string>
+    <string name="picture_calibrate_guide">We will need to take a picture of the sample blood to calibrate the camera</string>
     <string name="guide_step_5">After placing blood smear underneath the microscope lens wait until MOMALA App gives confirmation that the image is focused</string>
     <string name="guide_step_6">Move the blood smear when asked, STOP moving when prompted. While changing position of blood smear do not make any sudden movements</string>
     <string name="guide_step_7">During focusing do not touch the microscope or mobile phone to yield high quality images</string>

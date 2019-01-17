@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.google.android.cameraview.CameraView
@@ -15,25 +16,34 @@
         app:facing="back"
         app:flash="off"/>
 
-    <android.support.constraint.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="129dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginBottom="0dp">
+        android:layout_height="match_parent"
+        android:layout_below="@id/camera"
+        android:layout_alignParentEnd="true"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginBottom="50dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/picture_calibrate_guide"
+            android:fontFamily="roboto"
+            android:gravity="center"
+            android:textAllCaps="true"
+            android:textColor="@android:color/background_light"
+            android:textSize="16sp"
+            android:layout_marginBottom="7dp"/>
 
         <Button
             android:id="@+id/calibrateBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/calibrate"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:background="@color/colorAccent"/>
 
-    </android.support.constraint.ConstraintLayout>
+    </LinearLayout>
+
 
 </RelativeLayout>
