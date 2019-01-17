@@ -41,12 +41,12 @@ public class OrbFeatureDetectorService implements IOrbFeatureDetectorService {
     }
 
     @Override
-    public boolean pictureAlreadyTaken(Bitmap image, List<Bitmap> previousImages) {
+    public boolean pictureAlreadyTaken(Bitmap image) {
         Mat descriptor = new Mat();
         Mat mask = new Mat();
         MatOfKeyPoint matOfKeyPoint = new MatOfKeyPoint();
         orb.detectAndCompute(bitmapToMat(image), mask, matOfKeyPoint, descriptor);
-        if (previousImages == null || previousImages.isEmpty()) { // if this is the first image, we cannot compare it to any other
+        if (imagesDescriptors.isEmpty()) { // if this is the first image, we cannot compare it to any other
             imagesDescriptors.add(descriptor); // save current descriptor for next call
             return false;
         }

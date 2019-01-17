@@ -18,6 +18,8 @@ import malaria.com.malaria.interfaces.IMainPreferences;
 
 public class CalibrationService implements ICalibrationService {
 
+    private static final int MARGIN = 10;
+
     @Inject
     IMainPreferences preferences;
 
@@ -38,7 +40,7 @@ public class CalibrationService implements ICalibrationService {
         double savedThreshold = getThresholdAndThrow();
         Log.i("SAVED_THRESHOLD:", String.valueOf(savedThreshold));
         Log.i("THRESHOLD:", String.valueOf(threshold));
-        return savedThreshold < threshold;
+        return savedThreshold - MARGIN < threshold;
     }
 
     private double calculateThreshold(Bitmap bitmap) {

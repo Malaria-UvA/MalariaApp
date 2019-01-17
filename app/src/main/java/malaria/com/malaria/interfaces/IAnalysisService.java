@@ -5,6 +5,5 @@ import android.graphics.Bitmap;
 public interface IAnalysisService extends Injector {
 
     void initialize();
-
-    boolean addPicture(Bitmap image);
+    boolean isPictureAlreadyTaken(Bitmap image);
 }

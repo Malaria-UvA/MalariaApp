@@ -5,7 +5,6 @@ import android.graphics.Bitmap;
 import java.util.List;
 
 public interface IOrbFeatureDetectorService {
-    boolean pictureAlreadyTaken(Bitmap image, List<Bitmap> previousImages);
-
+    boolean pictureAlreadyTaken(Bitmap image);
     void initialize();
 }

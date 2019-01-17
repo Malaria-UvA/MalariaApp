@@ -72,6 +72,8 @@ public class AnalysisCameraActivity extends BaseCameraActivity implements OnPict
     @Override
     public void onPictureTaken(CameraView cameraView, Bitmap bitmap) {
         // TODO take a look to the concurrency of this methods and the used structures
+
+        //TODO resize images to 300x300 or 640x640. Depending on the model used
         new ModelTask(this).execute(bitmap);
     }
 
@@ -139,8 +141,8 @@ public class AnalysisCameraActivity extends BaseCameraActivity implements OnPict
                 Bitmap bitmap = bitmaps[0];
                 boolean isBlurry = act.calibrationService.isBlurry(bitmap);
                 if (isBlurry) return false;
-                boolean isAdded = act.analysisService.addPicture(bitmap);
-                if (!isAdded) return false;
+                boolean isTaken = act.analysisService.isPictureAlreadyTaken(bitmap);
+                if (!isTaken) return false;
 
                 act.numberOfPicturesTaken += 1;
                 act.refreshPictureTaken();
