@@ -72,6 +72,8 @@ public class AnalysisCameraActivity extends BaseCameraActivity {
     @Override
     public void onPictureTaken(CameraView cameraView, Bitmap bitmap) {
         // TODO take a look to the concurrency of this methods and the used structures
+
+        //TODO resize images to 300x300 or 640x640. Depending on the model used
         new ModelTask().execute(bitmap);
     }
 
