@@ -73,6 +73,8 @@ public class CameraService implements ICameraService {
 
     @Override
     public void takePicture() {
-        mCameraView.takePicture();
+        if (mCameraView != null) {
+            mCameraView.takePicture();
+        }
     }
 }
