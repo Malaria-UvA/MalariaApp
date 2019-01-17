@@ -1,5 +1,6 @@
 package malaria.com.malaria.activities.camera;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
@@ -23,8 +24,9 @@ import malaria.com.malaria.dagger.MalariaComponent;
 import malaria.com.malaria.interfaces.IAnalysisService;
 import malaria.com.malaria.interfaces.ICalibrationService;
 import malaria.com.malaria.interfaces.IModelAnalysisService;
+import malaria.com.malaria.interfaces.OnPictureTakenListener;
 
-public class AnalysisCameraActivity extends BaseCameraActivity {
+public class AnalysisCameraActivity extends BaseCameraActivity implements OnPictureTakenListener {
     private static final long DELAY_PICTURE_MS = 2000L;
     private static final long PERIOD_PICTURE_MS = 2000L;
 
@@ -52,11 +54,6 @@ public class AnalysisCameraActivity extends BaseCameraActivity {
     private int numberOfPicturesTaken;
     private Timer pictureTimer;
 
-    enum Status {
-        PICTURE_TAKEN,
-        FOCUSING
-    }
-
     public AnalysisCameraActivity() {
         super(R.layout.activity_camera);
     }
@@ -76,6 +73,11 @@ public class AnalysisCameraActivity extends BaseCameraActivity {
     public void onPictureTaken(CameraView cameraView, Bitmap bitmap) {
         // TODO take a look to the concurrency of this methods and the used structures
         new ModelTask(this).execute(bitmap);
+    }
+
+    @Override
+    public Activity getActivity() {
+        return this;
     }
 
     @Override
@@ -118,16 +120,9 @@ public class AnalysisCameraActivity extends BaseCameraActivity {
         });
     }
 
-    private class PictureTask extends TimerTask {
-
-        @Override
-        public void run() {
-            if (!AnalysisCameraActivity.this.isFinishing()) {
-                runOnUiThread(() -> {
-                    if (mCameraView != null) mCameraView.takePicture();
-                });
-            }
-        }
+    enum Status {
+        PICTURE_TAKEN,
+        FOCUSING
     }
 
     private static class ModelTask extends AsyncTask<Bitmap, Void, Boolean> {
@@ -163,6 +158,18 @@ public class AnalysisCameraActivity extends BaseCameraActivity {
                 act.pictureTimer.cancel();
                 act.startActivity(new Intent(act, ResultsActivity.class));
                 act.finish();
+            }
+        }
+    }
+
+    private class PictureTask extends TimerTask {
+
+        @Override
+        public void run() {
+            if (!AnalysisCameraActivity.this.isFinishing()) {
+                runOnUiThread(() -> {
+                    cameraService.takePicture();
+                });
             }
         }
     }

@@ -1,7 +1,5 @@
 package malaria.com.malaria.models;
 
-import android.media.Image;
-
 import java.util.List;
 
 /**
@@ -26,22 +24,6 @@ public class ImageFeature {
         this.nParasites = parasites;
     }
 
-    public int getnWhiteBloodCells() {
-        return nWhiteBloodCells;
-    }
-
-    public void setnWhiteBloodCells(int nWhiteBloodCells) {
-        this.nWhiteBloodCells = nWhiteBloodCells;
-    }
-
-    public int getnParasites() {
-        return nParasites;
-    }
-
-    public void setnParasites(int nParasites) {
-        this.nParasites = nParasites;
-    }
-
     /**
      * This method is part of the extracted knowledge. It returns 'true'
      * if it needs to stop counting, 'false' otherwise.
@@ -64,10 +46,26 @@ public class ImageFeature {
      * per microlitre of blood using the formula for the Thick film.
      *
      * @param nParasitesTotal number of total parasites
-     * @param nWBC number of total white blood cells
+     * @param nWBC            number of total white blood cells
      * @return int
      */
     static int calculate(int nParasitesTotal, int nWBC) {
         return (int) Math.ceil(8000f * nParasitesTotal / nWBC);
+    }
+
+    public int getnWhiteBloodCells() {
+        return nWhiteBloodCells;
+    }
+
+    public void setnWhiteBloodCells(int nWhiteBloodCells) {
+        this.nWhiteBloodCells = nWhiteBloodCells;
+    }
+
+    public int getnParasites() {
+        return nParasites;
+    }
+
+    public void setnParasites(int nParasites) {
+        this.nParasites = nParasites;
     }
 }

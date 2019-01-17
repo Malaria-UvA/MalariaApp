@@ -8,6 +8,7 @@
     <string name="done">DONE</string>
     <string name="description">HIGH QUALITY MALARIA DIAGNOSIS IN LOW RESOURCE ENVIRONMENTS</string>
     <string name="title_activity_guide">Guide</string>
+    <string name="guide_step_0">Welcome</string>
     <string name="guide_step_1">Clean both camera lens and microscope lens to remove any dirt other objects that can interfere with the detection</string>
     <string name="guide_step_2">Place the phone into the holding kit provided and secure holding kit to microscope</string>
     <string name="guide_step_3">Check if phone is properly attached to the microscope and make sure the battery is charged</string>
@@ -17,6 +18,7 @@
     <string name="guide_step_7">During focusing do not touch the microscope or mobile phone to yield high quality images</string>
     <string name="guide_step_8">After focusing the application takes images automatically and shows progress to user</string>
     <string name="guide_step_9">Wait until the results are shown and upload results to server for safekeeping</string>
+    <string name="guide_step_10">Well done, once you click on the start button the app will start taking pictures automatically</string>
     <string name="clear">Clear</string>
     <string name="cancel">Cancel</string>
     <string name="next">Next</string>
@@ -50,4 +52,5 @@
     <string name="analysed_fields">Analysed fields</string>
     <string name="parasites_per_microlitre">PARASITES/µL BLOOD</string>
     <string name="image_not_loaded">Image not loaded</string>
+    <string name="skip">SKIP</string>
 </resources>

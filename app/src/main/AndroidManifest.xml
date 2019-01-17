@@ -17,8 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activities.main.MainActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            android:name=".activities.guide.GuideActivity"
+            android:label="@string/title_activity_guide"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,17 +27,14 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.guide.GuideActivity"
-            android:label="@string/title_activity_guide" />
-        <activity
             android:name=".activities.camera.CalibrationCameraActivity"
-            android:label="@string/calibration"/>
+            android:label="@string/calibration" />
         <activity
             android:name=".activities.camera.AnalysisCameraActivity"
-            android:label="@string/analysing"/>
+            android:label="@string/analysing" />
         <activity
             android:name=".activities.results.ResultsActivity"
-            android:label="@string/results"/>
+            android:label="@string/results" />
     </application>
 
 </manifest>

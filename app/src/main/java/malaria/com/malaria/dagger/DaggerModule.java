@@ -9,11 +9,13 @@ import dagger.Module;
 import dagger.Provides;
 import malaria.com.malaria.interfaces.IAnalysisService;
 import malaria.com.malaria.interfaces.ICalibrationService;
+import malaria.com.malaria.interfaces.ICameraService;
 import malaria.com.malaria.interfaces.IMainPreferences;
 import malaria.com.malaria.interfaces.IModelAnalysisService;
 import malaria.com.malaria.interfaces.IOrbFeatureDetectorService;
 import malaria.com.malaria.services.AnalysisService;
 import malaria.com.malaria.services.CalibrationService;
+import malaria.com.malaria.services.CameraService;
 import malaria.com.malaria.services.MainPreferences;
 import malaria.com.malaria.services.ModelAnalysisService;
 import malaria.com.malaria.services.OrbFeatureDetectorService;
@@ -40,13 +42,13 @@ class DaggerModule {
 
     @Provides
     @Singleton
-    ICalibrationService providesCalibrationService(){
+    ICalibrationService providesCalibrationService() {
         return new CalibrationService();
     }
 
     @Provides
     @Singleton
-    IMainPreferences providesMainPreferences(Context context){
+    IMainPreferences providesMainPreferences(Context context) {
         return new MainPreferences(context);
     }
 
@@ -66,6 +68,12 @@ class DaggerModule {
     @Singleton
     IOrbFeatureDetectorService providesOrbFeatureDetectorService() {
         return new OrbFeatureDetectorService();
+    }
+
+    @Provides
+    @Singleton
+    ICameraService providesCameraService() {
+        return new CameraService();
     }
 
 }

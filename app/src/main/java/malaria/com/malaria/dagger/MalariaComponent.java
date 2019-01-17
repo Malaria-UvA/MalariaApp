@@ -4,14 +4,15 @@ import javax.inject.Singleton;
 
 import dagger.Component;
 import malaria.com.malaria.activities.camera.AnalysisCameraActivity;
+import malaria.com.malaria.activities.camera.BaseCameraActivity;
 import malaria.com.malaria.activities.camera.CalibrationCameraActivity;
 import malaria.com.malaria.activities.guide.GuideActivity;
-import malaria.com.malaria.activities.main.MainActivity;
 import malaria.com.malaria.activities.results.ResultsActivity;
+import malaria.com.malaria.fragments.BaseCameraFragment;
+import malaria.com.malaria.fragments.CalibrationFragment;
 import malaria.com.malaria.fragments.GuideFragment;
 import malaria.com.malaria.services.AnalysisService;
 import malaria.com.malaria.services.CalibrationService;
-import malaria.com.malaria.services.MainPreferences;
 
 @Singleton
 @Component(modules = {
@@ -21,18 +22,22 @@ public interface MalariaComponent {
     void inject(MalariaApplication malariaApplication);
 
     // Activities
-    void inject(MainActivity mainActivity);
-
     void inject(GuideActivity guideActivity);
 
     void inject(ResultsActivity resultsActivity);
 
+    void inject(AnalysisCameraActivity analysisCameraActivity);
+
     void inject(CalibrationCameraActivity calibrationCameraActivity);
 
-    void inject(AnalysisCameraActivity analysisCameraActivity);
+    void inject(BaseCameraActivity baseCameraActivity);
 
     //Fragments
     void inject(GuideFragment guideFragment);
+
+    void inject(CalibrationFragment calibrationFragment);
+
+    void inject(BaseCameraFragment baseCameraFragment);
 
     //Services
     void inject(CalibrationService calibrationService);

@@ -11,49 +11,33 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import javax.inject.Inject;
-
 import butterknife.BindView;
 import malaria.com.malaria.R;
-import malaria.com.malaria.activities.main.MainActivity;
+import malaria.com.malaria.activities.camera.AnalysisCameraActivity;
 import malaria.com.malaria.dagger.MalariaComponent;
-import malaria.com.malaria.interfaces.IMainPreferences;
 import malaria.com.malaria.interfaces.OnSwipeRightListener;
-import malaria.com.malaria.services.MainPreferences;
 
 /**
  * Created by zenbook on 11/02/14.
  */
 public class GuideFragment extends BaseFragmentV4 implements View.OnClickListener {
 
+    @BindView(R.id.guideTxt)
+    TextView textView;
+    @BindView(R.id.imageView)
+    ImageView image;
+    @BindView(R.id.exitBtn)
+    Button exitBtn;
+    @BindView(R.id.doneOrUnderstoodBtn)
+    Button doneOrUnderstoodBtn;
     private String content;
     private String doneOrUnderstoodBtnText;
     private int imageref;
     private boolean lastFragment;
     private OnSwipeRightListener listener;
 
-    @BindView(R.id.guideTxt)
-    TextView textView;
-
-    @BindView(R.id.imageView)
-    ImageView image;
-
-    @BindView(R.id.exitBtn)
-    Button exitBtn;
-
-    @BindView(R.id.doneOrUnderstoodBtn)
-    Button doneOrUnderstoodBtn;
-
-    @Inject()
-    IMainPreferences preferences;
-
     public GuideFragment() {
         super(R.layout.fragment_guide);
-    }
-
-    @Override
-    public void onInject(MalariaComponent applicationComponent) {
-        applicationComponent.inject(this);
     }
 
     public static GuideFragment newInstance(String content, int imageref, boolean lastFragment, String textButton, OnSwipeRightListener listener) {
@@ -69,6 +53,11 @@ public class GuideFragment extends BaseFragmentV4 implements View.OnClickListene
     }
 
     @Override
+    public void onInject(MalariaComponent applicationComponent) {
+        applicationComponent.inject(this);
+    }
+
+    @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = super.onCreateView(inflater, container, savedInstanceState);
         exitBtn.setOnClickListener(this);
@@ -81,11 +70,9 @@ public class GuideFragment extends BaseFragmentV4 implements View.OnClickListene
 
         if (lastFragment) {
             exitBtn.setVisibility(View.VISIBLE);
-            textView.setVisibility(View.INVISIBLE);
             doneOrUnderstoodBtn.setVisibility(View.INVISIBLE);
         } else {
             exitBtn.setVisibility(View.INVISIBLE);
-            textView.setVisibility(View.VISIBLE);
             doneOrUnderstoodBtn.setVisibility(View.VISIBLE);
         }
 
@@ -94,16 +81,9 @@ public class GuideFragment extends BaseFragmentV4 implements View.OnClickListene
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.exitBtn:
-                boolean firstTime = preferences.getBoolean(MainPreferences.FIRST_TIME_APP, true);
-                if (firstTime) {
-                    startActivity(new Intent(getActivity(), MainActivity.class));
-                    preferences.putBoolean(MainPreferences.FIRST_TIME_APP, false);
-                }
-                if (getActivity() != null) {
-                    getActivity().finish();
-                }
+                startActivity(new Intent(getActivity(), AnalysisCameraActivity.class));
                 break;
             case R.id.doneOrUnderstoodBtn:
                 listener.onSwipeRight();

@@ -1,6 +1,5 @@
 package malaria.com.malaria.interfaces;
 
-import malaria.com.malaria.dagger.DependencyInjector;
 import malaria.com.malaria.dagger.MalariaComponent;
 
 public interface Injector {

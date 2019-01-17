@@ -26,7 +26,7 @@ public class ModelAnalysisService implements IModelAnalysisService {
     @Override
     public ImageFeature processImage(Bitmap image) {
         // TODO Call model.predict() to obtain number of parasites and WBC
-        ImageFeature imageFeature = new ImageFeature(50,100);
+        ImageFeature imageFeature = new ImageFeature(50, 100);
         features.add(imageFeature);
         return imageFeature;
     }

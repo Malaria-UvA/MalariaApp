@@ -41,7 +41,7 @@ public class CalibrationService implements ICalibrationService {
         return savedThreshold < threshold;
     }
 
-    private double calculateThreshold(Bitmap bitmap){
+    private double calculateThreshold(Bitmap bitmap) {
 
         Mat src = new Mat();
         Utils.bitmapToMat(bitmap, src);

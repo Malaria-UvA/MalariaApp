@@ -14,9 +14,6 @@ import org.opencv.features2d.ORB;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Supplier;
-import java.util.stream.Collectors;
-import java.util.stream.DoubleStream;
 
 import malaria.com.malaria.interfaces.IOrbFeatureDetectorService;
 
@@ -34,6 +31,13 @@ public class OrbFeatureDetectorService implements IOrbFeatureDetectorService {
 
     public OrbFeatureDetectorService() {
         this.initialize();
+    }
+
+    private static Mat bitmapToMat(Bitmap bitmap) {
+        Mat mat = new Mat();
+        Bitmap bmp32 = bitmap.copy(Bitmap.Config.ARGB_8888, true);
+        Utils.bitmapToMat(bmp32, mat);
+        return mat;
     }
 
     @Override
@@ -75,12 +79,5 @@ public class OrbFeatureDetectorService implements IOrbFeatureDetectorService {
         this.orb.setScoreType(ORB.FAST_SCORE);
         this.bf = BFMatcher.create(NORM_HAMMING, true);
         this.imagesDescriptors = new ArrayList<>();
-    }
-
-    private static Mat bitmapToMat(Bitmap bitmap) {
-        Mat mat = new Mat();
-        Bitmap bmp32 = bitmap.copy(Bitmap.Config.ARGB_8888, true);
-        Utils.bitmapToMat(bmp32, mat);
-        return mat;
     }
 }

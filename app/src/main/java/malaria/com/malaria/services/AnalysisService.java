@@ -17,13 +17,11 @@ import malaria.com.malaria.interfaces.IOrbFeatureDetectorService;
 public class AnalysisService implements IAnalysisService {
     //private static final String TAG = "AnalysisService";
     private static final String TAG = "OrbFeatureDetector";
-    private List<Bitmap> images;
-
     @Inject
     IModelAnalysisService modelAnalysisService;
-
     @Inject
     IOrbFeatureDetectorService detector;
+    private List<Bitmap> images;
 
     @Inject
     public AnalysisService() {
