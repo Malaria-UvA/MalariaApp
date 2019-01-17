@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.google.android.cameraview.CameraView;
 
+import java.lang.ref.WeakReference;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -24,6 +25,8 @@ import malaria.com.malaria.interfaces.ICalibrationService;
 import malaria.com.malaria.interfaces.IModelAnalysisService;
 
 public class AnalysisCameraActivity extends BaseCameraActivity {
+    private static final long DELAY_PICTURE_MS = 2000L;
+    private static final long PERIOD_PICTURE_MS = 2000L;
 
     @Inject
     IAnalysisService analysisService;
@@ -66,7 +69,7 @@ public class AnalysisCameraActivity extends BaseCameraActivity {
         refreshPictureTaken();
         analysisService.initialize();
         pictureTimer = new Timer();
-        pictureTimer.schedule(new PictureTask(), 2000, 2000);
+        pictureTimer.schedule(new PictureTask(), DELAY_PICTURE_MS, PERIOD_PICTURE_MS);
     }
 
     @Override
@@ -74,7 +77,7 @@ public class AnalysisCameraActivity extends BaseCameraActivity {
         // TODO take a look to the concurrency of this methods and the used structures
 
         //TODO resize images to 300x300 or 640x640. Depending on the model used
-        new ModelTask().execute(bitmap);
+        new ModelTask(this).execute(bitmap);
     }
 
     @Override
@@ -129,29 +132,39 @@ public class AnalysisCameraActivity extends BaseCameraActivity {
         }
     }
 
-    private class ModelTask extends AsyncTask<Bitmap, Void, Boolean> {
+    private static class ModelTask extends AsyncTask<Bitmap, Void, Boolean> {
+        private WeakReference<AnalysisCameraActivity> weakAct;
+
+        ModelTask(AnalysisCameraActivity weakReference) {
+            this.weakAct = new WeakReference<>(weakReference);
+        }
 
         @Override
         protected Boolean doInBackground(Bitmap... bitmaps) {
-            Bitmap bitmap = bitmaps[0];
-            boolean isBlurry = calibrationService.isBlurry(bitmap);
-            if (isBlurry) return false;
-            boolean isAdded = analysisService.addPicture(bitmap);
-            if (!isAdded) return false;
+            AnalysisCameraActivity act = weakAct.get();
+            if (act != null) {
+                Bitmap bitmap = bitmaps[0];
+                boolean isBlurry = act.calibrationService.isBlurry(bitmap);
+                if (isBlurry) return false;
+                boolean isAdded = act.analysisService.addPicture(bitmap);
+                if (!isAdded) return false;
 
-            numberOfPicturesTaken += 1;
-            refreshPictureTaken();
+                act.numberOfPicturesTaken += 1;
+                act.refreshPictureTaken();
 
-            modelAnalysisService.processImage(bitmap);
-            return modelAnalysisService.checkStopCondition();
+                act.modelAnalysisService.processImage(bitmap);
+                return act.modelAnalysisService.checkStopCondition();
+            }
+            return false;
         }
 
         @Override
         protected void onPostExecute(Boolean stop) {
-            if (stop) {
-                pictureTimer.cancel();
-                startActivity(new Intent(AnalysisCameraActivity.this, ResultsActivity.class));
-                finish();
+            AnalysisCameraActivity act = weakAct.get();
+            if (stop && act != null) {
+                act.pictureTimer.cancel();
+                act.startActivity(new Intent(act, ResultsActivity.class));
+                act.finish();
             }
         }
     }

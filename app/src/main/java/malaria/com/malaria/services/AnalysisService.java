@@ -1,8 +1,10 @@
 package malaria.com.malaria.services;
 
 import android.graphics.Bitmap;
+import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -10,13 +12,18 @@ import malaria.com.malaria.dagger.DependencyInjector;
 import malaria.com.malaria.dagger.MalariaComponent;
 import malaria.com.malaria.interfaces.IAnalysisService;
 import malaria.com.malaria.interfaces.IModelAnalysisService;
+import malaria.com.malaria.interfaces.IOrbFeatureDetectorService;
 
 public class AnalysisService implements IAnalysisService {
-
-    private ArrayList<Bitmap> images;
+    //private static final String TAG = "AnalysisService";
+    private static final String TAG = "OrbFeatureDetector";
+    private List<Bitmap> images;
 
     @Inject
     IModelAnalysisService modelAnalysisService;
+
+    @Inject
+    IOrbFeatureDetectorService detector;
 
     @Inject
     public AnalysisService() {
@@ -28,6 +35,7 @@ public class AnalysisService implements IAnalysisService {
     public void initialize() {
         images = new ArrayList<>();
         modelAnalysisService.initialize();
+        detector.initialize();
     }
 
     @Override
@@ -39,8 +47,9 @@ public class AnalysisService implements IAnalysisService {
     }
 
     private boolean checkPictureAlreadyTaken(Bitmap image) {
-        // TODO implement using the array images and the image given above
-        return false;
+        boolean alreadyTaken = this.detector.pictureAlreadyTaken(image, images);
+        Log.i(TAG, "checkPictureAlreadyTaken: " + alreadyTaken);
+        return alreadyTaken;
     }
 
     @Override

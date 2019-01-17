@@ -11,10 +11,12 @@ import malaria.com.malaria.interfaces.IAnalysisService;
 import malaria.com.malaria.interfaces.ICalibrationService;
 import malaria.com.malaria.interfaces.IMainPreferences;
 import malaria.com.malaria.interfaces.IModelAnalysisService;
+import malaria.com.malaria.interfaces.IOrbFeatureDetectorService;
 import malaria.com.malaria.services.AnalysisService;
 import malaria.com.malaria.services.CalibrationService;
 import malaria.com.malaria.services.MainPreferences;
 import malaria.com.malaria.services.ModelAnalysisService;
+import malaria.com.malaria.services.OrbFeatureDetectorService;
 
 @Module()
 class DaggerModule {
@@ -58,6 +60,12 @@ class DaggerModule {
     @Singleton
     IModelAnalysisService providesModelAnalysisService() {
         return new ModelAnalysisService();
+    }
+
+    @Provides
+    @Singleton
+    IOrbFeatureDetectorService providesOrbFeatureDetectorService() {
+        return new OrbFeatureDetectorService();
     }
 
 }
