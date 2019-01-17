@@ -1,7 +1,6 @@
 package malaria.com.malaria.activities.guide;
 
 import android.os.Bundle;
-import android.support.v4.view.ViewPager;
 
 import com.rd.PageIndicatorView;
 
@@ -10,14 +9,16 @@ import malaria.com.malaria.R;
 import malaria.com.malaria.activities.base.BaseActivity;
 import malaria.com.malaria.adapters.GuideAdapter;
 import malaria.com.malaria.dagger.MalariaComponent;
+import malaria.com.malaria.interfaces.OnSwipeRightListener;
+import malaria.com.malaria.views.CustomViewPager;
 
-public class GuideActivity extends BaseActivity {
+public class GuideActivity extends BaseActivity implements OnSwipeRightListener {
 
     @BindView(R.id.pageIndicatorView)
     PageIndicatorView pageIndicatorView;
 
     @BindView(R.id.viewPager)
-    ViewPager viewPager;
+    CustomViewPager viewPager;
 
     public GuideActivity() {
         super(R.layout.activity_guide);
@@ -35,10 +36,16 @@ public class GuideActivity extends BaseActivity {
     private void initViews() {
         GuideAdapter adapter = new GuideAdapter(this);
         viewPager.setAdapter(adapter);
+        viewPager.setPagingEnabled(false);
     }
 
     @Override
     public void onInject(MalariaComponent applicationComponent) {
         applicationComponent.inject(this);
+    }
+
+    public void onSwipeRight() {
+        //viewPager.arrowScroll(View.FOCUS_RIGHT);
+        viewPager.setCurrentItem(viewPager.getCurrentItem() + 1);
     }
 }

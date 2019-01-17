@@ -4,6 +4,8 @@
     <string name="heading">MOMALA APP</string>
     <string name="guide">GUIDE</string>
     <string name="start">START</string>
+    <string name="understood">UNDERSTOOD</string>
+    <string name="done">DONE</string>
     <string name="description">HIGH QUALITY MALARIA DIAGNOSIS IN LOW RESOURCE ENVIRONMENTS</string>
     <string name="title_activity_guide">Guide</string>
     <string name="guide_step_1">Clean both camera lens and microscope lens to remove any dirt other objects that can interfere with the detection</string>
@@ -47,4 +49,5 @@
     <string name="device_calibrated">Device calibrated</string>
     <string name="analysed_fields">Analysed fields</string>
     <string name="parasites_per_microlitre">PARASITES/µL BLOOD</string>
+    <string name="image_not_loaded">Image not loaded</string>
 </resources>
