@@ -1,10 +1,12 @@
 package malaria.com.malaria.activities.camera;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -52,7 +54,8 @@ public class AnalysisCameraActivity extends BaseCameraActivity implements OnPict
     ProgressBar progressBar;
 
     private int numberOfPicturesTaken;
-    private Timer pictureTimer;
+    private final Timer pictureTimer = new Timer();;
+    private boolean isDialogOpened;
 
     public AnalysisCameraActivity() {
         super(R.layout.activity_camera);
@@ -65,14 +68,11 @@ public class AnalysisCameraActivity extends BaseCameraActivity implements OnPict
         numberOfPicturesTaken = 0;
         numberPicturesTV.setText(String.valueOf(numberOfPicturesTaken));
         analysisService.initialize();
-        pictureTimer = new Timer();
         pictureTimer.schedule(new PictureTask(), DELAY_PICTURE_MS, PERIOD_PICTURE_MS);
     }
 
     @Override
     public void onPictureTaken(CameraView cameraView, Bitmap bitmap) {
-        // TODO take a look to the concurrency of this methods and the used structures
-
         //TODO resize images to 300x300 or 640x640. Depending on the model used
         new ModelTask(this).execute(bitmap);
     }
@@ -117,6 +117,22 @@ public class AnalysisCameraActivity extends BaseCameraActivity implements OnPict
                 runOnUiThread(() -> changeStatus(AnalysisCameraActivity.Status.FOCUSING));
             }
         }, 2000);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+            this.isDialogOpened = true;
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("Are you sure you want to exit?")
+                    .setCancelable(false)
+                    .setPositiveButton("Yes", (dialog, id) -> AnalysisCameraActivity.this.finish())
+                    .setNegativeButton("No", (dialog, id) -> {
+                        dialog.cancel();
+                        isDialogOpened = false;
+                    }).show();
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     enum Status {
@@ -165,7 +181,7 @@ public class AnalysisCameraActivity extends BaseCameraActivity implements OnPict
 
         @Override
         public void run() {
-            if (!AnalysisCameraActivity.this.isFinishing()) {
+            if (!AnalysisCameraActivity.this.isFinishing() && !isDialogOpened) {
                 runOnUiThread(cameraService::takePicture);
             }
         }
