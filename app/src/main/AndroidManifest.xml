@@ -31,9 +31,11 @@
             android:label="@string/calibration" />
         <activity
             android:name=".activities.camera.AnalysisCameraActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
             android:label="@string/analysing" />
         <activity
             android:name=".activities.results.ResultsActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
             android:label="@string/results" />
     </application>
 
