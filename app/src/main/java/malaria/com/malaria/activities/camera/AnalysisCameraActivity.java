@@ -147,7 +147,7 @@ public class AnalysisCameraActivity extends BaseCameraActivity {
                 boolean isBlurry = act.calibrationService.isBlurry(bitmap);
                 if (isBlurry) return false;
                 boolean isTaken = act.analysisService.isPictureAlreadyTaken(bitmap);
-                if (!isTaken) return false;
+                if (isTaken) return false;
 
                 act.numberOfPicturesTaken += 1;
                 act.refreshPictureTaken();

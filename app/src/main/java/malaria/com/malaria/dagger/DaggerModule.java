@@ -58,8 +58,8 @@ class DaggerModule {
 
     @Provides
     @Singleton
-    IModelAnalysisService providesModelAnalysisService() {
-        return new ModelAnalysisService();
+    IModelAnalysisService providesModelAnalysisService(Context context) {
+        return new ModelAnalysisService(context);
     }
 
     @Provides

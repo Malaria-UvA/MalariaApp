@@ -40,7 +40,7 @@ public class CalibrationService implements ICalibrationService {
         double savedThreshold = getThresholdAndThrow();
         Log.i("SAVED_THRESHOLD:", String.valueOf(savedThreshold));
         Log.i("THRESHOLD:", String.valueOf(threshold));
-        return savedThreshold - MARGIN < threshold;
+        return savedThreshold + MARGIN < threshold;
     }
 
     private double calculateThreshold(Bitmap bitmap){
