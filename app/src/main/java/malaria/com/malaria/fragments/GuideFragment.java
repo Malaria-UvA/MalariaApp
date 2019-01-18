@@ -23,7 +23,8 @@ import malaria.com.malaria.interfaces.OnSwipeRightListener;
  * Created by zenbook on 11/02/14.
  */
 public class GuideFragment extends BaseFragmentV4 implements View.OnClickListener {
-
+    @BindView(R.id.titleTxt)
+    TextView titleTxt;
     @BindView(R.id.guideTxt)
     TextView textView;
     @BindView(R.id.imageView)
@@ -35,18 +36,19 @@ public class GuideFragment extends BaseFragmentV4 implements View.OnClickListene
     private String content;
     private String doneOrUnderstoodBtnText;
     private int imageref;
-    private boolean lastFragment;
+    private boolean firstFragment,lastFragment;
     private OnSwipeRightListener listener;
 
     public GuideFragment() {
         super(R.layout.fragment_guide);
     }
 
-    public static GuideFragment newInstance(String content, int imageref, boolean lastFragment, String textButton, OnSwipeRightListener listener) {
+    public static GuideFragment newInstance(String content, int imageref, boolean firstFragment, boolean lastFragment, String textButton, OnSwipeRightListener listener) {
         GuideFragment fragment = new GuideFragment();
 
         fragment.content = content;
         fragment.imageref = imageref;
+        fragment.firstFragment = firstFragment;
         fragment.lastFragment = lastFragment;
         fragment.doneOrUnderstoodBtnText = textButton;
         fragment.listener = listener;
@@ -69,6 +71,10 @@ public class GuideFragment extends BaseFragmentV4 implements View.OnClickListene
         textView.setText(content);
         image.setImageResource(imageref);
         doneOrUnderstoodBtn.setText(doneOrUnderstoodBtnText);
+
+        if(!firstFragment && !lastFragment){
+            titleTxt.setVisibility(View.INVISIBLE);
+        }
 
         if (lastFragment) {
             exitBtn.setVisibility(View.VISIBLE);

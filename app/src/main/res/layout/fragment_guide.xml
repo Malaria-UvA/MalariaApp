@@ -9,7 +9,7 @@
     <TextView
         android:id="@+id/guideTxt"
         android:layout_width="0dp"
-        android:layout_height="134dp"
+        android:layout_height="0dp"
         android:layout_marginStart="22dp"
         android:layout_marginEnd="22dp"
         android:layout_marginBottom="122dp"
@@ -24,7 +24,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/titleTxt"
         app:layout_constraintVertical_bias="1.0"
         tools:text="@string/guide_step_1" />
 
@@ -35,7 +35,6 @@
         android:background="@color/colorAccent"
         android:text="@string/start"
         android:textAppearance="@style/btnText"
-        app:layout_constraintBottom_toBottomOf="@+id/guideTxt"
         app:layout_constraintStart_toStartOf="@+id/doneOrUnderstoodBtn"
         app:layout_constraintTop_toBottomOf="@+id/guideTxt" />
 
@@ -48,22 +47,38 @@
         android:contentDescription="@string/image_not_loaded"
         app:layout_constraintBottom_toTopOf="@+id/doneOrUnderstoodBtn"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/doneOrUnderstoodBtn"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
-        android:layout_marginTop="10dp"
         android:background="@color/colorAccent"
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
         android:text="@string/understood"
         android:textAppearance="@style/btnText"
-        app:layout_constraintBottom_toBottomOf="@+id/guideTxt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/guideTxt"
-        app:layout_constraintVertical_bias="0.158" />
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/titleTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="91dp"
+        android:layout_marginBottom="284dp"
+        android:text="@string/app_name"
+        android:textAlignment="center"
+        android:textColor="@android:color/background_light"
+        android:textSize="46sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/guideTxt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>
