@@ -72,7 +72,7 @@ public class ResultsActivity extends BaseActivity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if ((keyCode == KeyEvent.KEYCODE_BACK)) {
-            startActivity(new Intent(this, GuideActivity.class));
+            startActivityForResult(new Intent(this, GuideActivity.class), GuideActivity.REQUEST_CODES.SECOND_SLIDE);
             finish();
         }
         return super.onKeyDown(keyCode, event);
