@@ -16,6 +16,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    aaptOptions {
+        noCompress "tflite"
+    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -43,4 +46,5 @@ dependencies {
     implementation 'com.android.support:support-v13:27.1.1'
     implementation project(':openCVLibrary343')
     implementation 'com.github.google:cameraview:d0b508a5ea'
+    implementation 'org.tensorflow:tensorflow-lite:1.12.0'
 }
