@@ -28,12 +28,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.camera.CalibrationCameraActivity"
-            android:label="@string/calibration" />
-        <activity
             android:name=".activities.camera.AnalysisCameraActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar"
-            android:label="@string/analysing" />
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".activities.results.ResultsActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar"

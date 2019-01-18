@@ -57,7 +57,7 @@ public class AnalysisCameraActivity extends BaseCameraActivity implements OnPict
 
     private int numberOfPicturesTaken;
     private final Timer pictureTimer = new Timer();
-    ;
+
     private boolean isDialogOpened;
 
     public AnalysisCameraActivity() {

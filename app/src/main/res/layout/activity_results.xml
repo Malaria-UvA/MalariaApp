@@ -12,23 +12,21 @@
     <TextView
         android:id="@+id/wbc_label"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
+        android:layout_height="20dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="100dp"
-        android:layout_marginBottom="177dp"
+        android:layout_marginTop="32dp"
         android:text="@string/white_blood_cells"
         android:textAllCaps="true"
         android:textColor="@android:color/background_light"
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/startOverBtn"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <TextView
         android:id="@+id/wbcTV"
         android:layout_width="50dp"
         android:layout_height="20dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
         android:textAlignment="textEnd"
         android:textAllCaps="true"
@@ -37,14 +35,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/wbc_label"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <TextView
         android:id="@+id/fieldsTV"
         android:layout_width="50dp"
         android:layout_height="20dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="28dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
         android:textAlignment="textEnd"
         android:textAllCaps="true"
         android:textColor="@android:color/background_light"
@@ -56,8 +54,8 @@
         android:id="@+id/resultTV"
         android:layout_width="50dp"
         android:layout_height="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="28dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
         android:textAlignment="textEnd"
         android:textAllCaps="true"
         android:textColor="@android:color/background_light"
@@ -70,8 +68,8 @@
         android:id="@+id/parasitesTV"
         android:layout_width="50dp"
         android:layout_height="20dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="28dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
         android:textAlignment="textEnd"
         android:textAllCaps="true"
         android:textColor="@android:color/background_light"
@@ -84,7 +82,7 @@
         android:layout_width="wrap_content"
         android:layout_height="20dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="16dp"
         android:text="@string/parasites"
         android:textAllCaps="true"
         android:textColor="@android:color/background_light"
@@ -110,7 +108,7 @@
         android:layout_width="wrap_content"
         android:layout_height="20dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="16dp"
         android:text="@string/parasites_per_microlitre"
         android:textAllCaps="false"
         android:textColor="@android:color/background_light"
@@ -121,29 +119,24 @@
     <View
         android:id="@+id/divider"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="1dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
-        android:layout_marginBottom="521dp"
-        android:background="?android:attr/listDivider"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@android:color/background_light"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/analysed_fields_label" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="29dp"
-        android:layout_marginBottom="139dp"
+        android:layout_marginTop="16dp"
         android:text="@string/results"
         android:textSize="30sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/divider"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -151,14 +144,14 @@
         android:id="@+id/startOverBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="386dp"
+        android:layout_marginTop="32dp"
+        android:background="@color/colorAccent"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
         android:text="@string/start_over"
         android:textAppearance="@style/btnText"
-        android:background="@color/colorAccent"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/wbc_label"
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp"/>
+        app:layout_constraintTop_toBottomOf="@+id/result_label" />
+
 </android.support.constraint.ConstraintLayout>

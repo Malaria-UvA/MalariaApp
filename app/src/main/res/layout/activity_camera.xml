@@ -69,6 +69,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="28dp"
             android:layout_marginTop="2dp"
+            android:indeterminate="true"
+            android:indeterminateTintMode="src_atop"
+            android:indeterminateTint="@color/colorAccent"
             app:layout_constraintStart_toStartOf="@+id/statusTV"
             app:layout_constraintTop_toBottomOf="@+id/statusTV" />
 
