@@ -67,6 +67,11 @@ public class CameraService implements ICameraService {
     }
 
     @Override
+    public void startCameraView() {
+        mCameraView.start();
+    }
+
+    @Override
     public void stopCameraView() {
         mCameraView.stop();
     }

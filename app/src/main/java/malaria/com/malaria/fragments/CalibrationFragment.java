@@ -5,6 +5,8 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +24,7 @@ import malaria.com.malaria.interfaces.ICalibrationService;
 import malaria.com.malaria.interfaces.OnSwipeRightListener;
 
 public class CalibrationFragment extends BaseCameraFragment {
-
+    public static final String TAG = "CalibrationFragment";
     private OnSwipeRightListener listener;
     @BindView(R.id.calibrateBtn)
     Button calibrateBtn;
@@ -43,7 +45,16 @@ public class CalibrationFragment extends BaseCameraFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = super.onCreateView(inflater, container, savedInstanceState);
-        calibrateBtn.setOnClickListener(view -> cameraService.takePicture());
+        calibrateBtn.setOnClickListener(view -> {
+            Log.i(TAG, "setOnClickListener");
+            Log.i(TAG, "setOnClickListener if");
+
+            cameraService.takePicture();
+
+            calibrateBtn.setBackgroundColor(ContextCompat.getColor(context, R.color.colorPrimary));
+            Log.i(TAG, "setOnClickListener end if");
+            calibrateBtn.setClickable(false);
+        });
         return v;
     }
 
@@ -54,10 +65,14 @@ public class CalibrationFragment extends BaseCameraFragment {
 
     @Override
     public void onPictureTaken(CameraView cameraView, Bitmap bitmap) {
+        Log.i(TAG, "onPictureTaken start");
         Toast.makeText(getActivity(), R.string.device_calibrated, Toast.LENGTH_LONG).show();
         calibrationService.calculateAndSaveThreshold(bitmap);
-        if(listener != null){
+        if (listener != null) {
             listener.swipeRight();
         }
+        calibrateBtn.setBackgroundColor(ContextCompat.getColor(context, R.color.colorAccent));
+        calibrateBtn.setClickable(true);
+        Log.i(TAG, "onPictureTaken end");
     }
 }

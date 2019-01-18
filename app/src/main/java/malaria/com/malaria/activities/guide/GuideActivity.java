@@ -2,6 +2,7 @@ package malaria.com.malaria.activities.guide;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.Button;
@@ -14,9 +15,11 @@ import butterknife.BindView;
 import malaria.com.malaria.R;
 import malaria.com.malaria.activities.base.BaseActivity;
 import malaria.com.malaria.activities.camera.AnalysisCameraActivity;
+import malaria.com.malaria.activities.results.ResultsActivity;
 import malaria.com.malaria.adapters.GuideAdapter;
 import malaria.com.malaria.constants.SwipeDirection;
 import malaria.com.malaria.dagger.MalariaComponent;
+import malaria.com.malaria.fragments.GuideFragment;
 import malaria.com.malaria.interfaces.ICalibrationService;
 import malaria.com.malaria.interfaces.IMainPreferences;
 import malaria.com.malaria.interfaces.OnSwipeRightListener;
@@ -41,6 +44,7 @@ public class GuideActivity extends BaseActivity implements OnSwipeRightListener 
 
 
     private int lastIndexFragment;
+    private GuideAdapter adapter;
 
     public GuideActivity() {
         super(R.layout.activity_guide);
@@ -51,13 +55,13 @@ public class GuideActivity extends BaseActivity implements OnSwipeRightListener 
         super.onCreate(savedInstanceState);
         //pageIndicatorView.setCount(5); // specify total count of indicators
         //pageIndicatorView.setSelection(2);
-        initViews();
         binds();
+        initViews();
     }
 
     @SuppressWarnings("ConstantConditions")
     private void initViews() {
-        GuideAdapter adapter = new GuideAdapter(this);
+        adapter = new GuideAdapter(this);
         viewPager.setAdapter(adapter);
         setAllowedSwipeDirection(SwipeDirection.left);
         viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
@@ -96,10 +100,12 @@ public class GuideActivity extends BaseActivity implements OnSwipeRightListener 
 
     private void binds() {
         skipBtn.setOnClickListener(v -> {
-            startActivity(new Intent(GuideActivity.this, AnalysisCameraActivity.class));
-            finish();
+            // hack: start the activity here doesn't work for some weird reason
+            Fragment f = adapter.getItem(viewPager.getCurrentItem());
+            if(f instanceof GuideFragment){
+                ((GuideFragment)f).startAnalysisCameraActivity();
+            }
         });
-        //skipBtn.setOnClickListener(v -> viewPager.setCurrentItem(adapter.getCount() - 1));
     }
 
     @Override

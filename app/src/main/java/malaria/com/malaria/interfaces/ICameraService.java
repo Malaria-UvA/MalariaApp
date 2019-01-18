@@ -12,4 +12,6 @@ public interface ICameraService {
     void takePicture();
 
     void setListener(OnPictureTakenListener listener);
+
+    void startCameraView();
 }

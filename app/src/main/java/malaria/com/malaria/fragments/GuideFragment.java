@@ -63,6 +63,7 @@ public class GuideFragment extends BaseFragmentV4 implements View.OnClickListene
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = super.onCreateView(inflater, container, savedInstanceState);
+
         listener = (OnSwipeRightListener) getActivity();
         exitBtn.setOnClickListener(this);
         doneOrUnderstoodBtn.setOnClickListener(this);
@@ -92,11 +93,7 @@ public class GuideFragment extends BaseFragmentV4 implements View.OnClickListene
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.exitBtn:
-                GuideActivity activity = (GuideActivity) getActivity();
-                startActivity(new Intent(activity, AnalysisCameraActivity.class));
-                if (activity != null) {
-                    activity.finish();
-                }
+                startAnalysisCameraActivity();
                 break;
             case R.id.doneOrUnderstoodBtn:
                 listener.swipeRight();
@@ -106,5 +103,13 @@ public class GuideFragment extends BaseFragmentV4 implements View.OnClickListene
 
     private void setAllowedSwipeDirection(SwipeDirection direction) {
         ((GuideActivity) listener).setAllowedSwipeDirection(direction);
+    }
+
+    public void startAnalysisCameraActivity(){
+        GuideActivity activity = (GuideActivity) getActivity();
+        startActivity(new Intent(activity, AnalysisCameraActivity.class));
+        if (activity != null) {
+            activity.finish();
+        }
     }
 }
