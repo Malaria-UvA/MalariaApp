@@ -18,6 +18,7 @@ import malaria.com.malaria.adapters.GuideAdapter;
 import malaria.com.malaria.constants.SwipeDirection;
 import malaria.com.malaria.dagger.MalariaComponent;
 import malaria.com.malaria.interfaces.ICalibrationService;
+import malaria.com.malaria.interfaces.IMainPreferences;
 import malaria.com.malaria.interfaces.OnSwipeRightListener;
 import malaria.com.malaria.views.CustomViewPager;
 
@@ -34,6 +35,11 @@ public class GuideActivity extends BaseActivity implements OnSwipeRightListener 
 
     @Inject
     ICalibrationService calibrationService;
+
+    @Inject
+    IMainPreferences mainPreferences;
+
+    private GuideAdapter adapter;
 
     private int lastIndexFragment;
 
@@ -63,11 +69,22 @@ public class GuideActivity extends BaseActivity implements OnSwipeRightListener 
                 } else {
                     setAllowedSwipeDirection(SwipeDirection.left);
                 }
-                if(position == adapter.getCount() - 1) {
+                boolean firstTime = mainPreferences.getBoolean(IMainPreferences.FIRST_TIME_APP, true);
+                if(firstTime) {
                     skipBtn.setVisibility(View.GONE);
                 } else {
-                    skipBtn.setVisibility(View.VISIBLE);
+                    if (position>=0 && position <= 5) {
+                        skipBtn.setVisibility(View.GONE);
+                    } else {
+                        skipBtn.setVisibility(View.VISIBLE);
+                    }
                 }
+
+                if (position == adapter.getCount() - 1) {
+                    skipBtn.setVisibility(View.GONE);
+                    mainPreferences.putBoolean(IMainPreferences.FIRST_TIME_APP, false);
+                }
+
                 lastIndexFragment = Math.max(lastIndexFragment, position);
             }
         });
