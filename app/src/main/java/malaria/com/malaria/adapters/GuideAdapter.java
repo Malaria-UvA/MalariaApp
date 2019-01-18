@@ -25,18 +25,18 @@ public class GuideAdapter extends FragmentPagerAdapter {
         OnSwipeRightListener listener = (OnSwipeRightListener) activity;
 
         fragments = new Fragment[]{
-                GuideFragment.newInstance(activity.getString(R.string.guide_step_0), R.drawable.guide_mosquito, false, understoodText, listener),
-                GuideFragment.newInstance(activity.getString(R.string.guide_step_1), R.drawable.guide_1_clean, false, doneText, listener),
-                GuideFragment.newInstance(activity.getString(R.string.guide_step_2), R.drawable.guide_2_microscope, false, doneText, listener),
-                GuideFragment.newInstance(activity.getString(R.string.guide_step_3), R.drawable.guide_3_battery, false, doneText, listener),
-                GuideFragment.newInstance(activity.getString(R.string.guide_step_4), R.drawable.guide_4_blood_smear, false, doneText, listener),
+                GuideFragment.newInstance(activity.getString(R.string.guide_step_0), R.drawable.guide_mosquito, true, false, understoodText, listener),
+                GuideFragment.newInstance(activity.getString(R.string.guide_step_1), R.drawable.guide_1_clean, false, false, doneText, listener),
+                GuideFragment.newInstance(activity.getString(R.string.guide_step_2), R.drawable.guide_2_microscope, false, false, doneText, listener),
+                GuideFragment.newInstance(activity.getString(R.string.guide_step_3), R.drawable.guide_3_battery, false, false, doneText, listener),
+                GuideFragment.newInstance(activity.getString(R.string.guide_step_4), R.drawable.guide_4_blood_smear, false, false, doneText, listener),
                 new CalibrationFragment(listener),
-                GuideFragment.newInstance(activity.getString(R.string.guide_step_5), R.drawable.guide_5_focus, false, understoodText, listener),
-                GuideFragment.newInstance(activity.getString(R.string.guide_step_6), R.drawable.guide_6_move, false, understoodText, listener),
-                GuideFragment.newInstance(activity.getString(R.string.guide_step_7), R.drawable.guide_7_nottouch, false, understoodText, listener),
-                GuideFragment.newInstance(activity.getString(R.string.guide_step_8), R.drawable.guide_8_progress, false, understoodText, listener),
-                GuideFragment.newInstance(activity.getString(R.string.guide_step_9), R.drawable.guide_9_results, false, understoodText, listener),
-                GuideFragment.newInstance(activity.getString(R.string.guide_step_10), R.drawable.guide_mosquito, true, null, listener)
+                GuideFragment.newInstance(activity.getString(R.string.guide_step_5), R.drawable.guide_5_focus, false, false, understoodText, listener),
+                GuideFragment.newInstance(activity.getString(R.string.guide_step_6), R.drawable.guide_6_move, false, false, understoodText, listener),
+                GuideFragment.newInstance(activity.getString(R.string.guide_step_7), R.drawable.guide_7_nottouch, false, false, understoodText, listener),
+                GuideFragment.newInstance(activity.getString(R.string.guide_step_8), R.drawable.guide_8_progress, false, false, understoodText, listener),
+                GuideFragment.newInstance(activity.getString(R.string.guide_step_9), R.drawable.guide_9_results, false, false, understoodText, listener),
+                GuideFragment.newInstance(activity.getString(R.string.guide_step_10), R.drawable.guide_mosquito, false, true, null, listener)
         };
     }
 
