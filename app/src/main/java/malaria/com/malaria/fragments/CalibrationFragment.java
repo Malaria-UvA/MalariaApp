@@ -57,7 +57,7 @@ public class CalibrationFragment extends BaseCameraFragment {
         Toast.makeText(getActivity(), R.string.device_calibrated, Toast.LENGTH_SHORT).show();
         calibrationService.calculateAndSaveThreshold(bitmap);
         if(listener != null){
-            listener.onSwipeRight();
+            listener.swipeRight();
         }
     }
 }

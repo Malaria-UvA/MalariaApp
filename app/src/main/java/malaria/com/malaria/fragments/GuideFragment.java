@@ -14,6 +14,8 @@ import android.widget.TextView;
 import butterknife.BindView;
 import malaria.com.malaria.R;
 import malaria.com.malaria.activities.camera.AnalysisCameraActivity;
+import malaria.com.malaria.activities.guide.GuideActivity;
+import malaria.com.malaria.constants.SwipeDirection;
 import malaria.com.malaria.dagger.MalariaComponent;
 import malaria.com.malaria.interfaces.OnSwipeRightListener;
 
@@ -71,6 +73,7 @@ public class GuideFragment extends BaseFragmentV4 implements View.OnClickListene
         if (lastFragment) {
             exitBtn.setVisibility(View.VISIBLE);
             doneOrUnderstoodBtn.setVisibility(View.INVISIBLE);
+            setAllowedSwipeDirection(SwipeDirection.all);
         } else {
             exitBtn.setVisibility(View.INVISIBLE);
             doneOrUnderstoodBtn.setVisibility(View.VISIBLE);
@@ -86,8 +89,12 @@ public class GuideFragment extends BaseFragmentV4 implements View.OnClickListene
                 startActivity(new Intent(getActivity(), AnalysisCameraActivity.class));
                 break;
             case R.id.doneOrUnderstoodBtn:
-                listener.onSwipeRight();
+                listener.swipeRight();
                 break;
         }
+    }
+
+    private void setAllowedSwipeDirection(SwipeDirection direction) {
+        ((GuideActivity)listener).setAllowedSwipeDirection(direction);
     }
 }

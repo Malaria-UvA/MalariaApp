@@ -2,6 +2,7 @@ package malaria.com.malaria.activities.guide;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.Button;
 
@@ -14,6 +15,7 @@ import malaria.com.malaria.R;
 import malaria.com.malaria.activities.base.BaseActivity;
 import malaria.com.malaria.activities.camera.AnalysisCameraActivity;
 import malaria.com.malaria.adapters.GuideAdapter;
+import malaria.com.malaria.constants.SwipeDirection;
 import malaria.com.malaria.dagger.MalariaComponent;
 import malaria.com.malaria.interfaces.ICalibrationService;
 import malaria.com.malaria.interfaces.OnSwipeRightListener;
@@ -33,7 +35,7 @@ public class GuideActivity extends BaseActivity implements OnSwipeRightListener 
     @Inject
     ICalibrationService calibrationService;
 
-    private GuideAdapter adapter;
+    private int lastIndexFragment;
 
     public GuideActivity() {
         super(R.layout.activity_guide);
@@ -50,9 +52,25 @@ public class GuideActivity extends BaseActivity implements OnSwipeRightListener 
 
     @SuppressWarnings("ConstantConditions")
     private void initViews() {
-        adapter = new GuideAdapter(this);
+        GuideAdapter adapter = new GuideAdapter(this);
         viewPager.setAdapter(adapter);
-        viewPager.setPagingEnabled(false);
+        setAllowedSwipeDirection(SwipeDirection.left);
+        viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+            @Override
+            public void onPageSelected(int position) {
+                if (position < lastIndexFragment) {
+                    setAllowedSwipeDirection(SwipeDirection.all);
+                } else {
+                    setAllowedSwipeDirection(SwipeDirection.left);
+                }
+                if(position == adapter.getCount() - 1) {
+                    skipBtn.setVisibility(View.GONE);
+                } else {
+                    skipBtn.setVisibility(View.VISIBLE);
+                }
+                lastIndexFragment = Math.max(lastIndexFragment, position);
+            }
+        });
 
         boolean isCalibrated = !Double.isNaN(calibrationService.getThreshold());
         if (!isCalibrated) {
@@ -70,7 +88,12 @@ public class GuideActivity extends BaseActivity implements OnSwipeRightListener 
         applicationComponent.inject(this);
     }
 
-    public void onSwipeRight() {
+    public void swipeRight() {
         viewPager.setCurrentItem(viewPager.getCurrentItem() + 1);
+    }
+
+
+    public void setAllowedSwipeDirection(SwipeDirection direction) {
+        viewPager.setAllowedSwipeDirection(direction);
     }
 }

@@ -49,4 +49,6 @@ public class GuideAdapter extends FragmentPagerAdapter {
     public int getCount() {
         return fragments.length;
     }
+
+
 }
