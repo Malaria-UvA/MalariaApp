@@ -36,14 +36,14 @@ public class GuideFragment extends BaseFragmentV4 implements View.OnClickListene
     private String content;
     private String doneOrUnderstoodBtnText;
     private int imageref;
-    private boolean firstFragment,lastFragment;
+    private boolean firstFragment, lastFragment;
     private OnSwipeRightListener listener;
 
     public GuideFragment() {
         super(R.layout.fragment_guide);
     }
 
-    public static GuideFragment newInstance(String content, int imageref, boolean firstFragment, boolean lastFragment, String textButton, OnSwipeRightListener listener) {
+    public static GuideFragment newInstance(String content, int imageref, boolean firstFragment, boolean lastFragment, String textButton) {
         GuideFragment fragment = new GuideFragment();
 
         fragment.content = content;
@@ -51,7 +51,6 @@ public class GuideFragment extends BaseFragmentV4 implements View.OnClickListene
         fragment.firstFragment = firstFragment;
         fragment.lastFragment = lastFragment;
         fragment.doneOrUnderstoodBtnText = textButton;
-        fragment.listener = listener;
 
         return fragment;
     }
@@ -64,6 +63,7 @@ public class GuideFragment extends BaseFragmentV4 implements View.OnClickListene
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = super.onCreateView(inflater, container, savedInstanceState);
+        listener = (OnSwipeRightListener) getActivity();
         exitBtn.setOnClickListener(this);
         doneOrUnderstoodBtn.setOnClickListener(this);
 
@@ -72,7 +72,7 @@ public class GuideFragment extends BaseFragmentV4 implements View.OnClickListene
         image.setImageResource(imageref);
         doneOrUnderstoodBtn.setText(doneOrUnderstoodBtnText);
 
-        if(!firstFragment && !lastFragment){
+        if (!firstFragment && !lastFragment) {
             titleTxt.setVisibility(View.INVISIBLE);
         }
 
@@ -92,7 +92,11 @@ public class GuideFragment extends BaseFragmentV4 implements View.OnClickListene
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.exitBtn:
-                startActivity(new Intent(getActivity(), AnalysisCameraActivity.class));
+                GuideActivity activity = (GuideActivity) getActivity();
+                startActivity(new Intent(activity, AnalysisCameraActivity.class));
+                if (activity != null) {
+                    activity.finish();
+                }
                 break;
             case R.id.doneOrUnderstoodBtn:
                 listener.swipeRight();
@@ -101,6 +105,6 @@ public class GuideFragment extends BaseFragmentV4 implements View.OnClickListene
     }
 
     private void setAllowedSwipeDirection(SwipeDirection direction) {
-        ((GuideActivity)listener).setAllowedSwipeDirection(direction);
+        ((GuideActivity) listener).setAllowedSwipeDirection(direction);
     }
 }

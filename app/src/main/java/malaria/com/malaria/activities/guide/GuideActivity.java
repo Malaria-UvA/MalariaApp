@@ -39,7 +39,6 @@ public class GuideActivity extends BaseActivity implements OnSwipeRightListener 
     @Inject
     IMainPreferences mainPreferences;
 
-    private GuideAdapter adapter;
 
     private int lastIndexFragment;
 
@@ -70,10 +69,10 @@ public class GuideActivity extends BaseActivity implements OnSwipeRightListener 
                     setAllowedSwipeDirection(SwipeDirection.left);
                 }
                 boolean firstTime = mainPreferences.getBoolean(IMainPreferences.FIRST_TIME_APP, true);
-                if(firstTime) {
+                if (firstTime) {
                     skipBtn.setVisibility(View.GONE);
                 } else {
-                    if (position>=0 && position <= 5) {
+                    if (position >= 0 && position <= 5) {
                         skipBtn.setVisibility(View.GONE);
                     } else {
                         skipBtn.setVisibility(View.VISIBLE);
@@ -96,7 +95,10 @@ public class GuideActivity extends BaseActivity implements OnSwipeRightListener 
     }
 
     private void binds() {
-        skipBtn.setOnClickListener(v -> startActivity(new Intent(GuideActivity.this, AnalysisCameraActivity.class)));
+        skipBtn.setOnClickListener(v -> {
+            startActivity(new Intent(GuideActivity.this, AnalysisCameraActivity.class));
+            finish();
+        });
         //skipBtn.setOnClickListener(v -> viewPager.setCurrentItem(adapter.getCount() - 1));
     }
 
@@ -109,8 +111,22 @@ public class GuideActivity extends BaseActivity implements OnSwipeRightListener 
         viewPager.setCurrentItem(viewPager.getCurrentItem() + 1);
     }
 
+    public void moveToSecondSlide() {
+        viewPager.setCurrentItem(1);
+    }
 
     public void setAllowedSwipeDirection(SwipeDirection direction) {
         viewPager.setAllowedSwipeDirection(direction);
+    }
+
+    @Override
+    public void startActivityForResult(Intent intent, int requestCode) {
+        if (requestCode == REQUEST_CODES.SECOND_SLIDE) {
+            moveToSecondSlide();
+        }
+    }
+
+    public class REQUEST_CODES {
+        public static final int SECOND_SLIDE = 1;
     }
 }

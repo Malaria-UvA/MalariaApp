@@ -21,8 +21,10 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import malaria.com.malaria.R;
+import malaria.com.malaria.activities.guide.GuideActivity;
 import malaria.com.malaria.activities.results.ResultsActivity;
 import malaria.com.malaria.dagger.MalariaComponent;
+import malaria.com.malaria.fragments.GuideFragment;
 import malaria.com.malaria.interfaces.IAnalysisService;
 import malaria.com.malaria.interfaces.ICalibrationService;
 import malaria.com.malaria.interfaces.IModelAnalysisService;
@@ -54,7 +56,8 @@ public class AnalysisCameraActivity extends BaseCameraActivity implements OnPict
     ProgressBar progressBar;
 
     private int numberOfPicturesTaken;
-    private final Timer pictureTimer = new Timer();;
+    private final Timer pictureTimer = new Timer();
+    ;
     private boolean isDialogOpened;
 
     public AnalysisCameraActivity() {
@@ -126,7 +129,10 @@ public class AnalysisCameraActivity extends BaseCameraActivity implements OnPict
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setMessage("Are you sure you want to exit?")
                     .setCancelable(false)
-                    .setPositiveButton("Yes", (dialog, id) -> AnalysisCameraActivity.this.finish())
+                    .setPositiveButton("Yes", (dialog, id) -> {
+                        startActivity(new Intent(this, GuideActivity.class));
+                        AnalysisCameraActivity.this.finish();
+                    })
                     .setNegativeButton("No", (dialog, id) -> {
                         dialog.cancel();
                         isDialogOpened = false;

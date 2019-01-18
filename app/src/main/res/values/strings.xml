@@ -54,4 +54,5 @@
     <string name="parasites_per_microlitre">PARASITES/µL BLOOD</string>
     <string name="image_not_loaded">Image not loaded</string>
     <string name="skip">SKIP INTRO</string>
+    <string name="start_over">START OVER</string>
 </resources>

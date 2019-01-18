@@ -12,13 +12,15 @@
     <TextView
         android:id="@+id/wbc_label"
         android:layout_width="wrap_content"
-        android:layout_height="20dp"
+        android:layout_height="0dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="100dp"
+        android:layout_marginBottom="177dp"
         android:text="@string/white_blood_cells"
         android:textAllCaps="true"
         android:textColor="@android:color/background_light"
         android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/startOverBtn"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -144,4 +146,19 @@
         app:layout_constraintBottom_toTopOf="@+id/divider"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/startOverBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="386dp"
+        android:text="@string/start_over"
+        android:textAppearance="@style/btnText"
+        android:background="@color/colorAccent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/wbc_label"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"/>
 </android.support.constraint.ConstraintLayout>
