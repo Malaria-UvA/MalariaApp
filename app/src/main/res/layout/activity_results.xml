@@ -136,6 +136,7 @@
         android:layout_marginTop="16dp"
         android:text="@string/results"
         android:textSize="30sp"
+        android:textColor="@android:color/background_light"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

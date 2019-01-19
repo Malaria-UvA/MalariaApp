@@ -24,15 +24,16 @@ import malaria.com.malaria.R;
 import malaria.com.malaria.activities.guide.GuideActivity;
 import malaria.com.malaria.activities.results.ResultsActivity;
 import malaria.com.malaria.dagger.MalariaComponent;
-import malaria.com.malaria.fragments.GuideFragment;
 import malaria.com.malaria.interfaces.IAnalysisService;
 import malaria.com.malaria.interfaces.ICalibrationService;
 import malaria.com.malaria.interfaces.IModelAnalysisService;
 import malaria.com.malaria.interfaces.OnPictureTakenListener;
+import malaria.com.malaria.models.ImageFeature;
 
 public class AnalysisCameraActivity extends BaseCameraActivity implements OnPictureTakenListener {
-    private static final long DELAY_PICTURE_MS = 3000L;
-    private static final long PERIOD_PICTURE_MS = 3000L;
+    private static final long DELAY_PICTURE_MS = 4000L;
+    private static final long PERIOD_PICTURE_MS = 4000L;
+    public static final int PICTURE_TAKEN_DELAY = 3500;
 
     @Inject
     IAnalysisService analysisService;
@@ -51,6 +52,12 @@ public class AnalysisCameraActivity extends BaseCameraActivity implements OnPict
 
     @BindView(R.id.statusTV2)
     TextView statusTV2;
+
+    @BindView(R.id.wbcTV)
+    TextView wbcTV;
+
+    @BindView(R.id.parasitesTV)
+    TextView parasitesTV;
 
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
@@ -119,7 +126,7 @@ public class AnalysisCameraActivity extends BaseCameraActivity implements OnPict
             public void run() {
                 runOnUiThread(() -> changeStatus(AnalysisCameraActivity.Status.FOCUSING));
             }
-        }, 2000);
+        }, PICTURE_TAKEN_DELAY);
     }
 
     @Override
@@ -167,6 +174,11 @@ public class AnalysisCameraActivity extends BaseCameraActivity implements OnPict
                 act.runOnUiThread(act::refreshPictureTaken);
 
                 act.modelAnalysisService.processImage(bitmap);
+                final ImageFeature features = act.modelAnalysisService.getTotalAggregation();
+                act.runOnUiThread(() -> {
+                    act.wbcTV.setText(String.valueOf(features.getnWhiteBloodCells()));
+                    act.parasitesTV.setText(String.valueOf(features.getnParasites()));
+                });
                 return act.modelAnalysisService.checkStopCondition();
             }
             return false;
