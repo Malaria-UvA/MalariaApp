@@ -80,6 +80,7 @@ public class GuideActivity extends BaseActivity implements OnSwipeRightListener 
                         skipBtn.setVisibility(View.GONE);
                     } else {
                         skipBtn.setVisibility(View.VISIBLE);
+                        viewPager.setAllowedSwipeDirection(SwipeDirection.all);
                     }
                 }
 
