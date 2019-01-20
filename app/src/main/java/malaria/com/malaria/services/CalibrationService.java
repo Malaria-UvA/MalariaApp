@@ -18,7 +18,7 @@ import malaria.com.malaria.interfaces.IMainPreferences;
 
 public class CalibrationService implements ICalibrationService {
 
-    private static final int MARGIN = 10;
+    private static final int MARGIN = 30;
 
     @Inject
     IMainPreferences preferences;

@@ -33,7 +33,7 @@ import malaria.com.malaria.models.ImageFeature;
 public class AnalysisCameraActivity extends BaseCameraActivity implements OnPictureTakenListener {
     private static final long DELAY_PICTURE_MS = 4000L;
     private static final long PERIOD_PICTURE_MS = 4000L;
-    public static final int PICTURE_TAKEN_DELAY = 3500;
+    public static final int BACK_TO_FOCUSING_DELAY = 3500;
 
     @Inject
     IAnalysisService analysisService;
@@ -109,24 +109,34 @@ public class AnalysisCameraActivity extends BaseCameraActivity implements OnPict
                 statusTV.setText(R.string.picture_taken);
                 statusTV2.setVisibility(View.VISIBLE);
                 progressBar.setVisibility(View.GONE);
+                changeBackToFocusing();
                 break;
             case FOCUSING:
                 statusTV.setText(R.string.focusing);
                 statusTV2.setVisibility(View.GONE);
                 progressBar.setVisibility(View.VISIBLE);
                 break;
+            case PICTURE_ALREADY_TAKEN:
+                statusTV.setText(R.string.picture_already_taken);
+                statusTV2.setVisibility(View.VISIBLE);
+                progressBar.setVisibility(View.GONE);
+                changeBackToFocusing();
+                break;
         }
     }
 
-    private void refreshPictureTaken() {
-        numberPicturesTV.setText(String.valueOf(numberOfPicturesTaken));
-        changeStatus(AnalysisCameraActivity.Status.PICTURE_TAKEN);
+    private void changeBackToFocusing() {
         new Timer().schedule(new TimerTask() {
             @Override
             public void run() {
                 runOnUiThread(() -> changeStatus(AnalysisCameraActivity.Status.FOCUSING));
             }
-        }, PICTURE_TAKEN_DELAY);
+        }, BACK_TO_FOCUSING_DELAY);
+    }
+
+    private void refreshPictureTaken() {
+        numberPicturesTV.setText(String.valueOf(numberOfPicturesTaken));
+        changeStatus(AnalysisCameraActivity.Status.PICTURE_TAKEN);
     }
 
     @Override
@@ -150,10 +160,18 @@ public class AnalysisCameraActivity extends BaseCameraActivity implements OnPict
 
     enum Status {
         PICTURE_TAKEN,
+        PICTURE_ALREADY_TAKEN,
         FOCUSING
     }
 
-    private static class ModelTask extends AsyncTask<Bitmap, Void, Boolean> {
+    enum AnalysisStatus {
+        PICTURE_ALREADY_TAKEN,
+        STOP,
+        PICTURE_PROCESSED,
+        BLURRY_IMAGE
+    }
+
+    private static class ModelTask extends AsyncTask<Bitmap, Void, AnalysisStatus> {
         private WeakReference<AnalysisCameraActivity> weakAct;
 
         ModelTask(AnalysisCameraActivity weakReference) {
@@ -161,14 +179,14 @@ public class AnalysisCameraActivity extends BaseCameraActivity implements OnPict
         }
 
         @Override
-        protected Boolean doInBackground(Bitmap... bitmaps) {
+        protected AnalysisStatus doInBackground(Bitmap... bitmaps) {
             AnalysisCameraActivity act = weakAct.get();
             if (act != null) {
                 Bitmap bitmap = bitmaps[0];
                 boolean isBlurry = act.calibrationService.isBlurry(bitmap);
-                if (isBlurry) return false;
+                if (isBlurry) return AnalysisStatus.BLURRY_IMAGE;
                 boolean isTaken = act.analysisService.isPictureAlreadyTaken(bitmap);
-                if (isTaken) return false;
+                if (isTaken) return AnalysisStatus.PICTURE_ALREADY_TAKEN;
 
                 act.numberOfPicturesTaken += 1;
                 act.runOnUiThread(act::refreshPictureTaken);
@@ -179,18 +197,28 @@ public class AnalysisCameraActivity extends BaseCameraActivity implements OnPict
                     act.wbcTV.setText(String.valueOf(features.getnWhiteBloodCells()));
                     act.parasitesTV.setText(String.valueOf(features.getnParasites()));
                 });
-                return act.modelAnalysisService.checkStopCondition();
+                if(act.modelAnalysisService.checkStopCondition()) {
+                    return AnalysisStatus.STOP;
+                } else {
+                    return AnalysisStatus.PICTURE_PROCESSED;
+                }
             }
-            return false;
+            return null;
         }
 
         @Override
-        protected void onPostExecute(Boolean stop) {
+        protected void onPostExecute(AnalysisStatus status) {
             AnalysisCameraActivity act = weakAct.get();
-            if (stop && act != null) {
-                act.pictureTimer.cancel();
-                act.startActivity(new Intent(act, ResultsActivity.class));
-                act.finish();
+            if (status == null || act == null) return;
+            switch (status) {
+                case STOP:
+                    act.pictureTimer.cancel();
+                    act.startActivity(new Intent(act, ResultsActivity.class));
+                    act.finish();
+                    break;
+                case PICTURE_ALREADY_TAKEN:
+                    act.changeStatus(AnalysisCameraActivity.Status.PICTURE_ALREADY_TAKEN);
+                    break;
             }
         }
     }

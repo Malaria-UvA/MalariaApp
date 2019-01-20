@@ -124,7 +124,7 @@ public class ModelAnalysisService implements IModelAnalysisService {
     public boolean checkStopCondition() {
         ImageFeature aggregation = getTotalAggregation();
         // TODO change the stop conditions
-        return aggregation.getnParasites() >= 7;
+        return aggregation.getnParasites() >= 10;
         /*return aggregation.getnParasites() >= 100 && aggregation.getnWhiteBloodCells() >= 200 ||
                 aggregation.getnParasites() <= 99 && aggregation.getnWhiteBloodCells() >= 500;*/
     }

@@ -1,6 +1,10 @@
 package malaria.com.malaria.services;
 
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
+import android.graphics.Paint;
 import android.util.Log;
 
 import org.opencv.android.Utils;
@@ -21,9 +25,10 @@ import static org.opencv.core.Core.NORM_HAMMING;
 
 public class OrbFeatureDetectorService implements IOrbFeatureDetectorService {
     private static final String TAG = "OrbFeatureDetector";
-    private static final int NUM_FEATURES = 100;
+    private static final int NUM_FEATURES = 300;
     private static final int DISTANCE_THRESHOLD = 60;
-    private static final float PERCENTAGE_GOOD_MATCHES_THRESHOLD = 0.85f;
+    private static final float PERCENTAGE_GOOD_MATCHES_THRESHOLD = 0.7f;
+    private static final int MIN_LENGTH_MATCHES = 20;
 
     private ORB orb;
     private BFMatcher bf;
@@ -52,22 +57,24 @@ public class OrbFeatureDetectorService implements IOrbFeatureDetectorService {
         }
 
         MatOfDMatch matches = new MatOfDMatch();
+        int i = 0;
         for (Mat previousImageDescriptor : imagesDescriptors) {
             bf.match(descriptor, previousImageDescriptor, matches);
 
             List<DMatch> matchesList = matches.toList();
-            if (!matchesList.isEmpty()) {
+            if (!matchesList.isEmpty() && matchesList.size() >= MIN_LENGTH_MATCHES) {
                 double[] distances = matchesList.parallelStream().mapToDouble(m -> m.distance).toArray();
                 double[] distances_good = matchesList.parallelStream().mapToDouble(m -> m.distance).filter(d -> d < DISTANCE_THRESHOLD).toArray();
 
                 float percentage = ((float) distances_good.length) / distances.length;
 
-                Log.i(TAG, "Distances:" + Arrays.toString(distances));
-                Log.i(TAG, "Percentage:" + percentage);
+                Log.i(TAG, "Matches "+ i +": " + matchesList.size());
+                Log.i(TAG, "Percentage "+ i +": " + percentage);
                 if (percentage > PERCENTAGE_GOOD_MATCHES_THRESHOLD) {
                     return true;
                 }
             }
+            i++;
         }
         imagesDescriptors.add(descriptor); // save current descriptor for next call
         return false;
