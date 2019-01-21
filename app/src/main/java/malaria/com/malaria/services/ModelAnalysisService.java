@@ -21,7 +21,7 @@ import malaria.com.malaria.models.ImageFeature;
 
 public class ModelAnalysisService implements IModelAnalysisService {
 
-    private static final String TF_OD_API_MODEL_FILE = "detect_100_mobilenet.tflite";
+    private static final String TF_OD_API_MODEL_FILE = "demo_plain_mobilenet.tflite";
     private static final String TF_OD_API_LABELS_FILE = "labels_list.txt";
     private static final int TF_OD_API_INPUT_SIZE = 300;
     private static final boolean TF_OD_API_IS_QUANTIZED = false;
@@ -124,7 +124,7 @@ public class ModelAnalysisService implements IModelAnalysisService {
     public boolean checkStopCondition() {
         ImageFeature aggregation = getTotalAggregation();
         // TODO change the stop conditions
-        return aggregation.getnParasites() >= 10;
+        return aggregation.getnParasites() >= 8;
         /*return aggregation.getnParasites() >= 100 && aggregation.getnWhiteBloodCells() >= 200 ||
                 aggregation.getnParasites() <= 99 && aggregation.getnWhiteBloodCells() >= 500;*/
     }
