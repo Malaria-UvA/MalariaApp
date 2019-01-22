@@ -99,7 +99,7 @@ public class ModelAnalysisService implements IModelAnalysisService {
             }
 
         }
-        ImageUtils.saveBitmap(image, "image_after_recognition.png");
+        ImageUtils.saveBitmap(image, String.format("image_after_recognition_%d.png", features.size()));
     }
 
     private Bitmap resizeBitmap(Bitmap bitmap) {
