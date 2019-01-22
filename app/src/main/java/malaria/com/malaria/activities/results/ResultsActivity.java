@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import javax.inject.Inject;
@@ -11,6 +12,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import malaria.com.malaria.R;
 import malaria.com.malaria.activities.base.BaseActivity;
+import malaria.com.malaria.activities.camera.AnalysisCameraActivity;
 import malaria.com.malaria.activities.guide.GuideActivity;
 import malaria.com.malaria.dagger.MalariaComponent;
 import malaria.com.malaria.interfaces.IModelAnalysisService;
@@ -32,6 +34,10 @@ public class ResultsActivity extends BaseActivity {
 
     @BindView(R.id.conclusionTxt)
     TextView conclusionTxt;
+
+    @BindView(R.id.status_dot)
+    ImageView statusDot;
+
 
     @BindView(R.id.startBtn)
     Button startBtn;
@@ -79,14 +85,21 @@ public class ResultsActivity extends BaseActivity {
         int textId = R.string.conclusion_no_malaria;
         if (parasitesPerMicrolitre >= 5 && parasitesPerMicrolitre < 100) {
             textId = R.string.conclusion_remark_0;
+            statusDot.setImageResource(R.drawable.green_dot);
         } else if (parasitesPerMicrolitre >= 100 && parasitesPerMicrolitre < 10_000) {
             textId = R.string.conclusion_remark_1;
+            statusDot.setImageResource(R.drawable.yellow_dot);
         } else if (parasitesPerMicrolitre >= 10_000 && parasitesPerMicrolitre < 100_000) {
             textId = R.string.conclusion_remark_2;
+            statusDot.setImageResource(R.drawable.yellow_dot);
         } else if (parasitesPerMicrolitre >= 100_000 && parasitesPerMicrolitre < 250_000) {
             textId = R.string.conclusion_remark_4;
+            statusDot.setImageResource(R.drawable.orange_dot);
         } else if(parasitesPerMicrolitre >= 250_000){
             textId = R.string.conclusion_remark_5;
+            statusDot.setImageResource(R.drawable.red_dot);
+        } else {
+            statusDot.setImageResource(R.drawable.green_dot);
         }
         return this.getString(textId);
     }

@@ -60,8 +60,8 @@
     <string name="conclusion">Conclusion</string>
     <string name="conclusion_no_malaria">There is no strong evidence that the patient has malaria</string>
     <string name="conclusion_remark_0">Sensitivity of thick blood film</string>
-    <string name="conclusion_remark_1">Patient may have symptoms below this level, where malaria is seasonal</string>
-    <string name="conclusion_remark_2">Level above which immunes show symptoms</string>
+    <string name="conclusion_remark_1">Patient may have symptoms, where malaria is seasonal</string>
+    <string name="conclusion_remark_2">The patient should show symptoms</string>
     <string name="conclusion_remark_3">Maximum parasitemia of P.v. and P.o.</string>
     <string name="conclusion_remark_4">Hyperparasitemia/severe malaria, increased mortality</string>
     <string name="conclusion_remark_5">Exchange transfusion may be considered / high mortality</string>
