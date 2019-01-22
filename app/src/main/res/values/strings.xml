@@ -56,4 +56,5 @@
     <string name="skip">SKIP INTRO</string>
     <string name="start_over">START OVER</string>
     <string name="picture_already_taken">This picture has been already taken.</string>
+    <string name="see_evidence">See evidence</string>
 </resources>

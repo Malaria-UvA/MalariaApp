@@ -14,9 +14,6 @@ public abstract class BaseActivity extends AppCompatActivity implements Injector
     protected Context context;
     private Integer layoutId;
 
-    public BaseActivity() {
-    }
-
     public BaseActivity(int layoutId) {
         this.layoutId = layoutId;
     }

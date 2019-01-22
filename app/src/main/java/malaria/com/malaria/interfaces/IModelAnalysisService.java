@@ -2,6 +2,8 @@ package malaria.com.malaria.interfaces;
 
 import android.graphics.Bitmap;
 
+import java.util.List;
+
 import malaria.com.malaria.models.ImageFeature;
 
 public interface IModelAnalysisService {
@@ -13,6 +15,8 @@ public interface IModelAnalysisService {
     boolean checkStopCondition();
 
     ImageFeature getTotalAggregation();
+
+    List<Bitmap> getProcessedImages();
 
     int getTotalFields();
 

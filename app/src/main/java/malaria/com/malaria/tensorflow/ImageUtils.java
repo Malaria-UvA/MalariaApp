@@ -13,7 +13,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ==============================================================================*/
 
-package malaria.com.malaria;
+package malaria.com.malaria.tensorflow;
 
 import android.graphics.Bitmap;
 import android.graphics.Matrix;

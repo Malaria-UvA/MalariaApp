@@ -13,9 +13,9 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import malaria.com.malaria.Classifier;
-import malaria.com.malaria.ImageUtils;
-import malaria.com.malaria.TFLiteObjectDetectionAPIModel;
+import malaria.com.malaria.tensorflow.Classifier;
+import malaria.com.malaria.tensorflow.ImageUtils;
+import malaria.com.malaria.tensorflow.TFLiteObjectDetectionAPIModel;
 import malaria.com.malaria.interfaces.IModelAnalysisService;
 import malaria.com.malaria.models.ImageFeature;
 
@@ -30,6 +30,7 @@ public class ModelAnalysisService implements IModelAnalysisService {
     private static final String PARASITE = "mal";
 
     private ArrayList<ImageFeature> features;
+    private ArrayList<Bitmap> processedImages;
 
     private Classifier detector;
 
@@ -53,6 +54,7 @@ public class ModelAnalysisService implements IModelAnalysisService {
     @Override
     public void initialize() {
         this.features = new ArrayList<>();
+        this.processedImages = new ArrayList<>();
     }
 
     @Override
@@ -62,7 +64,8 @@ public class ModelAnalysisService implements IModelAnalysisService {
         Bitmap croppedImage = resizeBitmap(image);
         //ImageUtils.saveBitmap(croppedImage, "image_after_changing_size.png");
         final List<Classifier.Recognition> results = detector.recognizeImage(croppedImage);
-        //saveImageWithRect(croppedImage, results);
+        Bitmap processedImage = getProcessedImage(croppedImage, results);
+        processedImages.add(processedImage);
 
         int nWBC = 0;
         int nParasites = 0;
@@ -79,9 +82,7 @@ public class ModelAnalysisService implements IModelAnalysisService {
         return imageFeature;
     }
 
-    private void saveImageWithRect(Bitmap image, List<Classifier.Recognition> results) {
-        // warning: if this method is called, the permission of external storage must be added
-        // on AndroidManifest
+    private Bitmap getProcessedImage(Bitmap image, List<Classifier.Recognition> results) {
         Canvas c = new Canvas(image);
         Paint wbcPaint = new Paint();
         wbcPaint.setColor(Color.BLUE);
@@ -99,7 +100,12 @@ public class ModelAnalysisService implements IModelAnalysisService {
             }
 
         }
-        ImageUtils.saveBitmap(image, String.format("image_after_recognition_%d.png", features.size()));
+
+        // warning: if the next method is called, the permission of external storage must be added
+        // on AndroidManifest
+        //ImageUtils.saveBitmap(image, String.format("image_after_recognition_%d.png", features.size()));
+
+        return image;
     }
 
     private Bitmap resizeBitmap(Bitmap bitmap) {
@@ -138,6 +144,11 @@ public class ModelAnalysisService implements IModelAnalysisService {
             nWBC += f.getnWhiteBloodCells();
         }
         return new ImageFeature(nWBC, nParasitesTotal);
+    }
+
+    @Override
+    public List<Bitmap> getProcessedImages() {
+        return processedImages;
     }
 
     @Override
