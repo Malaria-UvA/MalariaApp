@@ -142,20 +142,31 @@
         app:layout_constraintTop_toBottomOf="@+id/analysed_fields_label" />
 
 
-    <Button
-        android:id="@+id/startBtn"
-        android:layout_width="wrap_content"
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="152dp"
-        android:background="@color/colorAccent"
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp"
-        android:text="@string/start"
-        android:textAppearance="@style/btnText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/result_label" />
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="5dp"
+        android:text="@string/conclusion"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/background_light"
+        app:layout_constraintBottom_toTopOf="@+id/conclusionTxt"
+        app:layout_constraintStart_toStartOf="@+id/conclusionTxt" />
+
+    <TextView
+        android:id="@+id/conclusionTxt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="70dp"
+        android:text="@string/conclusion_no_malaria"
+        android:textColor="@android:color/background_light"
+        app:layout_constraintBottom_toTopOf="@+id/textView9"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
         android:id="@+id/textView9"
@@ -168,5 +179,20 @@
         android:textColor="@android:color/background_light"
         app:layout_constraintBottom_toTopOf="@+id/startBtn"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/startBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="256dp"
+        android:background="@color/colorAccent"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:text="@string/start"
+        android:textAppearance="@style/btnText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/result_label" />
 
 </android.support.constraint.ConstraintLayout>

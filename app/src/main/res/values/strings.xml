@@ -56,4 +56,10 @@
     <string name="skip">SKIP INTRO</string>
     <string name="picture_already_taken">This picture has been already taken.</string>
     <string name="click_on_start_if_you_want_to_analyse_another_blood_sample">Click on START if you want to analyse another blood sample.</string>
+    <string name="conclusion">Conclusion</string>
+    <string name="conclusion_no_malaria">There is no strong evidence that the patient has malaria</string>
+    <string name="conclusion_remark_0">Sensitivity of thick blood film</string>
+    <string name="conclusion_remark_1">Patient may have symptoms below this level, where malaria is seasonal</string>
+    <string name="conclusion_remark_2">Level above which immunes show symptoms</string>
+    <string name="conclusion_remark_3">Maximum parasitemia of P.v. and P.o.</string>
 </resources>
