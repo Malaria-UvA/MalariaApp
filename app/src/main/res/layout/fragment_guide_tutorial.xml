@@ -10,11 +10,10 @@
     <TextView
         android:id="@+id/guideTxt"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="22dp"
-        android:layout_marginTop="437dp"
-        android:layout_marginEnd="22dp"
-        android:layout_marginBottom="8dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
         android:fontFamily="roboto"
         android:gravity="center"
         android:text="@string/guide_step_1"
@@ -22,39 +21,34 @@
         android:textAllCaps="true"
         android:textColor="@android:color/background_light"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/tutorialBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintTop_toTopOf="@+id/guideline"
         tools:text="@string/guide_step_1" />
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="188dp"
-        android:layout_height="173dp"
-        android:layout_marginTop="181dp"
-        android:layout_marginBottom="267dp"
+        android:layout_height="175dp"
+        android:layout_marginBottom="72dp"
         android:contentDescription="@string/image_not_loaded"
-        app:layout_constraintBottom_toTopOf="@+id/doneOrUnderstoodBtn"
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/doneOrUnderstoodBtn"
         android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_marginTop="8dp"
+        android:layout_height="wrap_content"
         android:background="@color/colorAccent"
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
         android:text="@string/understood"
         android:textAppearance="@style/btnText"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/guideTxt" />
 
@@ -62,33 +56,28 @@
         android:id="@+id/titleTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="91dp"
-        android:layout_marginBottom="284dp"
         android:text="@string/app_name"
         android:textAlignment="center"
         android:textColor="@android:color/background_light"
         android:textSize="46sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/guideTxt"
+        app:layout_constraintBottom_toTopOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5" />
 
     <Button
         android:id="@+id/tutorialBtn"
         android:layout_width="115dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginBottom="66dp"
         android:background="@color/colorPrimary"
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
         android:text="@string/tutorial"
         android:textAppearance="@style/btnText"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/exitBtn"
-        app:layout_constraintHorizontal_bias="0.075"
-        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/guideTxt" />
 
@@ -96,14 +85,25 @@
         android:id="@+id/exitBtn"
         android:layout_width="115dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="32dp"
         android:background="@color/colorAccent"
         android:text="@string/start"
         android:textAppearance="@style/btnText"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/tutorialBtn"
-        app:layout_constraintStart_toStartOf="@+id/doneOrUnderstoodBtn"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toBottomOf="@+id/guideTxt" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.68" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
 </android.support.constraint.ConstraintLayout>

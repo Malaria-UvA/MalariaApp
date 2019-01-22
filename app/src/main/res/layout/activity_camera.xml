@@ -1,39 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/colorPrimaryDark"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark">
 
     <com.google.android.cameraview.CameraView
         android:id="@+id/camera"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:keepScreenOn="true"
+        android:layout_height="0dp"
         android:adjustViewBounds="true"
-        app:autoFocus="true"
+        android:keepScreenOn="true"
         app:aspectRatio="4:3"
+        app:autoFocus="true"
         app:facing="back"
-        app:flash="off"/>
+        app:flash="off"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="170dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginBottom="0dp">
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/camera">
 
         <TextView
             android:id="@+id/statusTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginBottom="8dp"
             android:text="@string/focusing"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textColor="@android:color/background_light"
+            app:layout_constraintBottom_toTopOf="@+id/progressBar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -42,41 +46,45 @@
             android:id="@+id/statusTV2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
             android:text="@string/keep_moving"
             android:textColor="@android:color/background_light"
             android:textSize="18sp"
             android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/progressBar"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/statusTV" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/numberPicturesLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="12dp"
             android:text="@string/number_pictures"
             android:textColor="@android:color/background_light"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/numberPictures"
             app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline5" />
 
         <ProgressBar
             android:id="@+id/progressBar"
             style="?android:attr/progressBarStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="28dp"
-            android:layout_marginTop="14dp"
             android:indeterminate="true"
-            android:indeterminateTintMode="src_atop"
             android:indeterminateTint="@color/colorAccent"
-            app:layout_constraintStart_toStartOf="@+id/statusTV"
-            app:layout_constraintTop_toBottomOf="@+id/statusTV" />
+            android:indeterminateTintMode="src_atop"
+            app:layout_constraintBottom_toTopOf="@+id/guideline5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/numberPictures"
@@ -90,6 +98,13 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/numberPicturesLabel" />
 
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.68" />
+
     </android.support.constraint.ConstraintLayout>
 
     <RelativeLayout
@@ -97,36 +112,36 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
         android:background="#99FF4081"
-        android:padding="8dp">
+        android:padding="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/wbc_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/white_blood_cells"
-            android:textColor="@android:color/background_light"/>
+            android:textColor="@android:color/background_light" />
 
         <TextView
             android:id="@+id/wbcTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="0"
+            android:layout_alignBaseline="@id/wbc_label"
             android:layout_marginStart="16dp"
-            android:textColor="@android:color/background_light"
-            android:textStyle="bold"
-            android:textAlignment="textEnd"
             android:layout_toEndOf="@+id/wbc_label"
-            android:layout_alignBaseline="@id/wbc_label"/>
+            android:text="0"
+            android:textAlignment="textEnd"
+            android:textColor="@android:color/background_light"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/parasites_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/parasites"
             android:layout_below="@id/wbc_label"
+            android:text="@string/parasites"
             android:textColor="@android:color/background_light" />
 
         <TextView
@@ -137,9 +152,9 @@
             android:layout_alignEnd="@+id/wbcTV"
             android:layout_toEndOf="@+id/parasites_label"
             android:text="0"
-            android:textStyle="bold"
             android:textAlignment="textEnd"
-            android:textColor="@android:color/background_light" />
+            android:textColor="@android:color/background_light"
+            android:textStyle="bold" />
     </RelativeLayout>
 
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>
