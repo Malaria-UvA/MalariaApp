@@ -75,8 +75,10 @@ public class ResultsActivity extends BaseActivity {
             textId = R.string.conclusion_remark_1;
         } else if (parasitesPerMicrolitre >= 10_000 && parasitesPerMicrolitre < 100_000) {
             textId = R.string.conclusion_remark_2;
-        } else if (parasitesPerMicrolitre >= 100_000) {
-            textId = R.string.conclusion_remark_3;
+        } else if (parasitesPerMicrolitre >= 100_000 && parasitesPerMicrolitre < 250_000) {
+            textId = R.string.conclusion_remark_4;
+        } else if(parasitesPerMicrolitre >= 250_000){
+            textId = R.string.conclusion_remark_5;
         }
         return this.getString(textId);
     }

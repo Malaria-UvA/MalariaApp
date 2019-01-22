@@ -62,6 +62,8 @@
     <string name="conclusion_remark_1">Patient may have symptoms below this level, where malaria is seasonal</string>
     <string name="conclusion_remark_2">Level above which immunes show symptoms</string>
     <string name="conclusion_remark_3">Maximum parasitemia of P.v. and P.o.</string>
+    <string name="conclusion_remark_4">Hyperparasitemia/severe malaria, increased mortality</string>
+    <string name="conclusion_remark_5">Exchange transfusion may be considered / high mortality</string>
     <string name="finished_analysis">You have successfully finished the analysis. Here there are the results:</string>
     <string name="tutorial">TUTORIAL</string>
 </resources>
