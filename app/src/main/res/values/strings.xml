@@ -54,7 +54,17 @@
     <string name="parasites_per_microlitre">PARASITES/µL BLOOD</string>
     <string name="image_not_loaded">Image not loaded</string>
     <string name="skip">SKIP INTRO</string>
-    <string name="start_over">START OVER</string>
     <string name="picture_already_taken">This picture has been already taken.</string>
     <string name="see_evidence">See evidence</string>
+    <string name="click_on_start_if_you_want_to_analyse_another_blood_sample">Click on START if you want to analyse another blood sample.</string>
+    <string name="conclusion">Conclusion</string>
+    <string name="conclusion_no_malaria">There is no strong evidence that the patient has malaria</string>
+    <string name="conclusion_remark_0">Sensitivity of thick blood film</string>
+    <string name="conclusion_remark_1">Patient may have symptoms below this level, where malaria is seasonal</string>
+    <string name="conclusion_remark_2">Level above which immunes show symptoms</string>
+    <string name="conclusion_remark_3">Maximum parasitemia of P.v. and P.o.</string>
+    <string name="conclusion_remark_4">Hyperparasitemia/severe malaria, increased mortality</string>
+    <string name="conclusion_remark_5">Exchange transfusion may be considered / high mortality</string>
+    <string name="finished_analysis">You have successfully finished the analysis. Here there are the results:</string>
+    <string name="tutorial">TUTORIAL</string>
 </resources>

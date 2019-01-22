@@ -30,8 +30,11 @@ public class ResultsActivity extends BaseActivity {
     @BindView(R.id.resultTV)
     TextView resultTV;
 
-    @BindView(R.id.startOverBtn)
-    Button startOverBtn;
+    @BindView(R.id.conclusionTxt)
+    TextView conclusionTxt;
+
+    @BindView(R.id.startBtn)
+    Button startBtn;
 
     @BindView(R.id.seeEvidenceBtn)
     Button seeEvidenceBtn;
@@ -58,8 +61,10 @@ public class ResultsActivity extends BaseActivity {
         fieldsTV.setText(String.valueOf(fields));
         resultTV.setText(String.valueOf(result));
 
-        startOverBtn.setOnClickListener(v -> {
-            startActivityForResult(new Intent(this, GuideActivity.class), GuideActivity.REQUEST_CODES.SECOND_SLIDE);
+        conclusionTxt.setText(this.getConclusionText(result));
+
+        startBtn.setOnClickListener(v -> {
+            startActivity(new Intent(this, AnalysisCameraActivity.class));
             finish();
         });
 
@@ -68,6 +73,22 @@ public class ResultsActivity extends BaseActivity {
         });
 
 
+    }
+
+    private String getConclusionText(int parasitesPerMicrolitre) {
+        int textId = R.string.conclusion_no_malaria;
+        if (parasitesPerMicrolitre >= 5 && parasitesPerMicrolitre < 100) {
+            textId = R.string.conclusion_remark_0;
+        } else if (parasitesPerMicrolitre >= 100 && parasitesPerMicrolitre < 10_000) {
+            textId = R.string.conclusion_remark_1;
+        } else if (parasitesPerMicrolitre >= 10_000 && parasitesPerMicrolitre < 100_000) {
+            textId = R.string.conclusion_remark_2;
+        } else if (parasitesPerMicrolitre >= 100_000 && parasitesPerMicrolitre < 250_000) {
+            textId = R.string.conclusion_remark_4;
+        } else if(parasitesPerMicrolitre >= 250_000){
+            textId = R.string.conclusion_remark_5;
+        }
+        return this.getString(textId);
     }
 
     @Override

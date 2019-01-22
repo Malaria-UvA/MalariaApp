@@ -2,10 +2,7 @@ package malaria.com.malaria.activities.guide;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.view.View;
-import android.widget.Button;
 
 import com.rd.PageIndicatorView;
 
@@ -14,12 +11,9 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import malaria.com.malaria.R;
 import malaria.com.malaria.activities.base.BaseActivity;
-import malaria.com.malaria.activities.camera.AnalysisCameraActivity;
-import malaria.com.malaria.activities.results.ResultsActivity;
 import malaria.com.malaria.adapters.GuideAdapter;
 import malaria.com.malaria.constants.SwipeDirection;
 import malaria.com.malaria.dagger.MalariaComponent;
-import malaria.com.malaria.fragments.GuideFragment;
 import malaria.com.malaria.interfaces.ICalibrationService;
 import malaria.com.malaria.interfaces.IMainPreferences;
 import malaria.com.malaria.interfaces.OnSwipeRightListener;
@@ -33,9 +27,6 @@ public class GuideActivity extends BaseActivity implements OnSwipeRightListener 
     @BindView(R.id.viewPager)
     CustomViewPager viewPager;
 
-    @BindView(R.id.skipBtn)
-    Button skipBtn;
-
     @Inject
     ICalibrationService calibrationService;
 
@@ -44,7 +35,6 @@ public class GuideActivity extends BaseActivity implements OnSwipeRightListener 
 
 
     private int lastIndexFragment;
-    private GuideAdapter adapter;
 
     public GuideActivity() {
         super(R.layout.activity_guide);
@@ -53,15 +43,12 @@ public class GuideActivity extends BaseActivity implements OnSwipeRightListener 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //pageIndicatorView.setCount(5); // specify total count of indicators
-        //pageIndicatorView.setSelection(2);
-        binds();
         initViews();
     }
 
     @SuppressWarnings("ConstantConditions")
     private void initViews() {
-        adapter = new GuideAdapter(this);
+        GuideAdapter adapter = new GuideAdapter(this);
         viewPager.setAdapter(adapter);
         setAllowedSwipeDirection(SwipeDirection.left);
         viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
@@ -73,38 +60,17 @@ public class GuideActivity extends BaseActivity implements OnSwipeRightListener 
                     setAllowedSwipeDirection(SwipeDirection.left);
                 }
                 boolean firstTime = mainPreferences.getBoolean(IMainPreferences.FIRST_TIME_APP, true);
-                if (firstTime) {
-                    skipBtn.setVisibility(View.GONE);
-                } else {
-                    if (position >= 0 && position <= 5) {
-                        skipBtn.setVisibility(View.GONE);
-                    } else {
-                        skipBtn.setVisibility(View.VISIBLE);
+                if (!firstTime) {
+                    if (!(position >= 0 && position <= 5)) {
                         viewPager.setAllowedSwipeDirection(SwipeDirection.all);
                     }
                 }
 
                 if (position == adapter.getCount() - 1) {
-                    skipBtn.setVisibility(View.GONE);
                     mainPreferences.putBoolean(IMainPreferences.FIRST_TIME_APP, false);
                 }
 
                 lastIndexFragment = Math.max(lastIndexFragment, position);
-            }
-        });
-
-        boolean isCalibrated = !Double.isNaN(calibrationService.getThreshold());
-        if (!isCalibrated) {
-            skipBtn.setVisibility(View.GONE);
-        }
-    }
-
-    private void binds() {
-        skipBtn.setOnClickListener(v -> {
-            // hack: start the activity here doesn't work for some weird reason
-            Fragment f = adapter.getItem(viewPager.getCurrentItem());
-            if(f instanceof GuideFragment){
-                ((GuideFragment)f).startAnalysisCameraActivity();
             }
         });
     }
@@ -114,6 +80,7 @@ public class GuideActivity extends BaseActivity implements OnSwipeRightListener 
         applicationComponent.inject(this);
     }
 
+    @Override
     public void swipeRight() {
         viewPager.setCurrentItem(viewPager.getCurrentItem() + 1);
     }
@@ -122,6 +89,7 @@ public class GuideActivity extends BaseActivity implements OnSwipeRightListener 
         viewPager.setCurrentItem(1);
     }
 
+    @Override
     public void setAllowedSwipeDirection(SwipeDirection direction) {
         viewPager.setAllowedSwipeDirection(direction);
     }
