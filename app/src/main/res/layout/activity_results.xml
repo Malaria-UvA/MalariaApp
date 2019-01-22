@@ -23,11 +23,24 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/textView12"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="13dp"
+        android:text="@string/finished_analysis"
+        android:textColor="@android:color/background_light"
+        app:layout_constraintBottom_toTopOf="@+id/wbc_label"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
         android:id="@+id/wbc_label"
         android:layout_width="wrap_content"
         android:layout_height="20dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="68dp"
         android:text="@string/white_blood_cells"
         android:textAllCaps="true"
         android:textColor="@android:color/background_light"
@@ -39,7 +52,7 @@
         android:id="@+id/wbcTV"
         android:layout_width="50dp"
         android:layout_height="20dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="68dp"
         android:layout_marginEnd="32dp"
         android:textAlignment="textEnd"
         android:textAllCaps="true"
@@ -147,12 +160,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
         android:layout_marginBottom="5dp"
         android:text="@string/conclusion"
+        android:textColor="@android:color/background_light"
         android:textSize="25sp"
         android:textStyle="bold"
-        android:textColor="@android:color/background_light"
         app:layout_constraintBottom_toTopOf="@+id/conclusionTxt"
         app:layout_constraintStart_toStartOf="@+id/conclusionTxt" />
 
@@ -194,5 +206,6 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/result_label" />
+
 
 </android.support.constraint.ConstraintLayout>

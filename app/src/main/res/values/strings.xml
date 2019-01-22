@@ -62,4 +62,5 @@
     <string name="conclusion_remark_1">Patient may have symptoms below this level, where malaria is seasonal</string>
     <string name="conclusion_remark_2">Level above which immunes show symptoms</string>
     <string name="conclusion_remark_3">Maximum parasitemia of P.v. and P.o.</string>
+    <string name="finished_analysis">You have successfully finished the analysis. Here there are the results:</string>
 </resources>
