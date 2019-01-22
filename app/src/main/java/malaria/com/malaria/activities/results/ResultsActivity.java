@@ -1,10 +1,8 @@
 package malaria.com.malaria.activities.results;
 
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -13,7 +11,6 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import malaria.com.malaria.R;
 import malaria.com.malaria.activities.base.BaseActivity;
-import malaria.com.malaria.activities.camera.AnalysisCameraActivity;
 import malaria.com.malaria.activities.guide.GuideActivity;
 import malaria.com.malaria.dagger.MalariaComponent;
 import malaria.com.malaria.interfaces.IModelAnalysisService;
@@ -33,8 +30,8 @@ public class ResultsActivity extends BaseActivity {
     @BindView(R.id.resultTV)
     TextView resultTV;
 
-    @BindView(R.id.startOverBtn)
-    Button startOverBtn;
+    @BindView(R.id.startBtn)
+    Button startBtn;
 
     @Inject
     IModelAnalysisService service;
@@ -58,7 +55,7 @@ public class ResultsActivity extends BaseActivity {
         fieldsTV.setText(String.valueOf(fields));
         resultTV.setText(String.valueOf(result));
 
-        startOverBtn.setOnClickListener(v -> {
+        startBtn.setOnClickListener(v -> {
             startActivityForResult(new Intent(this, GuideActivity.class), GuideActivity.REQUEST_CODES.SECOND_SLIDE);
             finish();
         });
