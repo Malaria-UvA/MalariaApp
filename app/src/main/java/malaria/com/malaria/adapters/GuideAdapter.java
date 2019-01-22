@@ -9,9 +9,6 @@ import malaria.com.malaria.fragments.CalibrationFragment;
 import malaria.com.malaria.fragments.GuideFragment;
 import malaria.com.malaria.interfaces.OnSwipeRightListener;
 
-/**
- * Created by zenbook on 11/02/14.
- */
 public class GuideAdapter extends FragmentPagerAdapter {
 
     private Fragment[] fragments;
@@ -31,11 +28,6 @@ public class GuideAdapter extends FragmentPagerAdapter {
                 GuideFragment.newInstance(activity.getString(R.string.guide_step_3), R.drawable.guide_3_battery, false, false, doneText),
                 GuideFragment.newInstance(activity.getString(R.string.guide_step_4), R.drawable.guide_4_blood_smear, false, false, doneText),
                 new CalibrationFragment(listener),
-                GuideFragment.newInstance(activity.getString(R.string.guide_step_5), R.drawable.guide_5_focus, false, false, understoodText),
-                GuideFragment.newInstance(activity.getString(R.string.guide_step_6), R.drawable.guide_6_move, false, false, understoodText),
-                GuideFragment.newInstance(activity.getString(R.string.guide_step_7), R.drawable.guide_7_nottouch, false, false, understoodText),
-                GuideFragment.newInstance(activity.getString(R.string.guide_step_8), R.drawable.guide_8_progress, false, false, understoodText),
-                GuideFragment.newInstance(activity.getString(R.string.guide_step_9), R.drawable.guide_9_results, false, false, understoodText),
                 GuideFragment.newInstance(activity.getString(R.string.guide_step_10), R.drawable.guide_mosquito, false, true, null)
         };
     }

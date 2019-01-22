@@ -2,6 +2,7 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDark">
@@ -11,8 +12,9 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="22dp"
+        android:layout_marginTop="437dp"
         android:layout_marginEnd="22dp"
-        android:layout_marginBottom="122dp"
+        android:layout_marginBottom="8dp"
         android:fontFamily="roboto"
         android:gravity="center"
         android:text="@string/guide_step_1"
@@ -20,23 +22,13 @@
         android:textAllCaps="true"
         android:textColor="@android:color/background_light"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/tutorialBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleTxt"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
         tools:text="@string/guide_step_1" />
-
-    <Button
-        android:id="@+id/exitBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/colorAccent"
-        android:text="@string/start"
-        android:textAppearance="@style/btnText"
-        app:layout_constraintStart_toStartOf="@+id/doneOrUnderstoodBtn"
-        app:layout_constraintTop_toBottomOf="@+id/guideTxt" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -56,6 +48,7 @@
         android:id="@+id/doneOrUnderstoodBtn"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
+        android:layout_marginTop="8dp"
         android:background="@color/colorAccent"
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
@@ -63,8 +56,7 @@
         android:textAppearance="@style/btnText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/guideTxt"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/guideTxt" />
 
     <TextView
         android:id="@+id/titleTxt"
@@ -81,4 +73,37 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/tutorialBtn"
+        android:layout_width="115dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="66dp"
+        android:background="@color/colorAccentDark"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:text="@string/tutorial"
+        android:textAppearance="@style/btnText"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/exitBtn"
+        app:layout_constraintHorizontal_bias="0.075"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/guideTxt" />
+
+    <Button
+        android:id="@+id/exitBtn"
+        android:layout_width="115dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        android:background="@color/colorAccent"
+        android:text="@string/start"
+        android:textAppearance="@style/btnText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/tutorialBtn"
+        app:layout_constraintStart_toStartOf="@+id/doneOrUnderstoodBtn"
+        app:layout_constraintTop_toBottomOf="@+id/guideTxt" />
 </android.support.constraint.ConstraintLayout>

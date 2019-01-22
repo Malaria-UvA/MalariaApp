@@ -8,6 +8,7 @@ import malaria.com.malaria.activities.camera.BaseCameraActivity;
 import malaria.com.malaria.activities.camera.CalibrationCameraActivity;
 import malaria.com.malaria.activities.guide.GuideActivity;
 import malaria.com.malaria.activities.results.ResultsActivity;
+import malaria.com.malaria.activities.tutorial.TutorialActivity;
 import malaria.com.malaria.fragments.BaseCameraFragment;
 import malaria.com.malaria.fragments.CalibrationFragment;
 import malaria.com.malaria.fragments.GuideFragment;
@@ -23,6 +24,8 @@ public interface MalariaComponent {
 
     // Activities
     void inject(GuideActivity guideActivity);
+
+    void inject(TutorialActivity tutorialActivity);
 
     void inject(ResultsActivity resultsActivity);
 

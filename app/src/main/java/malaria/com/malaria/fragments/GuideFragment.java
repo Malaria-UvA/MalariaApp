@@ -4,6 +4,9 @@ package malaria.com.malaria.fragments;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
+import android.support.constraint.ConstraintSet;
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +18,7 @@ import butterknife.BindView;
 import malaria.com.malaria.R;
 import malaria.com.malaria.activities.camera.AnalysisCameraActivity;
 import malaria.com.malaria.activities.guide.GuideActivity;
+import malaria.com.malaria.activities.tutorial.TutorialActivity;
 import malaria.com.malaria.constants.SwipeDirection;
 import malaria.com.malaria.dagger.MalariaComponent;
 import malaria.com.malaria.interfaces.OnSwipeRightListener;
@@ -23,6 +27,9 @@ import malaria.com.malaria.interfaces.OnSwipeRightListener;
  * Created by zenbook on 11/02/14.
  */
 public class GuideFragment extends BaseFragmentV4 implements View.OnClickListener {
+    @BindView(R.id.constraintLayout)
+    ConstraintLayout constraintLayout;
+
     @BindView(R.id.titleTxt)
     TextView titleTxt;
     @BindView(R.id.guideTxt)
@@ -31,16 +38,21 @@ public class GuideFragment extends BaseFragmentV4 implements View.OnClickListene
     ImageView image;
     @BindView(R.id.exitBtn)
     Button exitBtn;
+
+    @BindView(R.id.tutorialBtn)
+    Button tutorialBtn;
     @BindView(R.id.doneOrUnderstoodBtn)
     Button doneOrUnderstoodBtn;
+
     private String content;
     private String doneOrUnderstoodBtnText;
     private int imageref;
-    private boolean firstFragment, lastFragment;
+    private boolean firstFragment;
+    private boolean lastFragment;
     private OnSwipeRightListener listener;
 
     public GuideFragment() {
-        super(R.layout.fragment_guide);
+        super(R.layout.fragment_guide_tutorial);
     }
 
     public static GuideFragment newInstance(String content, int imageref, boolean firstFragment, boolean lastFragment, String textButton) {
@@ -64,9 +76,11 @@ public class GuideFragment extends BaseFragmentV4 implements View.OnClickListene
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = super.onCreateView(inflater, container, savedInstanceState);
 
+        boolean isGuideActivity = getActivity() instanceof GuideActivity;
         listener = (OnSwipeRightListener) getActivity();
         exitBtn.setOnClickListener(this);
         doneOrUnderstoodBtn.setOnClickListener(this);
+        tutorialBtn.setOnClickListener(this);
 
         //image.getLayoutParams().height = (int) (0.6f* Utils.heightScreen);
         textView.setText(content);
@@ -76,14 +90,23 @@ public class GuideFragment extends BaseFragmentV4 implements View.OnClickListene
         if (!firstFragment && !lastFragment) {
             titleTxt.setVisibility(View.INVISIBLE);
         }
+        if(lastFragment && !isGuideActivity){
+            centerElementHorizontally(exitBtn.getId());
+        }
 
         if (lastFragment) {
             exitBtn.setVisibility(View.VISIBLE);
             doneOrUnderstoodBtn.setVisibility(View.INVISIBLE);
+            if (isGuideActivity) {
+                tutorialBtn.setVisibility(View.VISIBLE);
+            } else {
+                tutorialBtn.setVisibility(View.INVISIBLE);
+            }
             setAllowedSwipeDirection(SwipeDirection.all);
         } else {
             exitBtn.setVisibility(View.INVISIBLE);
             doneOrUnderstoodBtn.setVisibility(View.VISIBLE);
+            tutorialBtn.setVisibility(View.INVISIBLE);
         }
 
         return v;
@@ -98,18 +121,35 @@ public class GuideFragment extends BaseFragmentV4 implements View.OnClickListene
             case R.id.doneOrUnderstoodBtn:
                 listener.swipeRight();
                 break;
+            case R.id.tutorialBtn:
+                startTutorialActivity();
+                break;
         }
     }
 
     private void setAllowedSwipeDirection(SwipeDirection direction) {
-        ((GuideActivity) listener).setAllowedSwipeDirection(direction);
+        listener.setAllowedSwipeDirection(direction);
     }
 
-    public void startAnalysisCameraActivity(){
-        GuideActivity activity = (GuideActivity) getActivity();
+    public void startAnalysisCameraActivity() {
+        FragmentActivity activity = getActivity();
         startActivity(new Intent(activity, AnalysisCameraActivity.class));
         if (activity != null) {
             activity.finish();
         }
+    }
+
+    private void startTutorialActivity() {
+        startActivity(new Intent(getActivity(), TutorialActivity.class));
+    }
+
+    private void centerElementHorizontally(int id) {
+        ConstraintSet constraintSet = new ConstraintSet();
+        constraintSet.clone(constraintLayout);
+
+        constraintSet.clear(id, ConstraintSet.START);
+        constraintSet.clear(id, ConstraintSet.END);
+        constraintSet.centerHorizontally(id, constraintLayout.getId());
+        constraintSet.applyTo(constraintLayout);
     }
 }
