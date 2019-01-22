@@ -11,6 +11,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import malaria.com.malaria.R;
 import malaria.com.malaria.activities.base.BaseActivity;
+import malaria.com.malaria.activities.camera.AnalysisCameraActivity;
 import malaria.com.malaria.activities.guide.GuideActivity;
 import malaria.com.malaria.dagger.MalariaComponent;
 import malaria.com.malaria.interfaces.IModelAnalysisService;
@@ -61,7 +62,7 @@ public class ResultsActivity extends BaseActivity {
         conclusionTxt.setText(this.getConclusionText(result));
 
         startBtn.setOnClickListener(v -> {
-            startActivityForResult(new Intent(this, GuideActivity.class), GuideActivity.REQUEST_CODES.SECOND_SLIDE);
+            startActivity(new Intent(this, AnalysisCameraActivity.class));
             finish();
         });
     }
