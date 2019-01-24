@@ -16,11 +16,9 @@
         android:layout_marginEnd="32dp"
         android:fontFamily="roboto"
         android:gravity="center"
-        android:text="@string/guide_step_1"
         android:textAlignment="center"
-        android:textAllCaps="true"
         android:textColor="@android:color/background_light"
-        android:textSize="16sp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -68,13 +66,13 @@
         app:layout_constraintVertical_bias="0.5" />
 
     <Button
-        android:id="@+id/tutorialBtn"
+        android:id="@+id/exitBtn"
         android:layout_width="115dp"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
+        android:background="@color/colorAccent"
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
-        android:text="@string/tutorial"
+        android:text="@string/start"
         android:textAppearance="@style/btnText"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
@@ -82,11 +80,11 @@
         app:layout_constraintTop_toBottomOf="@+id/guideTxt" />
 
     <Button
-        android:id="@+id/exitBtn"
+        android:id="@+id/tutorialBtn"
         android:layout_width="115dp"
         android:layout_height="wrap_content"
         android:background="@color/colorAccent"
-        android:text="@string/start"
+        android:text="@string/tutorial"
         android:textAppearance="@style/btnText"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

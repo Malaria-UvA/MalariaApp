@@ -13,9 +13,9 @@
     <string name="guide_step_2">Place the phone into the holding kit provided and secure the holding kit to the microscope</string>
     <string name="guide_step_3">Check if the phone is properly attached to the microscope and make sure the battery is charged</string>
     <string name="guide_step_4">Prepare the blood smear, ensure the blood smear is thick enough and check for contamination</string>
-    <string name="picture_calibrate_guide">We will need to take a picture of the sample blood to calibrate the camera</string>
-    <string name="guide_step_5">After placing blood smear underneath the microscope lens wait until MOMALA App gives confirmation that the image is focused</string>
-    <string name="guide_step_6">Move the blood smear when asked, STOP moving when prompted. While changing position of the blood smear do not make any sudden movements</string>
+    <string name="picture_calibrate_guide">The camera needs to be calibrated with a clear image of the blood sample to avoid blurriness</string>
+    <string name="guide_step_5">After placing blood smear underneath the microscope lens wait until it gives confirmation that the image is focused</string>
+    <string name="guide_step_6">Move the blood smear when asked, stop moving when prompted. While changing position of the blood smear do not make any sudden movements</string>
     <string name="guide_step_7">During focusing do not touch the microscope or mobile phone to yield high quality images</string>
     <string name="guide_step_8">After focusing, the application takes images automatically and shows the progress to you</string>
     <string name="guide_step_9">Wait until the results are shown and upload them to your server for safekeeping</string>
@@ -56,7 +56,7 @@
     <string name="skip">SKIP INTRO</string>
     <string name="picture_already_taken">This picture has been already taken.</string>
     <string name="see_evidence">See evidence</string>
-    <string name="click_on_start_if_you_want_to_analyse_another_blood_sample">Click on START if you want to analyse another blood sample.</string>
+    <string name="click_on_start_if_you_want_to_analyse_another_blood_sample">Click on SEE EVIDENCE to check the pictures taken and the detected white blood cells and parasites. Or click on START if you want to analyse another blood sample.</string>
     <string name="conclusion">Conclusion</string>
     <string name="conclusion_no_malaria">There is no strong evidence that the patient has malaria</string>
     <string name="conclusion_remark_0">Sensitivity of thick blood film</string>
@@ -66,5 +66,5 @@
     <string name="conclusion_remark_4">Hyperparasitemia/severe malaria, increased mortality</string>
     <string name="conclusion_remark_5">Exchange transfusion may be considered / high mortality</string>
     <string name="finished_analysis">You have successfully finished the analysis. Here there are the results:</string>
-    <string name="tutorial">TUTORIAL</string>
+    <string name="tutorial">HOW IT WORKS</string>
 </resources>
