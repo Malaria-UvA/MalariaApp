@@ -67,4 +67,5 @@
     <string name="conclusion_remark_5">Exchange transfusion may be considered / high mortality</string>
     <string name="finished_analysis">You have successfully finished the analysis. Here there are the results:</string>
     <string name="tutorial">HOW IT WORKS</string>
+    <string name="seen_pictures">Field %d out of %d</string>
 </resources>

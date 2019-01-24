@@ -217,6 +217,7 @@
         android:background="@color/colorAccent"
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
+        android:textAllCaps="true"
         android:text="@string/see_evidence"
         android:textAppearance="@style/btnText"
         app:layout_constraintEnd_toEndOf="parent"
