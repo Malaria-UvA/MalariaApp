@@ -147,7 +147,9 @@ public class AnalysisCameraActivity extends BaseCameraActivity implements OnPict
             builder.setMessage("Are you sure you want to exit?")
                     .setCancelable(false)
                     .setPositiveButton("Yes", (dialog, id) -> {
-                        startActivity(new Intent(this, GuideActivity.class));
+                        Intent intent = new Intent(this, GuideActivity.class);
+                        intent.putExtra("last_slide", true);
+                        AnalysisCameraActivity.this.startActivity(intent);
                         AnalysisCameraActivity.this.finish();
                     })
                     .setNegativeButton("No", (dialog, id) -> {

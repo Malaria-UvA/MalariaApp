@@ -25,7 +25,7 @@ import static org.opencv.core.Core.NORM_HAMMING;
 
 public class OrbFeatureDetectorService implements IOrbFeatureDetectorService {
     private static final String TAG = "OrbFeatureDetector";
-    private static final int NUM_FEATURES = 300;
+    private static final int NUM_FEATURES = 200;
     private static final int DISTANCE_THRESHOLD = 60;
     private static final float PERCENTAGE_GOOD_MATCHES_THRESHOLD = 0.75f;
     private static final int MIN_LENGTH_MATCHES = 20;

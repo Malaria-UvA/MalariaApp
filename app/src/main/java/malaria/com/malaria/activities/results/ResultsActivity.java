@@ -40,7 +40,7 @@ public class ResultsActivity extends BaseActivity {
 
 
     @BindView(R.id.startBtn)
-    Button startBtn;
+    Button finishBtn;
 
     @BindView(R.id.seeEvidenceBtn)
     Button seeEvidenceBtn;
@@ -69,9 +69,8 @@ public class ResultsActivity extends BaseActivity {
 
         conclusionTxt.setText(this.getConclusionText(result));
 
-        startBtn.setOnClickListener(v -> {
-            startActivity(new Intent(this, AnalysisCameraActivity.class));
-            finish();
+        finishBtn.setOnClickListener(v -> {
+            finishActivity();
         });
 
         seeEvidenceBtn.setOnClickListener(v -> {
@@ -109,11 +108,17 @@ public class ResultsActivity extends BaseActivity {
         applicationComponent.inject(this);
     }
 
+    private void finishActivity() {
+        Intent intent = new Intent(this, GuideActivity.class);
+        intent.putExtra("last_slide", true);
+        startActivity(intent);
+        finish();
+    }
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if ((keyCode == KeyEvent.KEYCODE_BACK)) {
-            startActivityForResult(new Intent(this, GuideActivity.class), GuideActivity.REQUEST_CODES.SECOND_SLIDE);
-            finish();
+            finishActivity();
         }
         return super.onKeyDown(keyCode, event);
     }

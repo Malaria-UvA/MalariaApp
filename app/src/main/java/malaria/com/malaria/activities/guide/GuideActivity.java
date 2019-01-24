@@ -33,6 +33,7 @@ public class GuideActivity extends BaseActivity implements OnSwipeRightListener 
     @Inject
     IMainPreferences mainPreferences;
 
+    private GuideAdapter adapter;
 
     private int lastIndexFragment;
 
@@ -44,11 +45,15 @@ public class GuideActivity extends BaseActivity implements OnSwipeRightListener 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initViews();
+        Intent intent = getIntent();
+        if(intent != null && intent.getBooleanExtra("last_slide", false)) {
+            moveToLastPage();
+        }
     }
 
     @SuppressWarnings("ConstantConditions")
     private void initViews() {
-        GuideAdapter adapter = new GuideAdapter(this);
+        adapter = new GuideAdapter(this);
         viewPager.setAdapter(adapter);
         setAllowedSwipeDirection(SwipeDirection.left);
         viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
@@ -85,23 +90,12 @@ public class GuideActivity extends BaseActivity implements OnSwipeRightListener 
         viewPager.setCurrentItem(viewPager.getCurrentItem() + 1);
     }
 
-    public void moveToSecondSlide() {
-        viewPager.setCurrentItem(1);
+    public void moveToLastPage() {
+        viewPager.setCurrentItem(adapter.getCount() - 1);
     }
 
     @Override
     public void setAllowedSwipeDirection(SwipeDirection direction) {
         viewPager.setAllowedSwipeDirection(direction);
-    }
-
-    @Override
-    public void startActivityForResult(Intent intent, int requestCode) {
-        if (requestCode == REQUEST_CODES.SECOND_SLIDE) {
-            moveToSecondSlide();
-        }
-    }
-
-    public class REQUEST_CODES {
-        public static final int SECOND_SLIDE = 1;
     }
 }
