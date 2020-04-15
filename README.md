@@ -1,4 +1,5 @@
 # MalariaApp
+An Android application for detecting parasites.
 
 # Detection Model
 Our detection algorithm consists of a Single Shot MultiBox Detector (SSD) that uses a Mobilenet Backbone. The Mobilenet alpha value is equal to 1 (no purning of the network for compression).    
@@ -6,6 +7,10 @@ Our detection algorithm consists of a Single Shot MultiBox Detector (SSD) that u
 The Tensorflow object detection API was used to train the model.  
 The Tensorflow Lite converter was used to convert the trained model to format that is executable on a mobile platform.
 Because these tools are publicly available and well documented, we trust that our solution can be easily adopted by Momala. 
+
+
+For an example of the app in use, see this video
+https://www.youtube.com/watch?v=c3U2l9EEw-I
 
 ### Commands
 To train the model, download and install the Tensorflow object detection API as instructed [here](https://github.com/tensorflow/models/tree/master/research/object_detection). 
